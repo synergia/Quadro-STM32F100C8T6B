@@ -29,6 +29,7 @@ void TIM3_IRQHandler(void)
 {
 	if (TIM_GetITStatus(TIM3, TIM_IT_Update) == SET) //sprawdzenie zrodla
 	{
+		LED_PORT->ODR ^= LED_CZER_1;
 		TIM_ClearFlag(TIM3, TIM_FLAG_Update); //wyzerowanie flagi przerwania
 	}
 }
