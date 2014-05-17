@@ -14,14 +14,13 @@ void inicjalizacja_LED()
 
 void SysTick_Handler(void)
 {
-	LED_PORT->ODR ^= LED_CZER_1 | LED_ZOL_2;
 }
 
 void TIM2_IRQHandler(void)
 {
 	if (TIM_GetITStatus(TIM2, TIM_IT_Update) == SET) //sprawdzenie zrodla
 	{
-		LED_PORT->ODR ^= LED_ZOL_1;
+		LED_PORT->ODR ^= LED_NIEB_1;
 		TIM_ClearFlag(TIM2, TIM_FLAG_Update); //wyzerowanie flagi przerwania
 	}
 }
@@ -30,8 +29,6 @@ void TIM3_IRQHandler(void)
 {
 	if (TIM_GetITStatus(TIM3, TIM_IT_Update) == SET) //sprawdzenie zrodla
 	{
-		LED_PORT->ODR ^= LED_NIEB_1 | LED_NIEB_2;
 		TIM_ClearFlag(TIM3, TIM_FLAG_Update); //wyzerowanie flagi przerwania
 	}
-
 }
