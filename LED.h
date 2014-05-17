@@ -12,6 +12,6 @@
 
 #define LED_WSZYSTKO GPIO_Pin_8 | GPIO_Pin_9 | GPIO_Pin_10 | GPIO_Pin_11 | GPIO_Pin_12
 
-void inicjalizacja_LED();
-
 #endif
+
+void inicjalizacja_LED();
