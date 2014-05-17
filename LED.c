@@ -16,19 +16,19 @@ void SysTick_Handler(void)
 {
 }
 
-void TIM2_IRQHandler(void)
+void TIM1_BRK_TIM15_IRQHandler(void)
 {
-	if (TIM_GetITStatus(TIM2, TIM_IT_Update) == SET) //sprawdzenie zrodla
+	if (TIM_GetITStatus(TIM15, TIM_IT_Update) == SET) //sprawdzenie zrodla
 	{
 		LED_PORT->ODR ^= LED_NIEB_1;
-		TIM_ClearFlag(TIM2, TIM_FLAG_Update); //wyzerowanie flagi przerwania
+		TIM_ClearFlag(TIM15, TIM_FLAG_Update); //wyzerowanie flagi przerwania
 	}
 }
 
-void TIM3_IRQHandler(void)
+void TIM1_UP_TIM16_IRQHandler(void)
 {
-	if (TIM_GetITStatus(TIM3, TIM_IT_Update) == SET) //sprawdzenie zrodla
+	if (TIM_GetITStatus(TIM16, TIM_IT_Update) == SET) //sprawdzenie zrodla
 	{
-		TIM_ClearFlag(TIM3, TIM_FLAG_Update); //wyzerowanie flagi przerwania
+		TIM_ClearFlag(TIM16, TIM_FLAG_Update); //wyzerowanie flagi przerwania
 	}
 }
