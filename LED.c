@@ -2,14 +2,12 @@
 #include "LED.h"
 #include "timery.h"
 
+int timer;
+int pwm;
+
 void inicjalizacja_LED()
 {
-	GPIO_InitTypeDef *led_ready = malloc(sizeof(GPIO_InitTypeDef));
-	led_ready->GPIO_Pin = LED_WSZYSTKO;
-	led_ready->GPIO_Mode = GPIO_Mode_Out_PP; //wyjscie pull-up
-	led_ready->GPIO_Speed = GPIO_Speed_2MHz; //moÂżna wybraĂ¦ 2,10,50 MHz
-	GPIO_Init(LED_PORT, led_ready);
-	free (led_ready);
+	GPIOA->CRH = 0b00100010001000100010; //diody wyjscie, 2MHz
 }
 
 void SysTick_Handler(void)
@@ -21,9 +19,14 @@ void TIM2_IRQHandler(void)
 	if (TIM_GetITStatus(TIM2, TIM_IT_Update) == SET) //sprawdzenie zrodla
 	{
 		TIM_ClearFlag(TIM2, TIM_FLAG_Update); //wyzerowanie flagi przerwania
-		TIM2->ARR = T_ARR - TIM2->ARR;
-		LED_PORT->ODR ^= LED_NIEB_1;
-		GPIOB->ODR ^= GPIO_Pin_12 | GPIO_Pin_13 | GPIO_Pin_14 | GPIO_Pin_15;
+
+		if (pwm >= timer)
+			GPIO_WriteBit(GPIOA, LED_NIEB_1, Bit_SET);
+		else
+			GPIO_WriteBit(GPIOA, LED_NIEB_1, Bit_RESET);
+		if (timer >= 99)
+			timer = 0;
+		timer++;
 	}
 }
 

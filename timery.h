@@ -2,8 +2,8 @@
 
 #ifndef TIMERY_H_
 #define TIMERY_H_
-#define T_PSC 6000 //24MHz / 6000 = 4000
-#define T_ARR 80 //4000 / 80 = 50Hz
+#define T_PSC 80
+#define T_ARR 2
 #endif
 
 void inicjalizacja_SysTick();
