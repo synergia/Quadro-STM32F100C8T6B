@@ -11,7 +11,7 @@ void inicjalizacja_SysTick()
 
 void inicjalizacja_TIM2()
 {
-	pwm = 0;
+	pwm = 3;
 	TIM2->CR1 = TIM_CR1_URS | TIM_CR1_CEN; //tylko overflow
 	TIM2->DIER = TIM_DIER_UIE; //interrupt enable
 	TIM2->PSC = T_PSC;
