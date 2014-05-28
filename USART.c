@@ -32,12 +32,70 @@ void inicjalizacja_USART()
 	free(usart);
 }
 
+/*
+ * S - ustawienia silnikow
+ * 0 - przyjeto polecenie (ASCII 48)
+ * 1 - blad (49)
+ */
+
 void USART1_IRQHandler(void)
 {
 	uint8_t dane=0;
 
 	if (USART_GetITStatus(USART1, USART_IT_RXNE) != RESET) //sprawdzenie czy aby na pewno odpowiednie przerwanie
 	{
+		USART_ITConfig(USART1, USART_IT_RXNE, DISABLE);
+
 		dane = USART_ReceiveData(USART1);
+		if (dane == 'S')//ustawienia silnikow
+		{
+			USART_potwierdz();
+			//ktory silnik
+			while(USART_GetFlagStatus(USART1, USART_FLAG_RXNE) == RESET);
+			dane = USART_ReceiveData(USART1);
+
+			if (dane == '1')
+			{
+				USART_potwierdz();
+
+				while(USART_GetFlagStatus(USART1, USART_FLAG_RXNE) == RESET);
+				dane = USART_ReceiveData(USART1); //wartosc PWM
+
+				if (dane >= 0 && dane <= 100)
+				{
+					USART_potwierdz();
+				}
+				else
+				{
+					USART_blad();
+				}
+			}
+			else
+			{
+				USART_blad();
+			}
+		}
+		else if (dane == '0') //zadnych zmian
+		{
+			USART_potwierdz();
+		}
+		else
+		{
+			USART_blad();
+		}
+
+		USART_ITConfig(USART1, USART_IT_RXNE, ENABLE);
 	}
+}
+
+inline void USART_potwierdz()
+{
+	USART1->DR = '0';
+	while(!(USART1->SR & USART_SR_TC)) {}
+}
+
+inline void USART_blad()
+{
+	USART1->DR = '1';
+	while(!(USART1->SR & USART_SR_TC)) {}
 }

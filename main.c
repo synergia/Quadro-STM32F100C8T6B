@@ -21,7 +21,5 @@ int main(void)
 
     while(1)
     {
-    	USART1->DR = 'a';
-    	while(!(USART1->SR & USART_SR_TC)) {}
     }
 }
