@@ -72,7 +72,7 @@ void USART1_IRQHandler(void)
 				else
 					USART_blad();
 			}
-			/*else if (dane_usart == '2')
+			else if (dane_usart == '2')
 			{
 				USART_potwierdz();
 
@@ -116,7 +116,7 @@ void USART1_IRQHandler(void)
 				}
 				else
 					USART_blad();
-			}*/
+			}
 			else
 				USART_blad();
 		}

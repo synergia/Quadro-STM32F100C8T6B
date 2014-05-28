@@ -3,10 +3,10 @@
 #ifndef _SILNIKI_H_
 #define _SILNIKI_H_
 
-#define SILNIK1  GPIO_Pin_12
-#define SILNIK2  GPIO_Pin_13
-#define SILNIK3	 GPIO_Pin_14
-#define SILNIK4  GPIO_Pin_15
+#define SILNIK4  GPIO_Pin_12
+#define SILNIK3  GPIO_Pin_13
+#define SILNIK2	 GPIO_Pin_14
+#define SILNIK1  GPIO_Pin_15
 
 #endif
 
