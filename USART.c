@@ -1,4 +1,7 @@
 #include "USART.h"
+#include "dane.h"
+
+extern volatile daneTypeDef dane;
 
 void inicjalizacja_USART()
 {
@@ -40,49 +43,87 @@ void inicjalizacja_USART()
 
 void USART1_IRQHandler(void)
 {
-	uint8_t dane=0;
+	uint8_t dane_usart=0;
 
 	if (USART_GetITStatus(USART1, USART_IT_RXNE) != RESET) //sprawdzenie czy aby na pewno odpowiednie przerwanie
 	{
 		USART_ITConfig(USART1, USART_IT_RXNE, DISABLE);
 
-		dane = USART_ReceiveData(USART1);
-		if (dane == 'S')//ustawienia silnikow
+		dane_usart = USART_ReceiveData(USART1);
+		if (dane_usart == 'S') //ustawienia silnikow
 		{
 			USART_potwierdz();
 			//ktory silnik
 			while(USART_GetFlagStatus(USART1, USART_FLAG_RXNE) == RESET);
-			dane = USART_ReceiveData(USART1);
+			dane_usart = USART_ReceiveData(USART1);
 
-			if (dane == '1')
+			if (dane_usart == '1')
 			{
 				USART_potwierdz();
 
 				while(USART_GetFlagStatus(USART1, USART_FLAG_RXNE) == RESET);
-				dane = USART_ReceiveData(USART1); //wartosc PWM
+				dane_usart = USART_ReceiveData(USART1); //wartosc PWM
 
-				if (dane >= 0 && dane <= 100)
+				if (dane_usart >= 0 && dane_usart <= 100)
 				{
+					dane.pwm.pwm1 = dane_usart;
 					USART_potwierdz();
 				}
 				else
-				{
 					USART_blad();
-				}
 			}
-			else
+			/*else if (dane_usart == '2')
 			{
-				USART_blad();
+				USART_potwierdz();
+
+				while(USART_GetFlagStatus(USART1, USART_FLAG_RXNE) == RESET);
+				dane_usart = USART_ReceiveData(USART1); //wartosc PWM
+
+				if (dane_usart >= 0 && dane_usart <= 100)
+				{
+					dane.pwm.pwm2 = dane_usart;
+					USART_potwierdz();
+				}
+				else
+					USART_blad();
 			}
+			else if (dane_usart == '3')
+			{
+				USART_potwierdz();
+
+				while(USART_GetFlagStatus(USART1, USART_FLAG_RXNE) == RESET);
+				dane_usart = USART_ReceiveData(USART1); //wartosc PWM
+
+				if (dane_usart >= 0 && dane_usart <= 100)
+				{
+					dane.pwm.pwm3 = dane_usart;
+					USART_potwierdz();
+				}
+				else
+					USART_blad();
+			}
+			else if (dane_usart == '4')
+			{
+				USART_potwierdz();
+
+				while(USART_GetFlagStatus(USART1, USART_FLAG_RXNE) == RESET);
+				dane_usart = USART_ReceiveData(USART1); //wartosc PWM
+
+				if (dane_usart >= 0 && dane_usart <= 100)
+				{
+					dane.pwm.pwm4 = dane_usart;
+					USART_potwierdz();
+				}
+				else
+					USART_blad();
+			}*/
+			else
+				USART_blad();
 		}
-		else if (dane == '0') //zadnych zmian
-		{
+		else if (dane_usart == '0') //zadnych zmian
 			USART_potwierdz();
-		}
 		else
-		{
 			USART_blad();
-		}
 
 		USART_ITConfig(USART1, USART_IT_RXNE, ENABLE);
 	}

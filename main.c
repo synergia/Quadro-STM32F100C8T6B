@@ -6,10 +6,12 @@
 #include "ADC.h"
 #include "NVIC.h"
 #include "USART.h"
+#include "dane.h"
 
 int main(void)
 {
 	inicjalizacja_zasilania();
+	inicjalizacja_dane();
 	inicjalizacja_LED();
 	inicjalizacja_SysTick();
 	inicjalizacja_TIM2();

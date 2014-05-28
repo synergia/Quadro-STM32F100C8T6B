@@ -4,6 +4,7 @@
 #define TIMERY_H_
 #define T_PSC 80
 #define T_ARR 2
+
 /*
  * 1kHz, 100 kroków
  * 100 * ARR * PSC = 24 000 000 / 1 000
@@ -17,6 +18,3 @@
 void inicjalizacja_SysTick();
 
 void inicjalizacja_TIM2();
-
-void inicjalizacja_TIM15();
-void inicjalizacja_TIM16();
