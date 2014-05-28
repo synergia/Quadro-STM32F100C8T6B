@@ -87,13 +87,13 @@
     <File name="NVIC.c" path="NVIC.c" type="1"/>
     <File name="stm_lib/inc/stm32f10x_tim.h" path="stm_lib/inc/stm32f10x_tim.h" type="1"/>
     <File name="cmsis/core_cm3.h" path="cmsis/core_cm3.h" type="1"/>
-    <File name="silniki.c" path="silniki.c" type="1"/>
-    <File name="cmsis_boot" path="" type="2"/>
     <File name="inicjalizacja.h" path="inicjalizacja.h" type="1"/>
+    <File name="cmsis_boot" path="" type="2"/>
+    <File name="silniki.c" path="silniki.c" type="1"/>
     <File name="stm_lib/src/stm32f10x_rcc.c" path="stm_lib/src/stm32f10x_rcc.c" type="1"/>
     <File name="timery.h" path="timery.h" type="1"/>
-    <File name="stm_lib/src/stm32f10x_tim.c" path="stm_lib/src/stm32f10x_tim.c" type="1"/>
     <File name="stm_lib/inc/stm32f10x_pwr.h" path="stm_lib/inc/stm32f10x_pwr.h" type="1"/>
+    <File name="stm_lib/src/stm32f10x_tim.c" path="stm_lib/src/stm32f10x_tim.c" type="1"/>
     <File name="cmsis_boot/startup" path="" type="2"/>
     <File name="ADC.h" path="ADC.h" type="1"/>
     <File name="stm_lib/src/misc.c" path="stm_lib/src/misc.c" type="1"/>
@@ -101,8 +101,8 @@
     <File name="naglowki_include.h" path="naglowki_include.h" type="1"/>
     <File name="cmsis_boot/stm32f10x_conf.h" path="cmsis_boot/stm32f10x_conf.h" type="1"/>
     <File name="stm_lib/src" path="" type="2"/>
-    <File name="inicjalizacja.c" path="inicjalizacja.c" type="1"/>
     <File name="cmsis" path="" type="2"/>
+    <File name="inicjalizacja.c" path="inicjalizacja.c" type="1"/>
     <File name="stm_lib" path="" type="2"/>
     <File name="syscalls/syscalls.c" path="syscalls/syscalls.c" type="1"/>
     <File name="NVIC.h" path="NVIC.h" type="1"/>

@@ -34,17 +34,17 @@ void ADC1_IRQHandler(void)
 		uint16_t bateria = ADC1->DR;
 
 
-		if (bateria >= 2800)
+		if (bateria >= 3370)
 		{
 			GPIO_WriteBit(LED_PORT, LED_NIEB_2, Bit_SET);
 			GPIO_WriteBit(LED_PORT, LED_ZOL_1 | LED_ZOL_2 | LED_CZER_1, Bit_RESET);
 		}
-		else if (bateria >= 2650)
+		else if (bateria >= 3130)
 		{
 			GPIO_WriteBit(LED_PORT, LED_ZOL_1, Bit_SET);
 			GPIO_WriteBit(LED_PORT, LED_NIEB_2 | LED_ZOL_2 | LED_CZER_1, Bit_RESET);
 		}
-		else if (bateria >= 2500)
+		else if (bateria >= 2930)
 		{
 			GPIO_WriteBit(LED_PORT, LED_ZOL_2, Bit_SET);
 			GPIO_WriteBit(LED_PORT, LED_NIEB_2 | LED_ZOL_1 | LED_CZER_1, Bit_RESET);
