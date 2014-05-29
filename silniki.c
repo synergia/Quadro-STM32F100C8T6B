@@ -25,9 +25,9 @@ void TIM2_IRQHandler(void)
 	if (TIM_GetITStatus(TIM2, TIM_IT_Update) == SET) //sprawdzenie zrodla
 	{
 		TIM_ClearFlag(TIM2, TIM_FLAG_Update); //wyzerowanie flagi przerwania
-		/*if (dane.pwm.pwm1 == 0 && dane.pwm.pwm2 == 0 && dane.pwm.pwm3 == 0 && dane.pwm.pwm4 == 0)
+		if (dane.pwm.pwm1 == 0 && dane.pwm.pwm2 == 0 && dane.pwm.pwm3 == 0 && dane.pwm.pwm4 == 0)
 			GPIO_WriteBit(GPIOB, SILNIK1 | SILNIK2 | SILNIK3 | SILNIK4, Bit_RESET);
-		else*/
+		else
 			GPIO_WriteBit(GPIOB, SILNIK1 | SILNIK2 | SILNIK3 | SILNIK4, Bit_SET);
 
 		TIM4->CNT = 0;
@@ -42,30 +42,30 @@ void TIM3_IRQHandler(void)
 	{
 		TIM_ClearFlag(TIM3, TIM_FLAG_Update); //wyzerowanie flagi przerwania
 
-		if (dane.pwm.pwm1 >= dane.pwm.timer)
+		if (dane.pwm.pwm1 > dane.pwm.timer)
 			GPIO_WriteBit(GPIOB, SILNIK1, Bit_SET);
 		else
 			GPIO_WriteBit(GPIOB, SILNIK1, Bit_RESET);
 
-		/*if (dane.pwm.pwm2 >= dane.pwm.timer)
+		if (dane.pwm.pwm2 > dane.pwm.timer)
 			GPIO_WriteBit(GPIOB, SILNIK2, Bit_SET);
 		else
 			GPIO_WriteBit(GPIOB, SILNIK2, Bit_RESET);
 
-		if (dane.pwm.pwm3 >= dane.pwm.timer)
+		if (dane.pwm.pwm3 > dane.pwm.timer)
 			GPIO_WriteBit(GPIOB, SILNIK3, Bit_SET);
 		else
 			GPIO_WriteBit(GPIOB, SILNIK3, Bit_RESET);
 
-		if (dane.pwm.pwm4 >= dane.pwm.timer)
+		if (dane.pwm.pwm4 > dane.pwm.timer)
 			GPIO_WriteBit(GPIOB, SILNIK4, Bit_SET);
 		else
-			GPIO_WriteBit(GPIOB, SILNIK4, Bit_RESET);*/
+			GPIO_WriteBit(GPIOB, SILNIK4, Bit_RESET);
 
 		if (dane.pwm.timer >= 99)
 		{
 			TIM3->DIER = 0; //wylaczenie przerwania
-			GPIO_WriteBit(GPIOB, SILNIK1, Bit_RESET);
+			GPIO_WriteBit(GPIOB, SILNIK1 | SILNIK2 | SILNIK3 | SILNIK4, Bit_RESET);
 		}
 		//dane.pwm.timer = 0;
 		else
