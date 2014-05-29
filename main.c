@@ -14,10 +14,13 @@ int main(void)
 	inicjalizacja_dane();
 	inicjalizacja_LED();
 	inicjalizacja_SysTick();
-	inicjalizacja_TIM2();
 	inicjalizacja_silniki();
 	inicjalizacja_ADC();
 	inicjalizacja_USART();
+	inicjalizacja_TIM2();
+	inicjalizacja_TIM4();
+	inicjalizacja_TIM3();
+
 
 	inicjalizacja_NVIC();
 

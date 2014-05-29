@@ -2,8 +2,16 @@
 
 #ifndef TIMERY_H_
 #define TIMERY_H_
-#define T_PSC 80
-#define T_ARR 2
+
+/*
+ * 50 Hz
+ */
+
+#define T_PSC2 10000
+#define T_ARR2 47
+
+#define T_PSC3 80
+#define T_ARR3 2
 
 /*
  * 1kHz, 100 kroków
@@ -13,8 +21,15 @@
  * PSC = 80
  * 3 * 80 = 240
  */
+
+#define T_PSC4 1000
+#define T_ARR4 23
 #endif
 
 void inicjalizacja_SysTick();
 
-void inicjalizacja_TIM2();
+void inicjalizacja_TIM2(); //TIM2 odpowiedzialny za sygnal co 20 ms
+
+void inicjalizacja_TIM3(); //TIM3 odpowiedzialny za szerokosc impulsu 1 - 2ms
+
+void inicjalizacja_TIM4(); //TIM4 odpowiedzialny za impuls dokladnie 1 ms
