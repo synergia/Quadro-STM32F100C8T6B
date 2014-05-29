@@ -12,6 +12,8 @@ typedef struct
 typedef struct
 {
 	PWMTypeDef pwm; //struktura PWM
+
+	uint8_t czy_polaczony; //zeby awaryjnie wylaczyc (systick)
 } daneTypeDef;
 
 

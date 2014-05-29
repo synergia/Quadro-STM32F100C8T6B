@@ -27,15 +27,15 @@ void inicjalizacja_NVIC()
 
 	NVIC_InitTypeDef nvic_usart;
 	nvic_usart.NVIC_IRQChannel = USART1_IRQn;
-	nvic_usart.NVIC_IRQChannelPreemptionPriority = 4;
+	nvic_usart.NVIC_IRQChannelPreemptionPriority = 2;
 	nvic_usart.NVIC_IRQChannelSubPriority = 0;
 	nvic_usart.NVIC_IRQChannelCmd = ENABLE;
 	NVIC_Init(&nvic_usart);
 
-	/*NVIC_InitTypeDef adc;
+	NVIC_InitTypeDef adc;
 	adc.NVIC_IRQChannel = ADC1_IRQn;
 	adc.NVIC_IRQChannelPreemptionPriority = 4;
 	adc.NVIC_IRQChannelSubPriority = 0;
 	adc.NVIC_IRQChannelCmd = ENABLE;
-	NVIC_Init(&adc);*/
+	NVIC_Init(&adc);
 }

@@ -48,6 +48,7 @@ void USART1_IRQHandler(void)
 	if (USART_GetITStatus(USART1, USART_IT_RXNE) != RESET) //sprawdzenie czy aby na pewno odpowiednie przerwanie
 	{
 		USART_ITConfig(USART1, USART_IT_RXNE, DISABLE);
+		dane.czy_polaczony = 1;
 
 		dane_usart = USART_ReceiveData(USART1);
 		if (dane_usart == 'S') //ustawienia silnikow
