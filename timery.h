@@ -26,7 +26,7 @@
 #define T_ARR4 23
 #endif
 
-void inicjalizacja_SysTick();
+void inicjalizacja_SysTick(); //odpowiedzialny za mruganie ledem i wylaczanie awaryjne silnikow
 
 void inicjalizacja_TIM2(); //TIM2 odpowiedzialny za sygnal co 20 ms
 
