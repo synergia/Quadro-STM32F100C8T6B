@@ -17,5 +17,7 @@ void inicjalizacja_zasilania()
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE); //TIM2
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE); //TIM3
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM4, ENABLE); //TIM4
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_I2C1, ENABLE); //I2C1
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_I2C2, ENABLE); //I2C2
 
 }

@@ -8,4 +8,5 @@
 #include "stm_lib/inc/stm32f10x_tim.h"
 #include "stm_lib/inc/stm32f10x_adc.h"
 #include "stm_lib/inc/stm32f10x_usart.h"
+#include "stm_lib/inc/stm32f10x_i2c.h"
 #include "stm_lib/inc/misc.h"
