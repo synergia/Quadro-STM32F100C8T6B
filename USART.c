@@ -118,6 +118,25 @@ void USART1_IRQHandler(void)
 				else
 					USART_blad();
 			}
+			else if (dane_usart == '5') // wszystkie silniki
+			{
+				USART_potwierdz();
+
+				while(USART_GetFlagStatus(USART1, USART_FLAG_RXNE) == RESET);
+				dane_usart = USART_ReceiveData(USART1); //wartosc PWM
+
+				if (dane_usart >= 0 && dane_usart <= 100)
+				{
+					dane.pwm.pwm1 = dane_usart;
+					dane.pwm.pwm2 = dane_usart;
+					dane.pwm.pwm3 = dane_usart;
+					dane.pwm.pwm4 = dane_usart;
+
+					USART_potwierdz();
+				}
+				else
+					USART_blad();
+			}
 			else
 				USART_blad();
 		}
