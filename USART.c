@@ -1,5 +1,6 @@
 #include "USART.h"
 #include "dane.h"
+#include "silniki.h"
 
 extern volatile daneTypeDef dane;
 
@@ -140,8 +141,42 @@ void USART1_IRQHandler(void)
 			else
 				USART_blad();
 		}
-		else if (dane_usart == '0') //zadnych zmian
+		else if (dane_usart == '0') //zadnych zmian lub dodajemy do garow!
+		{
 			USART_potwierdz();
+			//czy dodajemy koksu?
+			while(USART_GetFlagStatus(USART1, USART_FLAG_RXNE) == RESET);
+			dane_usart = USART_ReceiveData(USART1);
+
+			if(dane_usart == '+')
+			{
+				if (dane.pwm.pwm1 < PWM_MAX)
+					dane.pwm.pwm1++;
+				if (dane.pwm.pwm2 < PWM_MAX)
+					dane.pwm.pwm2++;
+				if (dane.pwm.pwm3 < PWM_MAX)
+					dane.pwm.pwm3++;
+				if (dane.pwm.pwm4 < PWM_MAX)
+					dane.pwm.pwm4++;
+				USART_potwierdz();
+			}
+			else if(dane_usart == '-')
+			{
+				if (dane.pwm.pwm1 > PWM_MIN)
+					dane.pwm.pwm1--;
+				if (dane.pwm.pwm2 > PWM_MIN)
+					dane.pwm.pwm2--;
+				if (dane.pwm.pwm3 > PWM_MIN)
+					dane.pwm.pwm3--;
+				if (dane.pwm.pwm4 > PWM_MIN)
+					dane.pwm.pwm4--;
+				USART_potwierdz();
+			}
+			else if (dane_usart == '0')
+				USART_potwierdz();
+			else
+				USART_blad();
+		}
 		else
 			USART_blad();
 

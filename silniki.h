@@ -8,6 +8,9 @@
 #define SILNIK2	 GPIO_Pin_14
 #define SILNIK1  GPIO_Pin_15
 
+#define PWM_MAX 100
+#define PWM_MIN 1
+
 #endif
 
 void inicjalizacja_silniki();
