@@ -17,8 +17,15 @@ typedef struct
 
 typedef struct
 {
+	uint8_t magnet_x_l;
+	uint8_t magnet_x_h;
+} MagnetTypeDef;
+
+typedef struct
+{
 	PWMTypeDef pwm; //struktura PWM
 	ZyroTypeDef zyro;
+	MagnetTypeDef magnet;
 
 	uint8_t czy_polaczony; //zeby awaryjnie wylaczyc (systick)
 } daneTypeDef;
