@@ -175,9 +175,23 @@ void USART1_IRQHandler(void)
 			else if (dane_usart == '0')
 			{
 				USART_potwierdz();
+				
+				/*
+				* wysylanie danych z ZYROSKOPU
+				*/
+				
 				USART1->DR = dane.zyro.zyro_x_l;
 				while(!(USART1->SR & USART_SR_TC)) {}
 				USART1->DR = dane.zyro.zyro_x_h;
+				while(!(USART1->SR & USART_SR_TC)) {}
+				
+				/*
+				* wysylanie danych z MAGNETOMETRU
+				*/
+				
+				USART1->DR = dane.magnet.magnet_x_l;
+				while(!(USART1->SR & USART_SR_TC)) {}
+				USART1->DR = dane.magnet.magnet_x_h;
 				while(!(USART1->SR & USART_SR_TC)) {}
 			}
 			else
