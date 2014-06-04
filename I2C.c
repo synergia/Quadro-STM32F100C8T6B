@@ -27,7 +27,7 @@ void inicjalizacja_I2C()
 	i2c->I2C_OwnAddress1 = 0x55;
 	i2c->I2C_Ack = I2C_Ack_Enable;
 	i2c->I2C_AcknowledgedAddress = I2C_AcknowledgedAddress_7bit;
-	i2c->I2C_ClockSpeed = 100000;
+	i2c->I2C_ClockSpeed = 400000;
 
 	/* I2C Peripheral Enable */
 	I2C_Cmd(I2C2, ENABLE);
