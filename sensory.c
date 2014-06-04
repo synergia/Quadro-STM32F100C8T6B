@@ -7,15 +7,23 @@ extern volatile daneTypeDef dane;
 void inicjalizacja_sensory()
 {
 	inicjalizacja_zyroskop();
+	inicjalizacja_magnetometr();
 }
 
 void inicjalizacja_zyroskop()
 {
 	wyslij_I2C(I2C2, ZYRO_ADR, 0x20, 0b11111111);  //wlaczony zyroskop
 	wyslij_I2C(I2C2, ZYRO_ADR, 0x21, 0b00100000); //filtry
-	wyslij_I2C(I2C2, ZYRO_ADR, 0x22, 0b00000000);// poki co pin zle poprowadzony wiec niepotrzebne, jakis dziwny
+	wyslij_I2C(I2C2, ZYRO_ADR, 0x22, 0b00000000);
 	wyslij_I2C(I2C2, ZYRO_ADR, 0x23, 0b00000000); //250 dps
 	wyslij_I2C(I2C2, ZYRO_ADR, 0x24, 0b00000000); //fifo, filtr wylaczone
+}
+
+void inicjalizacja_magnetometr()
+{
+	wyslij_I2C(I2C2, MAGNET_ADR, 0x00, 0b00011000); //75 Hz, normal measure
+	wyslij_I2C(I2C2, MAGNET_ADR, 0x01, 0b11100000); //najmniejsza czulosc
+	wyslij_I2C(I2C2, MAGNET_ADR, 0x02, 0b00000000); //tryb ciagly
 }
 
 void odczyt_zyroskop(uint8_t *bufor)
@@ -29,10 +37,18 @@ void odczyt_zyroskop(uint8_t *bufor)
 	//--------------------------
 }
 
+void odczyt_magnetometr(uint8_t *bufor)
+{
+	odczyt_I2C(I2C2, MAGNET_ADR, 0x03,2,bufor);
+	dane.magnet.magnet_x_l = bufor[0];
+	dane.magnet.magnet_x_h = bufor[1];
+}
+
 void odczyt_sensory()
 {
 	uint8_t bufor[2];
 	odczyt_zyroskop(bufor);
+	odczyt_magnetometr(bufor);
 }
 
 void TIM1_UP_TIM16_IRQHandler(void)
