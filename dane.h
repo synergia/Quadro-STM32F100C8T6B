@@ -11,7 +11,14 @@ typedef struct
 
 typedef struct
 {
+	uint8_t zyro_x_l;
+	uint8_t zyro_x_h;
+} ZyroTypeDef;
+
+typedef struct
+{
 	PWMTypeDef pwm; //struktura PWM
+	ZyroTypeDef zyro;
 
 	uint8_t czy_polaczony; //zeby awaryjnie wylaczyc (systick)
 } daneTypeDef;

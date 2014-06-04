@@ -10,5 +10,8 @@ void inicjalizacja_dane()
 	dane.pwm.pwm3 = 0;
 	dane.pwm.pwm4 = 0;
 
+	dane.zyro.zyro_x_h = 0;
+	dane.zyro.zyro_x_l = 0;
+
 	dane.czy_polaczony = 0;
 }

@@ -82,8 +82,8 @@
     <File name="naglowki_include.h" path="naglowki_include.h" type="1"/>
     <File name="cmsis_boot/stm32f10x_conf.h" path="cmsis_boot/stm32f10x_conf.h" type="1"/>
     <File name="syscalls/syscalls.c" path="syscalls/syscalls.c" type="1"/>
-    <File name="I2C.h" path="I2C.h" type="1"/>
     <File name="cmsis/core_cm3.c" path="cmsis/core_cm3.c" type="1"/>
+    <File name="I2C.h" path="I2C.h" type="1"/>
     <File name="stm_lib/src/stm32f10x_adc.c" path="stm_lib/src/stm32f10x_adc.c" type="1"/>
     <File name="dane.c" path="dane.c" type="1"/>
     <File name="silniki.h" path="silniki.h" type="1"/>
@@ -100,6 +100,7 @@
     <File name="inicjalizacja.h" path="inicjalizacja.h" type="1"/>
     <File name="stm_lib/src/stm32f10x_rcc.c" path="stm_lib/src/stm32f10x_rcc.c" type="1"/>
     <File name="timery.h" path="timery.h" type="1"/>
+    <File name="sensory.h" path="sensory.h" type="1"/>
     <File name="ADC.h" path="ADC.h" type="1"/>
     <File name="dane.h" path="dane.h" type="1"/>
     <File name="stm_lib/src" path="" type="2"/>
@@ -109,10 +110,11 @@
     <File name="NVIC.h" path="NVIC.h" type="1"/>
     <File name="stm_lib/inc/stm32f10x_adc.h" path="stm_lib/inc/stm32f10x_adc.h" type="1"/>
     <File name="cmsis_boot/system_stm32f10x.h" path="cmsis_boot/system_stm32f10x.h" type="1"/>
-    <File name="USART.h" path="USART.h" type="1"/>
     <File name="stm_lib/inc/stm32f10x_rcc.h" path="stm_lib/inc/stm32f10x_rcc.h" type="1"/>
+    <File name="USART.h" path="USART.h" type="1"/>
     <File name="stm_lib/inc/stm32f10x_i2c.h" path="stm_lib/inc/stm32f10x_i2c.h" type="1"/>
     <File name="syscalls" path="" type="2"/>
+    <File name="sensory.c" path="sensory.c" type="1"/>
     <File name="ADC.c" path="ADC.c" type="1"/>
     <File name="stm_lib/src/stm32f10x_i2c.c" path="stm_lib/src/stm32f10x_i2c.c" type="1"/>
     <File name="stm_lib/inc" path="" type="2"/>

@@ -173,7 +173,13 @@ void USART1_IRQHandler(void)
 				USART_potwierdz();
 			}
 			else if (dane_usart == '0')
+			{
 				USART_potwierdz();
+				USART1->DR = dane.zyro.zyro_x_l;
+				while(!(USART1->SR & USART_SR_TC)) {}
+				USART1->DR = dane.zyro.zyro_x_h;
+				while(!(USART1->SR & USART_SR_TC)) {}
+			}
 			else
 				USART_blad();
 		}

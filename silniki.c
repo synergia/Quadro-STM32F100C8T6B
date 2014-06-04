@@ -1,6 +1,7 @@
 #include "silniki.h"
 #include "dane.h"
 #include "timery.h"
+#include "sensory.h"
 
 extern volatile daneTypeDef dane;
 
@@ -33,6 +34,9 @@ void TIM2_IRQHandler(void)
 		TIM4->CNT = 0;
 		TIM4->DIER = TIM_DIER_UIE; //wlaczenie przerwania szerokosci impulsu
 		TIM_ClearFlag(TIM4, TIM_FLAG_Update); //wyzerowanie flagi przerwania
+
+		//odebranie danych
+		//odczyt_sensory();
 	}
 }
 
