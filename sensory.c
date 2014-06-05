@@ -1,6 +1,7 @@
 #include "sensory.h"
 #include "I2C.h"
 #include "dane.h"
+#include "PID.h"
 
 extern volatile daneTypeDef dane;
 
@@ -39,16 +40,23 @@ void odczyt_zyroskop(uint8_t *bufor)
 
 void odczyt_magnetometr(uint8_t *bufor)
 {
-	odczyt_I2C(I2C2, MAGNET_ADR, 0x03,2,bufor);
+	odczyt_I2C(I2C2, MAGNET_ADR, 0x83,6,bufor);
 	dane.magnet.magnet_x_l = bufor[0];
 	dane.magnet.magnet_x_h = bufor[1];
+
+	/*
+	 * przy poziomie magnetometr daje okolo 18
+	 * */
+
 }
 
 void odczyt_sensory()
 {
-	uint8_t bufor[2];
+	uint8_t bufor[6];
 	odczyt_zyroskop(bufor);
 	odczyt_magnetometr(bufor);
+
+	PID();
 }
 
 void TIM1_UP_TIM16_IRQHandler(void)

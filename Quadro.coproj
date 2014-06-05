@@ -82,12 +82,13 @@
     <File name="naglowki_include.h" path="naglowki_include.h" type="1"/>
     <File name="cmsis_boot/stm32f10x_conf.h" path="cmsis_boot/stm32f10x_conf.h" type="1"/>
     <File name="syscalls/syscalls.c" path="syscalls/syscalls.c" type="1"/>
-    <File name="cmsis/core_cm3.c" path="cmsis/core_cm3.c" type="1"/>
     <File name="I2C.h" path="I2C.h" type="1"/>
+    <File name="cmsis/core_cm3.c" path="cmsis/core_cm3.c" type="1"/>
     <File name="stm_lib/src/stm32f10x_adc.c" path="stm_lib/src/stm32f10x_adc.c" type="1"/>
     <File name="dane.c" path="dane.c" type="1"/>
     <File name="silniki.h" path="silniki.h" type="1"/>
     <File name="stm_lib/src/stm32f10x_usart.c" path="stm_lib/src/stm32f10x_usart.c" type="1"/>
+    <File name="PID.c" path="PID.c" type="1"/>
     <File name="stm_lib/src/stm32f10x_pwr.c" path="stm_lib/src/stm32f10x_pwr.c" type="1"/>
     <File name="stm_lib/src/stm32f10x_gpio.c" path="stm_lib/src/stm32f10x_gpio.c" type="1"/>
     <File name="stm_lib/inc/stm32f10x_gpio.h" path="stm_lib/inc/stm32f10x_gpio.h" type="1"/>
@@ -95,6 +96,7 @@
     <File name="USART.c" path="USART.c" type="1"/>
     <File name="cmsis_boot/system_stm32f10x.c" path="cmsis_boot/system_stm32f10x.c" type="1"/>
     <File name="stm_lib/inc/misc.h" path="stm_lib/inc/misc.h" type="1"/>
+    <File name="PID.h" path="PID.h" type="1"/>
     <File name="cmsis/core_cm3.h" path="cmsis/core_cm3.h" type="1"/>
     <File name="I2C.c" path="I2C.c" type="1"/>
     <File name="inicjalizacja.h" path="inicjalizacja.h" type="1"/>
@@ -104,8 +106,8 @@
     <File name="ADC.h" path="ADC.h" type="1"/>
     <File name="dane.h" path="dane.h" type="1"/>
     <File name="stm_lib/src" path="" type="2"/>
-    <File name="cmsis" path="" type="2"/>
     <File name="inicjalizacja.c" path="inicjalizacja.c" type="1"/>
+    <File name="cmsis" path="" type="2"/>
     <File name="stm_lib" path="" type="2"/>
     <File name="NVIC.h" path="NVIC.h" type="1"/>
     <File name="stm_lib/inc/stm32f10x_adc.h" path="stm_lib/inc/stm32f10x_adc.h" type="1"/>

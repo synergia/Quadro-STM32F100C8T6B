@@ -23,9 +23,15 @@ typedef struct
 
 typedef struct
 {
+	double kP; //wspolczynnik regulacji P
+} PIDTypeDef;
+
+typedef struct
+{
 	PWMTypeDef pwm; //struktura PWM
 	ZyroTypeDef zyro;
 	MagnetTypeDef magnet;
+	PIDTypeDef pid;
 
 	uint8_t czy_polaczony; //zeby awaryjnie wylaczyc (systick)
 } daneTypeDef;
