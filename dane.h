@@ -34,6 +34,7 @@ typedef struct
 	PIDTypeDef pid;
 
 	uint8_t czy_polaczony; //zeby awaryjnie wylaczyc (systick)
+	uint16_t opoznienie; //¿eby zainicjalizowaæ silniki oraz dla bezpieczeñstwa
 } daneTypeDef;
 
 

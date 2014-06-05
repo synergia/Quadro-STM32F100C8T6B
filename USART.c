@@ -180,7 +180,7 @@ void USART1_IRQHandler(void)
 				* wysylanie danych z ZYROSKOPU
 				*/
 				
-				USART1->DR = dane.zyro.zyro_x_l;
+				/*USART1->DR = dane.zyro.zyro_x_l;
 				while(!(USART1->SR & USART_SR_TC)) {}
 				USART1->DR = dane.zyro.zyro_x_h;
 				while(!(USART1->SR & USART_SR_TC)) {}
@@ -196,6 +196,20 @@ void USART1_IRQHandler(void)
 
 				USART1->DR = dane.pwm.pwm4;
 				while(!(USART1->SR & USART_SR_TC)) {}
+
+				//ewentualne ustawianie P
+				while(USART_GetFlagStatus(USART1, USART_FLAG_RXNE) == RESET);
+				dane_usart = USART_ReceiveData(USART1);
+
+				if (dane_usart != 0 )
+				{
+					uint8_t dzielnik;
+					while(USART_GetFlagStatus(USART1, USART_FLAG_RXNE) == RESET);
+					dzielnik = USART_ReceiveData(USART1);
+
+					dane.pid.kP = (double)dane_usart / (double)dzielnik;
+				}
+				USART_potwierdz();
 			}
 			else
 				USART_blad();

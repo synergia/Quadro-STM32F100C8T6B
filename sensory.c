@@ -53,10 +53,27 @@ void odczyt_magnetometr(uint8_t *bufor)
 void odczyt_sensory()
 {
 	uint8_t bufor[6];
-	odczyt_zyroskop(bufor);
+	//odczyt_zyroskop(bufor); na razie niepotrzebny
 	odczyt_magnetometr(bufor);
 
-	PID();
+    if (dane.opoznienie > 2000)
+    	PID();
+    else if (dane.opoznienie > 1000)
+    {
+    	dane.pwm.pwm1 = 1;
+    	dane.pwm.pwm2 = 1;
+    	dane.pwm.pwm3 = 1;
+    	dane.pwm.pwm4 = 1;
+    	dane.opoznienie++;
+    }
+    else
+    {
+    	dane.pwm.pwm1 = 50;
+		dane.pwm.pwm2 = 50;
+		dane.pwm.pwm3 = 50;
+		dane.pwm.pwm4 = 50;
+    	dane.opoznienie++;
+    }
 }
 
 void TIM1_UP_TIM16_IRQHandler(void)

@@ -13,10 +13,10 @@
 int main(void)
 {
 	inicjalizacja_zasilania();
+	inicjalizacja_silniki();
 	inicjalizacja_dane();
 	inicjalizacja_LED();
 	inicjalizacja_SysTick();
-	inicjalizacja_silniki();
 	inicjalizacja_ADC();
 	inicjalizacja_USART();
 	inicjalizacja_I2C();

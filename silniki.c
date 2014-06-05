@@ -15,13 +15,6 @@ void inicjalizacja_silniki()
 	free (silniki);
 	GPIO_WriteBit(GPIOB, SILNIK1 | SILNIK2 | SILNIK3 | SILNIK4, Bit_RESET );
 
-	int i;
-	for (i = 0; i < 500000; i++)
-	{
-		asm("nop");
-		asm("nop");
-		asm("nop");
-	}
 }
 
 void ustaw_silnik(uint8_t ktory, uint8_t wartosc)

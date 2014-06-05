@@ -5,10 +5,10 @@ volatile daneTypeDef dane;
 void inicjalizacja_dane()
 {
 	dane.pwm.timer = 0;
-	dane.pwm.pwm1 = 0;
-	dane.pwm.pwm2 = 0;
-	dane.pwm.pwm3 = 0;
-	dane.pwm.pwm4 = 0;
+	dane.pwm.pwm1 = 1;
+	dane.pwm.pwm2 = 1;
+	dane.pwm.pwm3 = 1;
+	dane.pwm.pwm4 = 1;
 
 	dane.zyro.zyro_x_h = 0;
 	dane.zyro.zyro_x_l = 0;
@@ -16,7 +16,8 @@ void inicjalizacja_dane()
 	dane.magnet.magnet_x_h = 0;
 	dane.magnet.magnet_x_l = 0;
 
-	dane.pid.kP = 0.01;
+	dane.pid.kP = 0.1;
 
 	dane.czy_polaczony = 0;
+	dane.opoznienie = 0;
 }
