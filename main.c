@@ -20,11 +20,10 @@ int main(void)
 	inicjalizacja_ADC();
 	inicjalizacja_USART();
 	inicjalizacja_I2C();
+	inicjalizacja_sensory();
 	inicjalizacja_TIM2();
 	inicjalizacja_TIM4();
 	inicjalizacja_TIM3();
-	inicjalizacja_sensory();
-	inicjalizacja_TIM1();
 
 	inicjalizacja_NVIC();
 

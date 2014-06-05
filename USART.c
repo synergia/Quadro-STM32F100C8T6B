@@ -177,15 +177,6 @@ void USART1_IRQHandler(void)
 				USART_potwierdz();
 				
 				/*
-				* wysylanie danych z ZYROSKOPU
-				*/
-				
-				/*USART1->DR = dane.zyro.zyro_x_l;
-				while(!(USART1->SR & USART_SR_TC)) {}
-				USART1->DR = dane.zyro.zyro_x_h;
-				while(!(USART1->SR & USART_SR_TC)) {}
-				
-				/*
 				* wysylanie danych z MAGNETOMETRU
 				*/
 				
@@ -194,22 +185,15 @@ void USART1_IRQHandler(void)
 				USART1->DR = dane.magnet.magnet_x_h;
 				while(!(USART1->SR & USART_SR_TC)) {}
 
-				USART1->DR = dane.pwm.pwm4;
-				while(!(USART1->SR & USART_SR_TC)) {}
-
-				//ewentualne ustawianie P
-				while(USART_GetFlagStatus(USART1, USART_FLAG_RXNE) == RESET);
-				dane_usart = USART_ReceiveData(USART1);
-
-				if (dane_usart != 0 )
-				{
-					uint8_t dzielnik;
-					while(USART_GetFlagStatus(USART1, USART_FLAG_RXNE) == RESET);
-					dzielnik = USART_ReceiveData(USART1);
-
-					dane.pid.kP = (double)dane_usart / (double)dzielnik;
-				}
+			}
+			else if (dane_usart == 'R') // regulator - nastawy
+			{
 				USART_potwierdz();
+				asm("nop");
+
+				while(USART_GetFlagStatus(USART1, USART_FLAG_RXNE) == RESET);  //kP
+				dane_usart = USART_ReceiveData(USART1);
+				dane.pid.kP = dane_usart;
 			}
 			else
 				USART_blad();

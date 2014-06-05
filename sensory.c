@@ -56,9 +56,9 @@ void odczyt_sensory()
 	//odczyt_zyroskop(bufor); na razie niepotrzebny
 	odczyt_magnetometr(bufor);
 
-    if (dane.opoznienie > 2000)
+    if (dane.opoznienie > 250)
     	PID();
-    else if (dane.opoznienie > 1000)
+    else if (dane.opoznienie > 100)
     {
     	dane.pwm.pwm1 = 1;
     	dane.pwm.pwm2 = 1;
@@ -74,16 +74,5 @@ void odczyt_sensory()
 		dane.pwm.pwm4 = 50;
     	dane.opoznienie++;
     }
-}
-
-void TIM1_UP_TIM16_IRQHandler(void)
-{
-	if (TIM_GetITStatus(TIM1, TIM_IT_Update) == SET) //sprawdzenie zrodla
-	{
-		TIM_ClearFlag(TIM1, TIM_FLAG_Update); //wyzerowanie flagi przerwania
-
-		//odebranie danych
-		odczyt_sensory();
-	}
 }
 

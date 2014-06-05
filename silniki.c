@@ -27,14 +27,12 @@ void TIM2_IRQHandler(void)
 	if (TIM_GetITStatus(TIM2, TIM_IT_Update) == SET) //sprawdzenie zrodla
 	{
 		TIM_ClearFlag(TIM2, TIM_FLAG_Update); //wyzerowanie flagi przerwania
-		if (dane.pwm.pwm1 == 0 && dane.pwm.pwm2 == 0 && dane.pwm.pwm3 == 0 && dane.pwm.pwm4 == 0)
-			GPIO_WriteBit(GPIOB, SILNIK1 | SILNIK2 | SILNIK3 | SILNIK4, Bit_RESET);
-		else
-			GPIO_WriteBit(GPIOB, SILNIK1 | SILNIK2 | SILNIK3 | SILNIK4, Bit_SET);
+		GPIO_WriteBit(GPIOB, SILNIK1 | SILNIK2 | SILNIK3 | SILNIK4, Bit_SET);
 
 		TIM4->CNT = 0;
 		TIM4->DIER = TIM_DIER_UIE; //wlaczenie przerwania szerokosci impulsu
 		TIM_ClearFlag(TIM4, TIM_FLAG_Update); //wyzerowanie flagi przerwania
+		odczyt_sensory();
 	}
 }
 

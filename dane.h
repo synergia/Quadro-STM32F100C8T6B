@@ -23,7 +23,7 @@ typedef struct
 
 typedef struct
 {
-	double kP; //wspolczynnik regulacji P
+	uint8_t kP; //wspolczynnik regulacji P
 } PIDTypeDef;
 
 typedef struct
@@ -34,7 +34,7 @@ typedef struct
 	PIDTypeDef pid;
 
 	uint8_t czy_polaczony; //zeby awaryjnie wylaczyc (systick)
-	uint16_t opoznienie; //¿eby zainicjalizowaæ silniki oraz dla bezpieczeñstwa
+	uint8_t opoznienie; //¿eby zainicjalizowaæ silniki oraz dla bezpieczeñstwa
 } daneTypeDef;
 
 
