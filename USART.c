@@ -141,62 +141,74 @@ void USART1_IRQHandler(void)
 			else
 				USART_blad();
 		}
-		else if (dane_usart == '0') //zadnych zmian lub dodajemy do garow!
+		else if (dane_usart == '0') //zadnych zmian tylko dane
 		{
 			USART_potwierdz();
-			//czy dodajemy koksu?
-			while(USART_GetFlagStatus(USART1, USART_FLAG_RXNE) == RESET);
+			/*
+			* wysylanie danych z MAGNETOMETRU
+			*/
+
+			USART1->DR = dane.magnet.magnet_x_l;
+			while(!(USART1->SR & USART_SR_TC)) {}
+			USART1->DR = dane.magnet.magnet_x_h;
+			while(!(USART1->SR & USART_SR_TC)) {}
+
+			USART1->DR = dane.magnet.magnet_y_l;
+			while(!(USART1->SR & USART_SR_TC)) {}
+			USART1->DR = dane.magnet.magnet_y_h;
+			while(!(USART1->SR & USART_SR_TC)) {}
+
+			USART1->DR = dane.magnet.magnet_z_l;
+			while(!(USART1->SR & USART_SR_TC)) {}
+			USART1->DR = dane.magnet.magnet_z_h;
+			while(!(USART1->SR & USART_SR_TC)) {}
+
+			/*
+			 * wysylanie danych z ZYROSKOPU
+			 */
+
+			USART1->DR = dane.zyro.zyro_y_l;
+			while(!(USART1->SR & USART_SR_TC)) {}
+			USART1->DR = dane.zyro.zyro_y_h;
+			while(!(USART1->SR & USART_SR_TC)) {}
+
+			/*
+			 * wysylanie danych z AKCELEROMETRU
+			 */
+
+			USART1->DR = dane.akcel.akcel_x_l;
+			while(!(USART1->SR & USART_SR_TC)) {}
+			USART1->DR = dane.akcel.akcel_x_h;
+			while(!(USART1->SR & USART_SR_TC)) {}
+
+			USART1->DR = dane.akcel.akcel_y_l;
+			while(!(USART1->SR & USART_SR_TC)) {}
+			USART1->DR = dane.akcel.akcel_y_h;
+			while(!(USART1->SR & USART_SR_TC)) {}
+
+			USART1->DR = dane.akcel.akcel_z_l;
+			while(!(USART1->SR & USART_SR_TC)) {}
+			USART1->DR = dane.akcel.akcel_z_h;
+			while(!(USART1->SR & USART_SR_TC)) {}
+
+			//srednia po x
+			USART1->DR = dane.akcel.akcel_x_srednia;
+			while(!(USART1->SR & USART_SR_TC)) {}
+
+		}
+		else if (dane_usart == 'R') // regulator - nastawy
+		{
+			USART_potwierdz();
+			asm("nop");
+
+			while(USART_GetFlagStatus(USART1, USART_FLAG_RXNE) == RESET);  //kP
 			dane_usart = USART_ReceiveData(USART1);
+			dane.pid.kP = dane_usart;
 
-			if(dane_usart == '+')
-			{
-				if (dane.pwm.pwm1 < PWM_MAX)
-					dane.pwm.pwm1++;
-				if (dane.pwm.pwm2 < PWM_MAX)
-					dane.pwm.pwm2++;
-				if (dane.pwm.pwm3 < PWM_MAX)
-					dane.pwm.pwm3++;
-				if (dane.pwm.pwm4 < PWM_MAX)
-					dane.pwm.pwm4++;
-				USART_potwierdz();
-			}
-			else if(dane_usart == '-')
-			{
-				if (dane.pwm.pwm1 > PWM_MIN)
-					dane.pwm.pwm1--;
-				if (dane.pwm.pwm2 > PWM_MIN)
-					dane.pwm.pwm2--;
-				if (dane.pwm.pwm3 > PWM_MIN)
-					dane.pwm.pwm3--;
-				if (dane.pwm.pwm4 > PWM_MIN)
-					dane.pwm.pwm4--;
-				USART_potwierdz();
-			}
-			else if (dane_usart == '0')
-			{
-				USART_potwierdz();
-				
-				/*
-				* wysylanie danych z MAGNETOMETRU
-				*/
-				
-				USART1->DR = dane.magnet.magnet_x_l;
-				while(!(USART1->SR & USART_SR_TC)) {}
-				USART1->DR = dane.magnet.magnet_x_h;
-				while(!(USART1->SR & USART_SR_TC)) {}
+			asm("nop");
 
-			}
-			else if (dane_usart == 'R') // regulator - nastawy
-			{
-				USART_potwierdz();
-				asm("nop");
-
-				while(USART_GetFlagStatus(USART1, USART_FLAG_RXNE) == RESET);  //kP
-				dane_usart = USART_ReceiveData(USART1);
-				dane.pid.kP = dane_usart;
-			}
-			else
-				USART_blad();
+			USART1->DR = dane.pwm.pwm4; //wys³anie PWM4
+			while(!(USART1->SR & USART_SR_TC)) {}
 		}
 		else
 			USART_blad();
