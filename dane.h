@@ -30,7 +30,11 @@ typedef struct
 	uint8_t akcel_x_srednia;
 	uint8_t akcel_x_srednia_tab[SREDNIA];
 
+	uint8_t akcel_x_srednia_mediana;
+	uint8_t akcel_x_srednia_mediana_tab[SREDNIA];
+
 	uint8_t akcel_x_mediana; //do filtru mediany
+	uint8_t akcel_x_mediana_tab[3];
 } AkcelTypeDef;
 
 typedef struct

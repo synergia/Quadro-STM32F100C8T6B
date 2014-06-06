@@ -194,6 +194,12 @@ void USART1_IRQHandler(void)
 			//srednia po x
 			USART1->DR = dane.akcel.akcel_x_srednia;
 			while(!(USART1->SR & USART_SR_TC)) {}
+			//mediana
+			USART1->DR = dane.akcel.akcel_x_mediana;
+			while(!(USART1->SR & USART_SR_TC)) {}
+			//srednia z mediany
+			USART1->DR = dane.akcel.akcel_x_srednia_mediana;
+			while(!(USART1->SR & USART_SR_TC)) {}
 
 		}
 		else if (dane_usart == 'R') // regulator - nastawy

@@ -14,11 +14,11 @@ void inicjalizacja_sensory()
 
 void inicjalizacja_zyroskop()
 {
-	wyslij_I2C(I2C2, ZYRO_ADR, 0x20, 0b00101111);  //wlaczony zyroskop
+	wyslij_I2C(I2C2, ZYRO_ADR, 0x20, 0b00001111);  //wlaczony zyroskop
 	wyslij_I2C(I2C2, ZYRO_ADR, 0x21, 0b00000000); //filtry
 	wyslij_I2C(I2C2, ZYRO_ADR, 0x22, 0b00000000);
-	wyslij_I2C(I2C2, ZYRO_ADR, 0x23, 0b00000000); //250 dps
-	wyslij_I2C(I2C2, ZYRO_ADR, 0x24, 0b00000000); //fifo, filtr wylaczone
+	wyslij_I2C(I2C2, ZYRO_ADR, 0x23, 0b10000000); //250 dps
+	wyslij_I2C(I2C2, ZYRO_ADR, 0x24, 0b00000000);
 }
 
 void inicjalizacja_magnetometr()
@@ -89,13 +89,53 @@ void odczyt_akcelerometr(uint8_t *bufor)
 			dane.temp -= (dane.akcel.akcel_x_srednia_tab[i] - 255);
 	}
 	dane.akcel.akcel_x_srednia = dane.temp >> PRZESUN;
-	dane.akcel.akcel_ktora_srednia++;
 	//---------------------------------------------
 
 	//filtr mediany
 	//---------------------------------------------
+	uint8_t temp[3];
+	uint8_t temp2;
+	uint8_t czy_zmieniany;
 
+	temp[0] = dane.akcel.akcel_x_mediana_tab[0];
+	temp[1] = dane.akcel.akcel_x_mediana_tab[1];
+	if (dane.akcel.akcel_x_h > 127)
+		temp[2] = dane.akcel.akcel_x_mediana_tab[2] = 255 - dane.akcel.akcel_x_h;
+	else
+		temp[2] = dane.akcel.akcel_x_mediana_tab[2] = dane.akcel.akcel_x_h;
+
+	//sortowanie babelkowe
+	do
+	{
+		czy_zmieniany = 0;
+		for (i = 0; i < 2; i++)
+		{
+			if (temp[i+1] < temp[i])
+			{
+				temp2 = temp[i];
+				temp[i] = temp[i+1];
+				temp[i+1] = temp2;
+				czy_zmieniany = 1;
+			}
+		}
+	} while (czy_zmieniany);
+
+	dane.akcel.akcel_x_mediana = temp[1];
+
+	dane.akcel.akcel_x_mediana_tab[0] = dane.akcel.akcel_x_mediana_tab[1];
+	dane.akcel.akcel_x_mediana_tab[1] = dane.akcel.akcel_x_mediana_tab[2];
+	dane.akcel.akcel_x_mediana_tab[2] = dane.akcel.akcel_x_mediana;
 	//---------------------------------------------
+
+	//filtr srednia z mediany
+	//--------------------------------------------
+	dane.akcel.akcel_x_srednia_mediana_tab[dane.akcel.akcel_ktora_srednia] = dane.akcel.akcel_x_mediana;
+	for(i=0, dane.temp = 0; i < SREDNIA; i++)
+		dane.temp += dane.akcel.akcel_x_srednia_mediana_tab[i];
+	dane.akcel.akcel_x_srednia_mediana = dane.temp >> PRZESUN;
+	//---------------------------------------------
+
+	dane.akcel.akcel_ktora_srednia++;
 }
 
 void odczyt_sensory()
