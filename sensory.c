@@ -3,6 +3,8 @@
 #include "dane.h"
 #include "PID.h"
 
+#define PI 3.14159265
+
 extern volatile daneTypeDef dane;
 
 void inicjalizacja_sensory()
@@ -75,6 +77,17 @@ void odczyt_akcelerometr(uint8_t *bufor)
 	dane.akcel.akcel_z_l = bufor[4];
 	dane.akcel.akcel_z_h = bufor[5];
 
+	//oblicza kat -90 do 90 stopni
+	uint16_t temp = (dane.akcel.akcel_x_h << 8) + dane.akcel.akcel_x_l;
+	signed int temp_deg;
+	if (temp > 32768)
+		temp_deg = temp - 65535;
+	else
+		temp_deg = temp;
+	dane.akcel.akcel_x_kat_deg = (int)(asin((double)temp_deg/8000.0) *180.0 / PI);
+	//----------------------------
+
+	/*
 	//obliczanie sredniej
 	//--------------------------------------------
 	if (dane.akcel.akcel_ktora_srednia >= SREDNIA)
@@ -136,6 +149,7 @@ void odczyt_akcelerometr(uint8_t *bufor)
 	//---------------------------------------------
 
 	dane.akcel.akcel_ktora_srednia++;
+	*/
 }
 
 void odczyt_sensory()

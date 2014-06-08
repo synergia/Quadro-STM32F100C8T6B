@@ -23,12 +23,13 @@ void inicjalizacja_dane()
 	dane.akcel.akcel_y_l = 0;
 	dane.akcel.akcel_z_h = 0;
 	dane.akcel.akcel_z_l = 0;
+	dane.akcel.akcel_x_kat_deg = 0;
 
-	int i;
+	/*int i;
 	for (i = 0; i < SREDNIA; i++)
 		dane.akcel.akcel_x_srednia_tab[i] = 0;
 	dane.akcel.akcel_x_srednia = 0;
-	dane.akcel.akcel_ktora_srednia = 0;
+	dane.akcel.akcel_ktora_srednia = 0;*/
 
 	dane.magnet.magnet_x_h = 0;
 	dane.magnet.magnet_x_l = 0;

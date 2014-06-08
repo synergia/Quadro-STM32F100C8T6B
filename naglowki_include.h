@@ -10,3 +10,4 @@
 #include "stm_lib/inc/stm32f10x_usart.h"
 #include "stm_lib/inc/stm32f10x_i2c.h"
 #include "stm_lib/inc/misc.h"
+#include "math.h"
