@@ -162,7 +162,7 @@ void odczyt_akcelerometr(uint8_t *bufor)
 void oblicz_kat()
 {
 	dane.kat.kat_x += dane.zyro.zyro_y_kat_mdeg;
-	dane.kat.kat_x = 0.995*dane.kat.kat_x + 0.005*dane.akcel.akcel_x_kat_deg*1000;
+	dane.kat.kat_x = 0.99*dane.kat.kat_x + 0.01*dane.akcel.akcel_x_kat_deg*1000;
 }
 
 void odczyt_sensory()

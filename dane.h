@@ -4,13 +4,15 @@
 #define _DANE_H_
 
 #define SREDNIA 32
-#define PRZESUN 5
+#define PRZESUN 8
+#define BLEDY 256 //ilosc bledow gromadzonych w I
 
 #endif
 
 typedef struct
 {
 	uint8_t timer;
+	uint8_t wartosc_pocz;
 	uint8_t pwm1;
 	uint8_t pwm2;
 	uint8_t pwm3;
@@ -70,6 +72,11 @@ typedef struct
 typedef struct
 {
 	uint8_t kP; //wspolczynnik regulacji P
+	uint8_t kI;
+	uint8_t kD;
+	int32_t I_bledy_tab[BLEDY];
+	int32_t I_bledy_srednia;
+	uint8_t I_ktory_blad;
 } PIDTypeDef;
 
 typedef struct

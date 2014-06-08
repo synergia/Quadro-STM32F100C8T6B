@@ -223,9 +223,36 @@ void USART1_IRQHandler(void)
 			dane.pid.kP = dane_usart;
 
 			asm("nop");
+			USART1->DR = dane.pwm.pwm2; //wys³anie PWM4
+			while(!(USART1->SR & USART_SR_TC)) {}
+			asm("nop");
+
+			while(USART_GetFlagStatus(USART1, USART_FLAG_RXNE) == RESET);  //kI
+			dane_usart = USART_ReceiveData(USART1);
+			dane.pid.kI = dane_usart;
+
+			asm("nop");
 
 			USART1->DR = dane.pwm.pwm4; //wys³anie PWM4
 			while(!(USART1->SR & USART_SR_TC)) {}
+
+			asm("nop");
+			while(USART_GetFlagStatus(USART1, USART_FLAG_RXNE) == RESET);  //wartosc_pocz
+			dane_usart = USART_ReceiveData(USART1);
+			dane.pwm.wartosc_pocz = dane_usart;
+
+			asm("nop");
+			USART_potwierdz();
+			asm("nop");
+
+			asm("nop");
+			while(USART_GetFlagStatus(USART1, USART_FLAG_RXNE) == RESET);  //wartosc_pocz
+			dane_usart = USART_ReceiveData(USART1);
+			dane.pid.kD = dane_usart;
+
+			asm("nop");
+			USART_potwierdz();
+			asm("nop");
 		}
 		else
 			USART_blad();
