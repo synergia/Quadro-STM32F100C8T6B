@@ -6,19 +6,17 @@ extern volatile daneTypeDef dane;
 
 void PID()
 {
-	/*signed int magnet_y;
+	double kP = (double)dane.pid.kP * 0.0001;
+	int temp = (double)dane.kat.kat_x * kP;
 
-	magnet_y = dane.magnet.magnet_y_h;
-
-	temp *= dane.pid.kP;
-	temp = temp>>2;
-	dane.pwm.pwm4 -= temp;
+	dane.pwm.pwm4 = 25 + temp;
 
 	if(dane.pwm.pwm4 > 100) dane.pwm.pwm4 = 100;
 	else if (dane.pwm.pwm4 < 1) dane.pwm.pwm4 = 1;
 
-	dane.pwm.pwm2 += temp;
+	dane.pwm.pwm2 = 25 - temp;
 
 	if(dane.pwm.pwm2 > 100) dane.pwm.pwm2 = 100;
-	else if (dane.pwm.pwm2 < 1) dane.pwm.pwm2 = 1;*/
+	else if (dane.pwm.pwm2 < 1) dane.pwm.pwm2 = 1;
+
 }

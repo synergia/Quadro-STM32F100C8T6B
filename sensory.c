@@ -176,10 +176,7 @@ void odczyt_sensory()
 
     if (dane.opoznienie > 250)
     {
-    	dane.pwm.pwm1 = 50;
-		dane.pwm.pwm2 = 50;
-		dane.pwm.pwm3 = 50;
-		dane.pwm.pwm4 = 50;
+    	PID();
     }
     else if (dane.opoznienie > 100)
     {
@@ -187,6 +184,7 @@ void odczyt_sensory()
     	dane.pwm.pwm2 = 1;
     	dane.pwm.pwm3 = 1;
     	dane.pwm.pwm4 = 1;
+    	dane.kat.kat_x = 0;
     	dane.opoznienie++;
     }
     else
@@ -195,6 +193,7 @@ void odczyt_sensory()
 		dane.pwm.pwm2 = 50;
 		dane.pwm.pwm3 = 50;
 		dane.pwm.pwm4 = 50;
+		dane.kat.kat_x = 0;
     	dane.opoznienie++;
     }
 }

@@ -41,7 +41,7 @@ void inicjalizacja_dane()
 	dane.magnet.magnet_z_h = 0;
 	dane.magnet.magnet_z_l = 0;
 
-	dane.pid.kP = 1;
+	dane.pid.kP = 6;
 
 	dane.czy_polaczony = 0;
 	dane.opoznienie = 0;

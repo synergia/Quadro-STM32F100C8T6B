@@ -32,7 +32,7 @@ void TIM2_IRQHandler(void)
 		TIM4->CNT = 0;
 		TIM4->DIER = TIM_DIER_UIE; //wlaczenie przerwania szerokosci impulsu
 		TIM_ClearFlag(TIM4, TIM_FLAG_Update); //wyzerowanie flagi przerwania
-		odczyt_sensory();
+		//odczyt_sensory();
 	}
 }
 
@@ -66,6 +66,7 @@ void TIM3_IRQHandler(void)
 		{
 			TIM3->DIER = 0; //wylaczenie przerwania
 			GPIO_WriteBit(GPIOB, SILNIK1 | SILNIK2 | SILNIK3 | SILNIK4, Bit_RESET);
+			odczyt_sensory();
 		}
 		//dane.pwm.timer = 0;
 		else
