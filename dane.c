@@ -16,6 +16,7 @@ void inicjalizacja_dane()
 	dane.zyro.zyro_y_l = 0;
 	dane.zyro.zyro_z_h = 0;
 	dane.zyro.zyro_z_l = 0;
+	dane.zyro.zyro_y_kat_mdeg = 0;
 	
 	dane.akcel.akcel_x_h = 0;
 	dane.akcel.akcel_x_l = 0;
@@ -24,6 +25,8 @@ void inicjalizacja_dane()
 	dane.akcel.akcel_z_h = 0;
 	dane.akcel.akcel_z_l = 0;
 	dane.akcel.akcel_x_kat_deg = 0;
+
+	dane.kat.kat_x = 0;
 
 	/*int i;
 	for (i = 0; i < SREDNIA; i++)

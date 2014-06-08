@@ -191,7 +191,13 @@ void USART1_IRQHandler(void)
 			USART1->DR = dane.akcel.akcel_z_h;
 			while(!(USART1->SR & USART_SR_TC)) {}
 
-			USART1->DR = dane.akcel.akcel_x_kat_deg;
+			USART1->DR = dane.kat.kat_x >> 24;
+			while(!(USART1->SR & USART_SR_TC)) {}
+			USART1->DR = dane.kat.kat_x >> 16;
+			while(!(USART1->SR & USART_SR_TC)) {}
+			USART1->DR = dane.kat.kat_x >> 8;
+			while(!(USART1->SR & USART_SR_TC)) {}
+			USART1->DR = dane.kat.kat_x;
 			while(!(USART1->SR & USART_SR_TC)) {}
 
 			/*

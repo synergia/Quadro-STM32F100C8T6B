@@ -48,7 +48,14 @@ typedef struct
 	uint8_t zyro_y_h;
 	uint8_t zyro_z_l;
 	uint8_t zyro_z_h;
+
+	int32_t zyro_y_kat_mdeg;
 } ZyroTypeDef;
+
+typedef struct
+{
+	int32_t kat_x;
+} KatTypeDef;
 
 typedef struct
 {
@@ -72,6 +79,7 @@ typedef struct
 	MagnetTypeDef magnet;
 	AkcelTypeDef akcel;
 	PIDTypeDef pid;
+	KatTypeDef kat;
 
 	uint16_t temp;
 	uint8_t czy_polaczony; //zeby awaryjnie wylaczyc (systick)

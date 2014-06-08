@@ -3,8 +3,6 @@
 #include "dane.h"
 #include "PID.h"
 
-#define PI 3.14159265
-
 extern volatile daneTypeDef dane;
 
 void inicjalizacja_sensory()
@@ -50,6 +48,15 @@ void odczyt_zyroskop(uint8_t *bufor)
 	dane.zyro.zyro_z_l = bufor[4];
 	dane.zyro.zyro_z_h = bufor[5];
 	//--------------------------
+
+	//obliczenie kata z zyroskopu
+	uint16_t temp = (dane.zyro.zyro_y_h << 8) + dane.zyro.zyro_y_l;
+	signed int temp_vdeg;
+	if (temp > 32768)
+		temp_vdeg = temp - 65535;
+	else
+		temp_vdeg = temp;
+	dane.zyro.zyro_y_kat_mdeg = (temp_vdeg - DELTAZYRO) * DT * MDEG * 0.001; //w milistopniach
 }
 
 void odczyt_magnetometr(uint8_t *bufor)
@@ -152,6 +159,12 @@ void odczyt_akcelerometr(uint8_t *bufor)
 	*/
 }
 
+void oblicz_kat()
+{
+	dane.kat.kat_x += dane.zyro.zyro_y_kat_mdeg;
+	dane.kat.kat_x = 0.995*dane.kat.kat_x + 0.005*dane.akcel.akcel_x_kat_deg*1000;
+}
+
 void odczyt_sensory()
 {
 	uint8_t bufor[6];
@@ -159,8 +172,15 @@ void odczyt_sensory()
 	odczyt_akcelerometr(bufor);
 	odczyt_magnetometr(bufor);
 
+	oblicz_kat();
+
     if (dane.opoznienie > 250)
-    	PID();
+    {
+    	dane.pwm.pwm1 = 50;
+		dane.pwm.pwm2 = 50;
+		dane.pwm.pwm3 = 50;
+		dane.pwm.pwm4 = 50;
+    }
     else if (dane.opoznienie > 100)
     {
     	dane.pwm.pwm1 = 1;
