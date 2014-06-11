@@ -186,10 +186,13 @@ void USART1_IRQHandler(void)
 			USART1->DR = dane.akcel.akcel_y_h;
 			while(!(USART1->SR & USART_SR_TC)) {}
 
-			USART1->DR = dane.akcel.akcel_z_l;
+			//znowu z ZYROSKOPU
+			USART1->DR = dane.zyro.zyro_x_l;
 			while(!(USART1->SR & USART_SR_TC)) {}
-			USART1->DR = dane.akcel.akcel_z_h;
+			USART1->DR = dane.zyro.zyro_x_h;
 			while(!(USART1->SR & USART_SR_TC)) {}
+
+			//wysylanie katow
 
 			USART1->DR = dane.kat.kat_x >> 24;
 			while(!(USART1->SR & USART_SR_TC)) {}
@@ -200,18 +203,33 @@ void USART1_IRQHandler(void)
 			USART1->DR = dane.kat.kat_x;
 			while(!(USART1->SR & USART_SR_TC)) {}
 
-			/*
-			//srednia po x
-			USART1->DR = dane.akcel.akcel_x_srednia;
+			USART1->DR = dane.kat.kat_y >> 24;
 			while(!(USART1->SR & USART_SR_TC)) {}
-			//mediana
-			USART1->DR = dane.akcel.akcel_x_mediana;
+			USART1->DR = dane.kat.kat_y >> 16;
 			while(!(USART1->SR & USART_SR_TC)) {}
-			//srednia z mediany
-			USART1->DR = dane.akcel.akcel_x_srednia_mediana;
+			USART1->DR = dane.kat.kat_y >> 8;
 			while(!(USART1->SR & USART_SR_TC)) {}
-			*/
+			USART1->DR = dane.kat.kat_y;
+			while(!(USART1->SR & USART_SR_TC)) {}
 
+
+			//sredni kat z akcelerometru po x
+			USART1->DR = dane.akcel.akcel_x_kat_deg;
+			while(!(USART1->SR & USART_SR_TC)) {}
+
+			//sredni kat z akcelerometru po y
+			USART1->DR = dane.akcel.akcel_y_kat_deg;
+			while(!(USART1->SR & USART_SR_TC)) {}
+
+			//wysylanie PWMow
+			USART1->DR = dane.pwm.pwm1;
+			while(!(USART1->SR & USART_SR_TC)) {}
+			USART1->DR = dane.pwm.pwm2;
+			while(!(USART1->SR & USART_SR_TC)) {}
+			USART1->DR = dane.pwm.pwm3;
+			while(!(USART1->SR & USART_SR_TC)) {}
+			USART1->DR = dane.pwm.pwm4;
+			while(!(USART1->SR & USART_SR_TC)) {}
 		}
 		else if (dane_usart == 'R') // regulator - nastawy
 		{
@@ -223,8 +241,7 @@ void USART1_IRQHandler(void)
 			dane.pid.kP = dane_usart;
 
 			asm("nop");
-			USART1->DR = dane.pwm.pwm2; //wys³anie PWM4
-			while(!(USART1->SR & USART_SR_TC)) {}
+			USART_potwierdz();
 			asm("nop");
 
 			while(USART_GetFlagStatus(USART1, USART_FLAG_RXNE) == RESET);  //kI
@@ -233,8 +250,7 @@ void USART1_IRQHandler(void)
 
 			asm("nop");
 
-			USART1->DR = dane.pwm.pwm4; //wys³anie PWM4
-			while(!(USART1->SR & USART_SR_TC)) {}
+			USART_potwierdz();
 
 			asm("nop");
 			while(USART_GetFlagStatus(USART1, USART_FLAG_RXNE) == RESET);  //wartosc_pocz

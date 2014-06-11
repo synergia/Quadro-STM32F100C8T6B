@@ -10,9 +10,12 @@
 #include "I2C.h"
 #include "sensory.h"
 
+void opoznij();
+
 int main(void)
 {
 	inicjalizacja_zasilania();
+	opoznij(); //oczekiwanie a¿ sie ustabilizuje napiecie
 	inicjalizacja_silniki();
 	inicjalizacja_dane();
 	inicjalizacja_LED();
@@ -30,4 +33,12 @@ int main(void)
     while(1)
     {
     }
+}
+
+void opoznij()
+{
+	uint16_t i;
+
+	for (i = 0; i < 65535; i++)
+		asm("nop");
 }

@@ -26,6 +26,7 @@ void inicjalizacja_akcelerometr();
 void odczyt_zyroskop(uint8_t *bufor);
 void odczyt_magnetometr(uint8_t *bufor);
 void odczyt_akcelerometr(uint8_t *bufor);
+void obliczenia_akcelerometr();
 
 void odczyt_sensory();
 void oblicz_kat();

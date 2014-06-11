@@ -10,10 +10,9 @@ void inicjalizacja_TIM1()
 {
 	TIM1->CR1 = TIM_CR1_URS | TIM_CR1_CEN; //tylko overflow
 	TIM1->DIER = TIM_DIER_UIE; //interrupt enable
-	TIM1->PSC = 3200;
-	TIM1->ARR = 50; //42105 * 4 = 168420; 16000000/168420 ok 95 Hz
+	TIM1->PSC = 2400;
+	TIM1->ARR = 9; //42105 * 4 = 168420; 16000000/168420 ok 95 Hz
 }
-
 
 void inicjalizacja_TIM2() //timer odpowiedzialny za PWM
 {

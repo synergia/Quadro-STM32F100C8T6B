@@ -30,9 +30,9 @@ void inicjalizacja_magnetometr()
 
 void inicjalizacja_akcelerometr()
 {
-	wyslij_I2C(I2C2, AKCEL_ADR, 0x20, 0b00100111);
+	wyslij_I2C(I2C2, AKCEL_ADR, 0x20, 0b00111111);
 	wyslij_I2C(I2C2, AKCEL_ADR, 0x21, 0b00000000);
-	wyslij_I2C(I2C2, AKCEL_ADR, 0x23, 0b00010000);
+	wyslij_I2C(I2C2, AKCEL_ADR, 0x23, 0b00110000);
 }
 
 void odczyt_zyroskop(uint8_t *bufor)
@@ -57,6 +57,13 @@ void odczyt_zyroskop(uint8_t *bufor)
 	else
 		temp_vdeg = temp;
 	dane.zyro.zyro_y_kat_mdeg = (temp_vdeg - DELTAZYRO) * DT * MDEG * 0.001; //w milistopniach
+
+	temp = (dane.zyro.zyro_x_h << 8) + dane.zyro.zyro_x_l;
+	if(temp > 32768)
+		temp_vdeg = temp - 65535;
+	else
+		temp_vdeg = temp;
+	dane.zyro.zyro_x_kat_mdeg = (temp_vdeg - DELTAZYRO) * DT * MDEG * 0.001; //w milistopniach
 }
 
 void odczyt_magnetometr(uint8_t *bufor)
@@ -70,8 +77,6 @@ void odczyt_magnetometr(uint8_t *bufor)
 
 	dane.magnet.magnet_z_l = bufor[4];
 	dane.magnet.magnet_z_h = bufor[5];
-
-
 }
 
 void odczyt_akcelerometr(uint8_t *bufor)
@@ -84,85 +89,70 @@ void odczyt_akcelerometr(uint8_t *bufor)
 	dane.akcel.akcel_z_l = bufor[4];
 	dane.akcel.akcel_z_h = bufor[5];
 
-	//oblicza kat -90 do 90 stopni
-	uint16_t temp = (dane.akcel.akcel_x_h << 8) + dane.akcel.akcel_x_l;
-	signed int temp_deg;
-	if (temp > 32768)
-		temp_deg = temp - 65535;
-	else
-		temp_deg = temp;
-	dane.akcel.akcel_x_kat_deg = (int)(asin((double)temp_deg/8000.0) *180.0 / PI);
-	//----------------------------
-
-	/*
 	//obliczanie sredniej
 	//--------------------------------------------
 	if (dane.akcel.akcel_ktora_srednia >= SREDNIA)
 		dane.akcel.akcel_ktora_srednia = 0;
-	dane.akcel.akcel_x_srednia_tab[dane.akcel.akcel_ktora_srednia] = dane.akcel.akcel_x_h;
+	dane.akcel.akcel_x_srednia_tab[dane.akcel.akcel_ktora_srednia] = dane.akcel.akcel_x_h; //20 odczytow w miedzyczasie (1 kHz)
 	int i;
 	for(i=0, dane.temp = 0; i < SREDNIA; i++)
 	{
 		if(dane.akcel.akcel_x_srednia_tab[i] < 127)
 			dane.temp += dane.akcel.akcel_x_srednia_tab[i];
 		else
-			dane.temp -= (dane.akcel.akcel_x_srednia_tab[i] - 255);
+			dane.temp += (dane.akcel.akcel_x_srednia_tab[i] - 255);
 	}
 	dane.akcel.akcel_x_srednia = dane.temp >> PRZESUN;
-	//---------------------------------------------
 
-	//filtr mediany
-	//---------------------------------------------
-	uint8_t temp[3];
-	uint8_t temp2;
-	uint8_t czy_zmieniany;
-
-	temp[0] = dane.akcel.akcel_x_mediana_tab[0];
-	temp[1] = dane.akcel.akcel_x_mediana_tab[1];
-	if (dane.akcel.akcel_x_h > 127)
-		temp[2] = dane.akcel.akcel_x_mediana_tab[2] = 255 - dane.akcel.akcel_x_h;
-	else
-		temp[2] = dane.akcel.akcel_x_mediana_tab[2] = dane.akcel.akcel_x_h;
-
-	//sortowanie babelkowe
-	do
+	dane.akcel.akcel_y_srednia_tab[dane.akcel.akcel_ktora_srednia] = dane.akcel.akcel_y_h;
+	for(i = 0, dane.temp = 0; i < SREDNIA; i++)
 	{
-		czy_zmieniany = 0;
-		for (i = 0; i < 2; i++)
-		{
-			if (temp[i+1] < temp[i])
-			{
-				temp2 = temp[i];
-				temp[i] = temp[i+1];
-				temp[i+1] = temp2;
-				czy_zmieniany = 1;
-			}
-		}
-	} while (czy_zmieniany);
-
-	dane.akcel.akcel_x_mediana = temp[1];
-
-	dane.akcel.akcel_x_mediana_tab[0] = dane.akcel.akcel_x_mediana_tab[1];
-	dane.akcel.akcel_x_mediana_tab[1] = dane.akcel.akcel_x_mediana_tab[2];
-	dane.akcel.akcel_x_mediana_tab[2] = dane.akcel.akcel_x_mediana;
-	//---------------------------------------------
-
-	//filtr srednia z mediany
-	//--------------------------------------------
-	dane.akcel.akcel_x_srednia_mediana_tab[dane.akcel.akcel_ktora_srednia] = dane.akcel.akcel_x_mediana;
-	for(i=0, dane.temp = 0; i < SREDNIA; i++)
-		dane.temp += dane.akcel.akcel_x_srednia_mediana_tab[i];
-	dane.akcel.akcel_x_srednia_mediana = dane.temp >> PRZESUN;
-	//---------------------------------------------
+		if (dane.akcel.akcel_y_srednia_tab[i] < 127)
+			dane.temp += (dane.akcel.akcel_y_srednia_tab[i]);
+		else
+			dane.temp += (dane.akcel.akcel_y_srednia_tab[i] - 255);
+	}
+	dane.akcel.akcel_y_srednia = dane.temp >> PRZESUN;
 
 	dane.akcel.akcel_ktora_srednia++;
-	*/
+	//---------------------------------------------
+
+	//oblicza kat -90 do 90 stopni
+	//uint16_t temp = (dane.akcel.akcel_x_h << 8) + dane.akcel.akcel_x_l;
+	uint16_t temp = (dane.akcel.akcel_x_srednia << 8);// + dane.akcel.akcel_x_l;
+	signed int temp_deg;
+	if (temp > 32768)
+		temp_deg = temp - 65535;
+	else
+		temp_deg = temp;
+	if (temp_deg < -1280)
+		dane.akcel.akcel_x_kat_deg = -180.0 / PI; //skrajny przypadek
+	else if (temp_deg > 1280)
+		dane.akcel.akcel_x_kat_deg = 180.0 / PI; //skrajny przypadek
+	else
+		dane.akcel.akcel_x_kat_deg = (int)(asin((double)temp_deg/1280.0) *180.0 / PI);
+
+	temp = (dane.akcel.akcel_y_srednia << 8);
+	if (temp > 32768)
+		temp_deg = temp -65535;
+	else
+		temp_deg = temp;
+	if (temp_deg < -1280)
+		dane.akcel.akcel_y_kat_deg = -180.0 / PI;
+	else if (temp_deg > 1280)
+		dane.akcel.akcel_y_kat_deg = 180.0 / PI;
+	else
+		dane.akcel.akcel_y_kat_deg = (int)(asin((double)temp_deg/1280.0) * 180.0 / PI);
+	//----------------------------
 }
 
 void oblicz_kat()
 {
 	dane.kat.kat_x += dane.zyro.zyro_y_kat_mdeg;
-	dane.kat.kat_x = 0.99*dane.kat.kat_x + 0.01*dane.akcel.akcel_x_kat_deg*1000;
+	dane.kat.kat_x = 0.98*dane.kat.kat_x + 0.02*dane.akcel.akcel_x_kat_deg*1000;
+
+	dane.kat.kat_y -= dane.zyro.zyro_x_kat_mdeg;
+	dane.kat.kat_y = 0.98*dane.kat.kat_y + 0.02*dane.akcel.akcel_y_kat_deg*1000;
 }
 
 void odczyt_sensory()
@@ -189,10 +179,10 @@ void odczyt_sensory()
     }
     else
     {
-    	dane.pwm.pwm1 = 50;
-		dane.pwm.pwm2 = 50;
-		dane.pwm.pwm3 = 50;
-		dane.pwm.pwm4 = 50;
+    	dane.pwm.pwm1 = 10;
+		dane.pwm.pwm2 = 10;
+		dane.pwm.pwm3 = 10;
+		dane.pwm.pwm4 = 10;
 		dane.kat.kat_x = 0;
     	dane.opoznienie++;
     }

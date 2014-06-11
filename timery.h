@@ -28,6 +28,8 @@
 
 void inicjalizacja_SysTick(); //odpowiedzialny za mruganie ledem i wylaczanie awaryjne silnikow
 
+void inicjalizacja_TIM1(); //odpowiedzialny za zbieranie danych z akcelerometru 1kHz
+
 void inicjalizacja_TIM2(); //TIM2 odpowiedzialny za sygnal co 20 ms
 
 void inicjalizacja_TIM3(); //TIM3 odpowiedzialny za szerokosc impulsu 1 - 2ms

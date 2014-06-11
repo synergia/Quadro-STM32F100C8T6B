@@ -31,13 +31,13 @@
 </folder>
 </info>
 </editorArea>
-<editor id="org.eclipse.cdt.ui.editor.CEditor" name="startup_stm32f10x_md_vl.c" partName="startup_stm32f10x_md_vl.c" path="C:/Users/Marcin Twardak/Documents/GitHub/Quadro-STM32F100C8T6B/cmsis_boot/startup/startup_stm32f10x_md_vl.c" title="startup_stm32f10x_md_vl.c" tooltip="C:/Users/Marcin Twardak/Documents/GitHub/Quadro-STM32F100C8T6B/cmsis_boot/startup/startup_stm32f10x_md_vl.c" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Quadro/cmsis_boot/startup/startup_stm32f10x_md_vl.c"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="10214" selectionTopPixel="2580"/>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="ADC.c" partName="ADC.c" path="C:/Users/Marcin Twardak/Documents/GitHub/Quadro-STM32F100C8T6B/ADC.c" title="ADC.c" tooltip="C:/Users/Marcin Twardak/Documents/GitHub/Quadro-STM32F100C8T6B/ADC.c" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Quadro/ADC.c"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="934" selectionTopPixel="0"/>
 </editor>
 <editor id="org.eclipse.cdt.ui.editor.CEditor" name="USART.c" partName="USART.c" path="C:/Users/Marcin Twardak/Documents/GitHub/Quadro-STM32F100C8T6B/USART.c" title="USART.c" tooltip="C:/Users/Marcin Twardak/Documents/GitHub/Quadro-STM32F100C8T6B/USART.c" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Quadro/USART.c"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="6032" selectionTopPixel="64"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="5378" selectionTopPixel="2175"/>
 </editor>
 <editor id="org.eclipse.cdt.ui.editor.CEditor" name="I2C.h" partName="I2C.h" path="C:/Users/Marcin Twardak/Documents/GitHub/Quadro-STM32F100C8T6B/I2C.h" title="I2C.h" tooltip="C:/Users/Marcin Twardak/Documents/GitHub/Quadro-STM32F100C8T6B/I2C.h" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Quadro/I2C.h"/>
@@ -49,11 +49,11 @@
 </editor>
 <editor id="org.eclipse.cdt.ui.editor.CEditor" name="I2C.c" partName="I2C.c" path="C:/Users/Marcin Twardak/Documents/GitHub/Quadro-STM32F100C8T6B/I2C.c" title="I2C.c" tooltip="C:/Users/Marcin Twardak/Documents/GitHub/Quadro-STM32F100C8T6B/I2C.c" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Quadro/I2C.c"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="3206" selectionTopPixel="90"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="3206" selectionTopPixel="30"/>
 </editor>
-<editor id="org.eclipse.cdt.ui.editor.CEditor" name="sensory.c" partName="sensory.c" path="C:/Users/Marcin Twardak/Documents/GitHub/Quadro-STM32F100C8T6B/sensory.c" title="sensory.c" tooltip="C:/Users/Marcin Twardak/Documents/GitHub/Quadro-STM32F100C8T6B/sensory.c" workbook="DefaultEditorWorkbook">
+<editor activePart="true" focus="true" id="org.eclipse.cdt.ui.editor.CEditor" name="sensory.c" partName="sensory.c" path="C:/Users/Marcin Twardak/Documents/GitHub/Quadro-STM32F100C8T6B/sensory.c" title="sensory.c" tooltip="C:/Users/Marcin Twardak/Documents/GitHub/Quadro-STM32F100C8T6B/sensory.c" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Quadro/sensory.c"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="4723" selectionTopPixel="1699"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="3663" selectionTopPixel="274"/>
 </editor>
 <editor id="org.eclipse.cdt.ui.editor.CEditor" name="sensory.h" partName="sensory.h" path="C:/Users/Marcin Twardak/Documents/GitHub/Quadro-STM32F100C8T6B/sensory.h" title="sensory.h" tooltip="C:/Users/Marcin Twardak/Documents/GitHub/Quadro-STM32F100C8T6B/sensory.h" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Quadro/sensory.h"/>
@@ -61,27 +61,27 @@
 </editor>
 <editor id="org.eclipse.cdt.ui.editor.CEditor" name="dane.h" partName="dane.h" path="C:/Users/Marcin Twardak/Documents/GitHub/Quadro-STM32F100C8T6B/dane.h" title="dane.h" tooltip="C:/Users/Marcin Twardak/Documents/GitHub/Quadro-STM32F100C8T6B/dane.h" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Quadro/dane.h"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1280" selectionTopPixel="0"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="372" selectionTopPixel="0"/>
 </editor>
 <editor id="org.eclipse.cdt.ui.editor.CEditor" name="silniki.c" partName="silniki.c" path="C:/Users/Marcin Twardak/Documents/GitHub/Quadro-STM32F100C8T6B/silniki.c" title="silniki.c" tooltip="C:/Users/Marcin Twardak/Documents/GitHub/Quadro-STM32F100C8T6B/silniki.c" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Quadro/silniki.c"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1908" selectionTopPixel="244"/>
+<editorState selectionHorizontalPixel="0" selectionLength="68" selectionOffset="1177" selectionTopPixel="0"/>
 </editor>
 <editor id="org.eclipse.cdt.ui.editor.CEditor" name="timery.h" partName="timery.h" path="C:/Users/Marcin Twardak/Documents/GitHub/Quadro-STM32F100C8T6B/timery.h" title="timery.h" tooltip="C:/Users/Marcin Twardak/Documents/GitHub/Quadro-STM32F100C8T6B/timery.h" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Quadro/timery.h"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="472" selectionTopPixel="0"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="560" selectionTopPixel="0"/>
 </editor>
 <editor id="org.eclipse.cdt.ui.editor.CEditor" name="NVIC.c" partName="NVIC.c" path="C:/Users/Marcin Twardak/Documents/GitHub/Quadro-STM32F100C8T6B/NVIC.c" title="NVIC.c" tooltip="C:/Users/Marcin Twardak/Documents/GitHub/Quadro-STM32F100C8T6B/NVIC.c" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Quadro/NVIC.c"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="840" selectionTopPixel="0"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="892" selectionTopPixel="0"/>
 </editor>
 <editor id="org.eclipse.cdt.ui.editor.CEditor" name="timery.c" partName="timery.c" path="C:/Users/Marcin Twardak/Documents/GitHub/Quadro-STM32F100C8T6B/timery.c" title="timery.c" tooltip="C:/Users/Marcin Twardak/Documents/GitHub/Quadro-STM32F100C8T6B/timery.c" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Quadro/timery.c"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="978" selectionTopPixel="0"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="346" selectionTopPixel="0"/>
 </editor>
-<editor activePart="true" focus="true" id="org.eclipse.cdt.ui.editor.CEditor" name="PID.c" partName="PID.c" path="C:/Users/Marcin Twardak/Documents/GitHub/Quadro-STM32F100C8T6B/PID.c" title="PID.c" tooltip="C:/Users/Marcin Twardak/Documents/GitHub/Quadro-STM32F100C8T6B/PID.c" workbook="DefaultEditorWorkbook">
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="PID.c" partName="PID.c" path="C:/Users/Marcin Twardak/Documents/GitHub/Quadro-STM32F100C8T6B/PID.c" title="PID.c" tooltip="C:/Users/Marcin Twardak/Documents/GitHub/Quadro-STM32F100C8T6B/PID.c" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Quadro/PID.c"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="192" selectionTopPixel="0"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1013" selectionTopPixel="0"/>
 </editor>
 <editor id="org.eclipse.cdt.ui.editor.CEditor" name="PID.h" partName="PID.h" path="C:/Users/Marcin Twardak/Documents/GitHub/Quadro-STM32F100C8T6B/PID.h" title="PID.h" tooltip="C:/Users/Marcin Twardak/Documents/GitHub/Quadro-STM32F100C8T6B/PID.h" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Quadro/PID.h"/>
@@ -93,11 +93,11 @@
 </editor>
 <editor id="org.eclipse.cdt.ui.editor.CEditor" name="main.c" partName="main.c" path="C:/Users/Marcin Twardak/Documents/GitHub/Quadro-STM32F100C8T6B/main.c" title="main.c" tooltip="C:/Users/Marcin Twardak/Documents/GitHub/Quadro-STM32F100C8T6B/main.c" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Quadro/main.c"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="257" selectionTopPixel="0"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="483" selectionTopPixel="0"/>
 </editor>
 <editor id="org.eclipse.cdt.ui.editor.CEditor" name="dane.c" partName="dane.c" path="C:/Users/Marcin Twardak/Documents/GitHub/Quadro-STM32F100C8T6B/dane.c" title="dane.c" tooltip="C:/Users/Marcin Twardak/Documents/GitHub/Quadro-STM32F100C8T6B/dane.c" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Quadro/dane.c"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="837" selectionTopPixel="0"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="648" selectionTopPixel="0"/>
 </editor>
 </editors>
 <views>
@@ -135,8 +135,7 @@
 </view>
 <view id="org.coocox.coassistant.view.CoAssistantView_debug" partName="Peripherals">
 <viewState horizontalPosition="0" verticalPosition="0">
-<selection>
-<element name="TIM4"/>
+<selection>&#x0A;<element name="TIM4"/>
 </selection>
 <registerValues baseAddress="Base Address: 0x40000800" description="Description:  TIM4 registers"/>
 </viewState>
@@ -289,8 +288,8 @@
 <hide_toolbar_item_id id="org.eclipse.ui.edit.text.toggleShowSelectedElementOnly"/>
 <hide_toolbar_item_id id="org.coocox.builder.ui.build"/>
 <hide_toolbar_item_id id="org.coocox.welcome.ui.action.welcome"/>
-<hide_toolbar_item_id id="org.coocox.component.ui.ShowRepositoryAction"/>
 <hide_toolbar_item_id id="org.coocox.codebugger.configuration.coideProgramDownloadAction"/>
+<hide_toolbar_item_id id="org.coocox.component.ui.ShowRepositoryAction"/>
 <view id="org.eclipse.debug.ui.VariableView"/>
 <view id="org.eclipse.search.ui.views.SearchView"/>
 <view id="org.coocox.codebugger.trace.ui.traceview"/>
@@ -299,55 +298,40 @@
 <view id="org.coocox.coassistant.view.CoAssistantView_debug"/>
 <fastViewBars/>
 <viewLayoutRec closeable="false" id="org.eclipse.debug.ui.DebugView"/>
-<layout>
-<mainWindow>
-<info folder="true" part="org.eclipse.ui.internal.ViewStack@ea86ad">
-<folder appearance="2" expanded="2">
-<page content="org.coocox.builder.ui.views.ProjectView" label="LabelNotFound"/>
+<layout>&#x0A;<mainWindow>&#x0A;<info folder="true" part="org.eclipse.ui.internal.ViewStack@ea86ad">&#x0A;<folder appearance="2" expanded="2">&#x0A;<page content="org.coocox.builder.ui.views.ProjectView" label="LabelNotFound"/>
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
 </folder>
 </info>
-<info folder="true" part="stickyFolderRight" ratio="0.75" ratioLeft="1434" ratioRight="478" relationship="2" relative="org.eclipse.ui.internal.ViewStack@ea86ad">
-<folder appearance="2" expanded="2">
-<page content="org.eclipse.help.ui.HelpView" label="LabelNotFound"/>
+<info folder="true" part="stickyFolderRight" ratio="0.75" ratioLeft="1434" ratioRight="478" relationship="2" relative="org.eclipse.ui.internal.ViewStack@ea86ad">&#x0A;<folder appearance="2" expanded="2">&#x0A;<page content="org.eclipse.help.ui.HelpView" label="LabelNotFound"/>
 <page content="org.eclipse.ui.internal.introview" label="LabelNotFound"/>
 </folder>
 </info>
-<info folder="true" part="org.eclipse.ui.internal.ViewStack@1cd15da" ratio="0.6992561" ratioLeft="658" ratioRight="283" relationship="4" relative="org.eclipse.ui.internal.ViewStack@ea86ad">
-<folder activePageID="org.eclipse.debug.ui.DebugView" appearance="2" expanded="2">
-<page content="org.eclipse.ui.console.ConsoleView" label="Console"/>
+<info folder="true" part="org.eclipse.ui.internal.ViewStack@1cd15da" ratio="0.6992561" ratioLeft="658" ratioRight="283" relationship="4" relative="org.eclipse.ui.internal.ViewStack@ea86ad">&#x0A;<folder activePageID="org.eclipse.debug.ui.DebugView" appearance="2" expanded="2">&#x0A;<page content="org.eclipse.ui.console.ConsoleView" label="Console"/>
 <page content="org.eclipse.debug.ui.DebugView" label="Debug"/>
 <page content="org.eclipse.debug.ui.BreakpointView" label="LabelNotFound"/>
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
-<part id="0"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">&#x0A;<part id="0"/>
 <part id="1"/>
 </presentation>
 </folder>
 </info>
-<info folder="true" part="org.eclipse.ui.internal.ViewStack@7c6928" ratio="0.5" ratioLeft="956" ratioRight="956" relationship="2" relative="org.eclipse.ui.internal.ViewStack@1cd15da">
-<folder activePageID="org.eclipse.debug.ui.VariableView" appearance="2" expanded="2">
-<page content="org.eclipse.debug.ui.VariableView" label="Variables"/>
+<info folder="true" part="org.eclipse.ui.internal.ViewStack@7c6928" ratio="0.5" ratioLeft="956" ratioRight="956" relationship="2" relative="org.eclipse.ui.internal.ViewStack@1cd15da">&#x0A;<folder activePageID="org.eclipse.debug.ui.VariableView" appearance="2" expanded="2">&#x0A;<page content="org.eclipse.debug.ui.VariableView" label="Variables"/>
 <page content="org.eclipse.search.ui.views.SearchView" label="Search"/>
 <page content="org.coocox.codebugger.trace.ui.traceview" label="Semihosting"/>
 <page content="org.eclipse.debug.ui.ExpressionView" label="LabelNotFound"/>
 <page content="org.eclipse.debug.ui.MemoryView" label="LabelNotFound"/>
 <page content="org.eclipse.cdt.debug.ui.memory.memorybrowser.MemoryBrowser" label="LabelNotFound"/>
 <page content="org.coocox.component.ui.ComponentView" label="LabelNotFound"/>
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
-<part id="0"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">&#x0A;<part id="0"/>
 <part id="1"/>
 <part id="2"/>
 </presentation>
 </folder>
 </info>
-<info folder="true" part="org.eclipse.ui.internal.ViewStack@1dbf9c3" ratio="0.75" ratioLeft="1434" ratioRight="478" relationship="2" relative="org.eclipse.ui.internal.ViewStack@ea86ad">
-<folder activePageID="org.coocox.coassistant.view.CoAssistantView_debug" appearance="2" expanded="2">
-<page content="org.coocox.coassistant.view.CoAssistantView_debug" label="Peripherals"/>
+<info folder="true" part="org.eclipse.ui.internal.ViewStack@1dbf9c3" ratio="0.75" ratioLeft="1434" ratioRight="478" relationship="2" relative="org.eclipse.ui.internal.ViewStack@ea86ad">&#x0A;<folder activePageID="org.coocox.coassistant.view.CoAssistantView_debug" appearance="2" expanded="2">&#x0A;<page content="org.coocox.coassistant.view.CoAssistantView_debug" label="Peripherals"/>
 <page content="org.eclipse.debug.ui.RegisterView" label="LabelNotFound"/>
 <page content="org.eclipse.cdt.dsf.debug.ui.disassembly.view" label="LabelNotFound"/>
 <page content="org.eclipse.ui.views.ContentOutline" label="LabelNotFound"/>
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
-<part id="0"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">&#x0A;<part id="0"/>
 </presentation>
 </folder>
 </info>
@@ -359,165 +343,171 @@
 <workingSets/>
 <navigationHistory>
 <editors>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Quadro/sensory.c"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Quadro/dane.h"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Quadro/dane.c"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Quadro/PID.c"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Quadro/silniki.c"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Quadro/timery.c"/>
-<editor factoryID="org.coocox.builder.ui.persistent.PersistentElementFactory" id="org.coocox.builder.ui.editors.ConfigEditor">
-<org.coocox.builder.ui.editors.ConfigEditor/>
-</editor>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Quadro/sensory.c"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Quadro/USART.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Quadro/dane.c"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Quadro/timery.h"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Quadro/timery.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Quadro/NVIC.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Quadro/main.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Quadro/cmsis_boot/startup/startup_stm32f10x_md_vl.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Quadro/ADC.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Quadro/PID.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Quadro/sensory.h"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Quadro/USART.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Quadro/sensory.h"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Quadro/dane.c"/>
 </editors>
-<item historyLabel="Configuration" index="6"/>
-<item historyLabel="dane.c" index="2">
-<position info="not_deleted" x="948" y="0"/>
+<item historyLabel="sensory.c" index="1">
+<position/>
 </item>
-<item historyLabel="silniki.c" index="4">
-<position info="not_deleted" x="1908" y="0"/>
+<item historyLabel="startup_stm32f10x_md_vl.c" index="8">
+<position info="not_deleted" x="10214" y="0"/>
 </item>
-<item historyLabel="dane.c" index="2">
-<position info="not_deleted" x="948" y="0"/>
+<item historyLabel="main.c" index="7">
+<position info="not_deleted" x="257" y="0"/>
 </item>
-<item historyLabel="dane.h" index="1">
-<position info="not_deleted" x="1337" y="0"/>
+<item historyLabel="sensory.c" index="1">
+<position/>
 </item>
-<item historyLabel="dane.c" index="2">
-<position info="not_deleted" x="980" y="0"/>
+<item historyLabel="sensory.c" index="1">
+<position/>
 </item>
-<item historyLabel="dane.h" index="1">
-<position info="not_deleted" x="1337" y="0"/>
+<item historyLabel="ADC.c" index="9">
+<position info="not_deleted" x="898" y="0"/>
 </item>
-<item historyLabel="dane.c" index="2">
-<position info="not_deleted" x="980" y="0"/>
+<item historyLabel="ADC.c" index="9">
+<position info="not_deleted" x="934" y="0"/>
 </item>
-<item historyLabel="dane.c" index="2">
-<position info="not_deleted" x="1009" y="0"/>
+<item historyLabel="sensory.c" index="1">
+<position/>
 </item>
-<item historyLabel="dane.c" index="2">
-<position info="not_deleted" x="1037" y="0"/>
+<item historyLabel="sensory.c" index="1">
+<position/>
 </item>
-<item historyLabel="sensory.c" index="0">
-<position info="not_deleted" x="2000" y="0"/>
+<item historyLabel="sensory.c" index="1">
+<position/>
 </item>
-<item historyLabel="PID.c" index="3">
-<position info="not_deleted" x="1432" y="0"/>
+<item historyLabel="sensory.c" index="1">
+<position info="not_deleted" x="2043" y="0"/>
 </item>
-<item historyLabel="PID.c" index="3">
-<position info="not_deleted" x="935" y="0"/>
+<item historyLabel="sensory.c" index="1">
+<position info="not_deleted" x="2090" y="0"/>
 </item>
-<item historyLabel="dane.h" index="1">
-<position info="not_deleted" x="1337" y="0"/>
+<item historyLabel="sensory.c" index="1">
+<position info="not_deleted" x="2125" y="0"/>
 </item>
-<item historyLabel="PID.c" index="3">
-<position info="not_deleted" x="935" y="0"/>
+<item historyLabel="sensory.c" index="1">
+<position info="not_deleted" x="2160" y="0"/>
 </item>
-<item historyLabel="dane.h" index="1">
-<position info="not_deleted" x="159" y="0"/>
+<item historyLabel="sensory.c" index="1">
+<position info="not_deleted" x="2195" y="0"/>
 </item>
-<item historyLabel="PID.c" index="3">
-<position info="not_deleted" x="935" y="0"/>
+<item historyLabel="sensory.c" index="1">
+<position/>
 </item>
-<item historyLabel="sensory.c" index="0">
-<position info="not_deleted" x="2000" y="0"/>
+<item historyLabel="NVIC.c" index="6">
+<position info="not_deleted" x="892" y="0"/>
 </item>
-<item historyLabel="timery.c" index="5">
-<position info="not_deleted" x="978" y="0"/>
+<item historyLabel="sensory.c" index="1">
+<position/>
 </item>
-<item historyLabel="dane.c" index="2">
-<position info="not_deleted" x="1037" y="0"/>
+<item historyLabel="NVIC.c" index="6">
+<position info="not_deleted" x="892" y="0"/>
 </item>
-<item historyLabel="dane.h" index="1">
-<position info="not_deleted" x="159" y="0"/>
+<item historyLabel="sensory.c" index="1">
+<position/>
 </item>
-<item historyLabel="silniki.c" index="4">
-<position info="not_deleted" x="1908" y="0"/>
-</item>
-<item historyLabel="sensory.c" index="0">
-<position info="not_deleted" x="2000" y="0"/>
-</item>
-<item historyLabel="PID.c" index="3">
-<position info="not_deleted" x="935" y="0"/>
-</item>
-<item historyLabel="PID.c" index="3">
-<position info="not_deleted" x="1479" y="0"/>
-</item>
-<item historyLabel="USART.c" index="7">
-<position info="not_deleted" x="5881" y="11"/>
-</item>
-<item historyLabel="USART.c" index="7">
-<position info="not_deleted" x="5955" y="0"/>
-</item>
-<item historyLabel="PID.c" index="3">
-<position info="not_deleted" x="962" y="0"/>
-</item>
-<item historyLabel="dane.c" index="2">
-<position info="not_deleted" x="1037" y="0"/>
-</item>
-<item historyLabel="dane.h" index="1">
-<position info="not_deleted" x="231" y="0"/>
-</item>
-<item historyLabel="dane.c" index="2">
-<position info="not_deleted" x="130" y="0"/>
-</item>
-<item historyLabel="PID.c" index="3">
-<position info="not_deleted" x="1261" y="0"/>
-</item>
-<item historyLabel="USART.c" index="7">
-<position info="not_deleted" x="5955" y="0"/>
-</item>
-<item historyLabel="USART.c" index="7">
-<position info="not_deleted" x="6760" y="0"/>
-</item>
-<item historyLabel="USART.c" index="7">
-<position info="not_deleted" x="6760" y="0"/>
-</item>
-<item historyLabel="sensory.c" index="0">
-<position info="not_deleted" x="4723" y="0"/>
-</item>
-<item historyLabel="dane.h" index="1">
-<position info="not_deleted" x="108" y="0"/>
+<item historyLabel="timery.h" index="4">
+<position info="not_deleted" x="560" y="0"/>
 </item>
 <item historyLabel="timery.c" index="5">
-<position info="not_deleted" x="978" y="0"/>
+<position info="not_deleted" x="346" y="0"/>
 </item>
-<item historyLabel="PID.c" index="3">
-<position info="not_deleted" x="1261" y="0"/>
+<item historyLabel="timery.h" index="4">
+<position info="not_deleted" x="560" y="0"/>
 </item>
-<item historyLabel="PID.c" index="3">
-<position info="not_deleted" x="395" y="0"/>
+<item historyLabel="timery.c" index="5">
+<position info="not_deleted" x="346" y="0"/>
 </item>
-<item historyLabel="dane.h" index="1">
-<position info="not_deleted" x="1280" y="0"/>
+<item historyLabel="timery.h" index="4">
+<position info="not_deleted" x="560" y="0"/>
 </item>
-<item historyLabel="dane.c" index="2">
-<position info="not_deleted" x="837" y="0"/>
+<item historyLabel="timery.c" index="5">
+<position info="not_deleted" x="346" y="0"/>
 </item>
-<item historyLabel="PID.c" index="3">
-<position info="not_deleted" x="307" y="0"/>
+<item historyLabel="main.c" index="7">
+<position info="not_deleted" x="483" y="0"/>
 </item>
-<item historyLabel="dane.h" index="1">
-<position info="not_deleted" x="1280" y="0"/>
+<item historyLabel="sensory.c" index="1">
+<position info="not_deleted" x="4079" y="0"/>
 </item>
-<item historyLabel="timery.h" index="8">
-<position info="not_deleted" x="472" y="0"/>
+<item historyLabel="main.c" index="7">
+<position info="not_deleted" x="483" y="0"/>
 </item>
-<item historyLabel="PID.c" index="3">
-<position info="not_deleted" x="307" y="0"/>
+<item historyLabel="dane.h" index="0">
+<position info="not_deleted" x="372" y="0"/>
 </item>
-<item historyLabel="PID.c" index="3">
-<position info="not_deleted" x="395" y="0"/>
+<item historyLabel="dane.c" index="3">
+<position info="not_deleted" x="648" y="0"/>
 </item>
-<item historyLabel="PID.c" index="3">
-<position info="not_deleted" x="1150" y="0"/>
+<item historyLabel="sensory.c" index="1">
+<position info="not_deleted" x="4079" y="0"/>
 </item>
-<item historyLabel="USART.c" index="7">
-<position info="not_deleted" x="6032" y="0"/>
+<item historyLabel="sensory.c" index="1">
+<position info="not_deleted" x="3541" y="0"/>
 </item>
-<item active="true" historyLabel="PID.c" index="3">
-<position info="not_deleted" x="1150" y="0"/>
+<item historyLabel="sensory.c" index="1">
+<position info="not_deleted" x="2587" y="0"/>
+</item>
+<item historyLabel="PID.c" index="10">
+<position info="not_deleted" x="1013" y="0"/>
+</item>
+<item historyLabel="sensory.c" index="1">
+<position info="not_deleted" x="2587" y="0"/>
+</item>
+<item historyLabel="sensory.c" index="1">
+<position info="not_deleted" x="3799" y="0"/>
+</item>
+<item historyLabel="USART.c" index="2">
+<position info="not_deleted" x="5378" y="0"/>
+</item>
+<item historyLabel="sensory.c" index="1">
+<position info="not_deleted" x="3799" y="0"/>
+</item>
+<item historyLabel="dane.c" index="3">
+<position info="not_deleted" x="648" y="0"/>
+</item>
+<item historyLabel="sensory.h" index="11">
+<position info="not_deleted" x="705" y="0"/>
+</item>
+<item historyLabel="sensory.c" index="1">
+<position info="not_deleted" x="3799" y="0"/>
+</item>
+<item historyLabel="USART.c" index="12">
+<position info="not_deleted" x="5378" y="0"/>
+</item>
+<item historyLabel="sensory.c" index="1">
+<position info="not_deleted" x="3663" y="0"/>
+</item>
+<item historyLabel="sensory.h" index="13">
+<position info="not_deleted" x="705" y="0"/>
+</item>
+<item historyLabel="sensory.c" index="1">
+<position info="not_deleted" x="3663" y="0"/>
+</item>
+<item historyLabel="sensory.h" index="13">
+<position info="not_deleted" x="281" y="0"/>
+</item>
+<item historyLabel="sensory.c" index="1">
+<position info="not_deleted" x="3663" y="0"/>
+</item>
+<item historyLabel="dane.c" index="14">
+<position info="not_deleted" x="648" y="0"/>
+</item>
+<item active="true" historyLabel="sensory.c" index="1">
+<position info="not_deleted" x="3663" y="0"/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
@@ -526,16 +516,6 @@
 <actionBarAdvisor/>
 </window>
 <mruList>
-<file factoryID="org.coocox.builder.ui.persistent.PersistentElementFactory" id="org.coocox.builder.ui.editors.ConfigEditor" name="" tooltip="">
-<persistable>
-<org.coocox.builder.ui.editors.ConfigEditor/>
-</persistable>
-</file>
-<file factoryID="org.coocox.builder.ui.persistent.PersistentElementFactory" id="org.coocox.builder.ui.editors.ConfigEditor" name="" tooltip="">
-<persistable>
-<org.coocox.builder.ui.editors.ConfigEditor/>
-</persistable>
-</file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="dane.c" tooltip="Quadro/dane.c">
 <persistable path="/Quadro/dane.c"/>
 </file>
@@ -571,6 +551,12 @@
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="sensory.h" tooltip="Quadro/sensory.h">
 <persistable path="/Quadro/sensory.h"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="sensory.c" tooltip="Quadro/sensory.c">
+<persistable path="/Quadro/sensory.c"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="dane.c" tooltip="Quadro/dane.c">
+<persistable path="/Quadro/dane.c"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="sensory.c" tooltip="Quadro/sensory.c">
 <persistable path="/Quadro/sensory.c"/>

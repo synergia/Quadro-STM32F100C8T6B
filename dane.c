@@ -18,6 +18,7 @@ void inicjalizacja_dane()
 	dane.zyro.zyro_z_h = 0;
 	dane.zyro.zyro_z_l = 0;
 	dane.zyro.zyro_y_kat_mdeg = 0;
+	dane.zyro.zyro_x_kat_mdeg = 0;
 	
 	dane.akcel.akcel_x_h = 0;
 	dane.akcel.akcel_x_l = 0;
@@ -26,8 +27,13 @@ void inicjalizacja_dane()
 	dane.akcel.akcel_z_h = 0;
 	dane.akcel.akcel_z_l = 0;
 	dane.akcel.akcel_x_kat_deg = 0;
+	dane.akcel.akcel_y_kat_deg = 0;
+	dane.akcel.akcel_ktora_srednia = 0;
+	dane.akcel.akcel_x_srednia = 0;
+	dane.akcel.akcel_y_srednia = 0;
 
 	dane.kat.kat_x = 0;
+	dane.kat.kat_y = 0;
 
 	dane.magnet.magnet_x_h = 0;
 	dane.magnet.magnet_x_l = 0;
@@ -42,8 +48,12 @@ void inicjalizacja_dane()
 
 	int i;
 	for (i = 0; i < BLEDY; i++)
-		dane.pid.I_bledy_tab[i] = 0;
-	dane.pid.I_bledy_srednia = 0;
+	{
+		dane.pid.I_x_bledy_tab[i] = 0;
+		dane.pid.I_y_bledy_tab[i] = 0;
+	}
+	dane.pid.I_x_bledy_srednia = 0;
+	dane.pid.I_y_bledy_srednia = 0;
 	dane.pid.I_ktory_blad = 0;
 
 	dane.czy_polaczony = 0;
