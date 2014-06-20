@@ -49,21 +49,48 @@ void odczyt_zyroskop(uint8_t *bufor)
 	dane.zyro.zyro_z_h = bufor[5];
 	//--------------------------
 
-	//obliczenie kata z zyroskopu
-	uint16_t temp = (dane.zyro.zyro_y_h << 8) + dane.zyro.zyro_y_l;
+	uint16_t temp;
 	signed int temp_vdeg;
-	if (temp > 32768)
-		temp_vdeg = temp - 65535;
-	else
-		temp_vdeg = temp;
-	dane.zyro.zyro_y_kat_mdeg = (temp_vdeg - DELTAZYRO) * DT * MDEG * 0.001; //w milistopniach
 
-	temp = (dane.zyro.zyro_x_h << 8) + dane.zyro.zyro_x_l;
-	if(temp > 32768)
-		temp_vdeg = temp - 65535;
+	if(dane.zyro.zyro_kalibr_ktory < KALIBR + 10)
+	{
+		if (dane.zyro.zyro_kalibr_ktory >= 10)
+		{
+			temp = (dane.zyro.zyro_y_h << 8) + dane.zyro.zyro_y_l;
+			//uwzglêdnienie ujemnych
+			if (temp > 32768)
+				temp_vdeg = temp - 65535;
+			else
+				temp_vdeg = temp;
+
+			dane.zyro.zyro_y_kalibracja += temp_vdeg;
+			dane.zyro.zyro_y_kat_mdeg = 0;
+
+			dane.zyro.zyro_kalibr_ktory++;
+			if (dane.zyro.zyro_kalibr_ktory == KALIBR + 10)
+				dane.zyro.zyro_y_kalibracja = dane.zyro.zyro_y_kalibracja >> KALIBR_PRZESUN;
+		}
+		else
+			dane.zyro.zyro_kalibr_ktory++;
+	}
 	else
-		temp_vdeg = temp;
-	dane.zyro.zyro_x_kat_mdeg = (temp_vdeg - DELTAZYRO) * DT * MDEG * 0.001; //w milistopniach
+	{
+		//obliczenie kata z zyroskopu
+		temp = (dane.zyro.zyro_y_h << 8) + dane.zyro.zyro_y_l;
+		if (temp > 32768)
+			temp_vdeg = temp - 65535;
+		else
+			temp_vdeg = temp;
+		dane.zyro.zyro_y_kat_mdeg = (temp_vdeg - dane.zyro.zyro_y_kalibracja) * DT * MDEG * 0.001; //w milistopniach
+
+
+		temp = (dane.zyro.zyro_x_h << 8) + dane.zyro.zyro_x_l;
+		if(temp > 32768)
+			temp_vdeg = temp - 65535;
+		else
+			temp_vdeg = temp;
+		dane.zyro.zyro_x_kat_mdeg = (temp_vdeg - DELTAZYROX) * DT * MDEG * 0.001; //w milistopniach
+	}
 }
 
 void odczyt_magnetometr(uint8_t *bufor)
@@ -149,10 +176,10 @@ void odczyt_akcelerometr(uint8_t *bufor)
 void oblicz_kat()
 {
 	dane.kat.kat_x += dane.zyro.zyro_y_kat_mdeg;
-	dane.kat.kat_x = 0.98*dane.kat.kat_x + 0.02*dane.akcel.akcel_x_kat_deg*1000;
+	dane.kat.kat_x = 0.999*dane.kat.kat_x + 0.001*dane.akcel.akcel_x_kat_deg*1000;
 
 	dane.kat.kat_y -= dane.zyro.zyro_x_kat_mdeg;
-	dane.kat.kat_y = 0.98*dane.kat.kat_y + 0.02*dane.akcel.akcel_y_kat_deg*1000;
+	dane.kat.kat_y = 0.99*dane.kat.kat_y + 0.01*dane.akcel.akcel_y_kat_deg*1000;
 }
 
 void odczyt_sensory()

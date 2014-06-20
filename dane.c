@@ -19,6 +19,8 @@ void inicjalizacja_dane()
 	dane.zyro.zyro_z_l = 0;
 	dane.zyro.zyro_y_kat_mdeg = 0;
 	dane.zyro.zyro_x_kat_mdeg = 0;
+	dane.zyro.zyro_y_kalibracja = 0;
+	dane.zyro.zyro_kalibr_ktory = 0;
 	
 	dane.akcel.akcel_x_h = 0;
 	dane.akcel.akcel_x_l = 0;
@@ -55,6 +57,9 @@ void inicjalizacja_dane()
 	dane.pid.I_x_bledy_srednia = 0;
 	dane.pid.I_y_bledy_srednia = 0;
 	dane.pid.I_ktory_blad = 0;
+
+	dane.bateria.poziom = 0;
+	dane.bateria.ktora = 0;
 
 	dane.czy_polaczony = 0;
 	dane.opoznienie = 0;

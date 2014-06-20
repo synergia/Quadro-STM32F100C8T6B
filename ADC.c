@@ -2,6 +2,9 @@
 #include "ADC.h"
 #include "timery.h"
 #include "LED.h"
+#include "dane.h"
+
+extern volatile daneTypeDef dane;
 
 void inicjalizacja_ADC()
 {
@@ -32,27 +35,35 @@ void ADC1_IRQHandler(void)
 	if(ADC1->SR & ADC_SR_EOC) //na wszelki wypadek
 	{
 		uint16_t bateria = ADC1->DR;
+		dane.bateria.poziom += bateria;
+		dane.bateria.ktora++;
 
+		if (dane.bateria.ktora >= SREDNIA)
+		{
+			dane.bateria.poziom = dane.bateria.poziom >> PRZESUN;
+			dane.bateria.ktora = 0;
+			dane.bateria.poziom_procent = (dane.bateria.poziom - 2900)*0.2;
 
-		if (bateria >= 3370)
-		{
-			GPIO_WriteBit(LED_PORT, LED_NIEB_2, Bit_SET);
-			GPIO_WriteBit(LED_PORT, LED_ZOL_1 | LED_ZOL_2 | LED_CZER_1, Bit_RESET);
-		}
-		else if (bateria >= 3130)
-		{
-			GPIO_WriteBit(LED_PORT, LED_ZOL_1, Bit_SET);
-			GPIO_WriteBit(LED_PORT, LED_NIEB_2 | LED_ZOL_2 | LED_CZER_1, Bit_RESET);
-		}
-		else if (bateria >= 2930)
-		{
-			GPIO_WriteBit(LED_PORT, LED_ZOL_2, Bit_SET);
-			GPIO_WriteBit(LED_PORT, LED_NIEB_2 | LED_ZOL_1 | LED_CZER_1, Bit_RESET);
-		}
-		else
-		{
-			GPIO_WriteBit(LED_PORT, LED_CZER_1, Bit_SET);
-			GPIO_WriteBit(LED_PORT, LED_NIEB_2 | LED_ZOL_2 | LED_ZOL_1, Bit_RESET);
+			if (dane.bateria.poziom >= 3370)
+			{
+				GPIO_WriteBit(LED_PORT, LED_NIEB_2, Bit_SET);
+				GPIO_WriteBit(LED_PORT, LED_ZOL_1 | LED_ZOL_2 | LED_CZER_1, Bit_RESET);
+			}
+			else if (dane.bateria.poziom >= 3130)
+			{
+				GPIO_WriteBit(LED_PORT, LED_ZOL_1, Bit_SET);
+				GPIO_WriteBit(LED_PORT, LED_NIEB_2 | LED_ZOL_2 | LED_CZER_1, Bit_RESET);
+			}
+			else if (dane.bateria.poziom >= 2930)
+			{
+				GPIO_WriteBit(LED_PORT, LED_ZOL_2, Bit_SET);
+				GPIO_WriteBit(LED_PORT, LED_NIEB_2 | LED_ZOL_1 | LED_CZER_1, Bit_RESET);
+			}
+			else
+			{
+				GPIO_WriteBit(LED_PORT, LED_CZER_1, Bit_SET);
+				GPIO_WriteBit(LED_PORT, LED_NIEB_2 | LED_ZOL_2 | LED_ZOL_1, Bit_RESET);
+			}
 		}
 	}
 }

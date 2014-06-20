@@ -46,9 +46,12 @@ typedef struct
 	uint8_t zyro_y_h;
 	uint8_t zyro_z_l;
 	uint8_t zyro_z_h;
+	uint16_t zyro_kalibr_ktory;
 
 	int32_t zyro_y_kat_mdeg;
 	int32_t zyro_x_kat_mdeg;
+
+	int32_t zyro_y_kalibracja; //sluzy do kalibrowania odczytow, przez pierwsze 256 odczytow quadro MUSI staæ
 } ZyroTypeDef;
 
 typedef struct
@@ -81,12 +84,20 @@ typedef struct
 
 typedef struct
 {
+	uint32_t poziom;
+	uint8_t poziom_procent;
+	uint32_t ktora;
+} BateriaTypeDef;
+
+typedef struct
+{
 	PWMTypeDef pwm; //struktura PWM
 	ZyroTypeDef zyro;
 	MagnetTypeDef magnet;
 	AkcelTypeDef akcel;
 	PIDTypeDef pid;
 	KatTypeDef kat;
+	BateriaTypeDef bateria;
 
 	signed int temp;
 	uint8_t czy_polaczony; //zeby awaryjnie wylaczyc (systick)

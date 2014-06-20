@@ -230,6 +230,10 @@ void USART1_IRQHandler(void)
 			while(!(USART1->SR & USART_SR_TC)) {}
 			USART1->DR = dane.pwm.pwm4;
 			while(!(USART1->SR & USART_SR_TC)) {}
+
+			//bateria
+			USART1->DR = dane.bateria.poziom_procent;
+			while(!(USART1->SR & USART_SR_TC)) {}
 		}
 		else if (dane_usart == 'R') // regulator - nastawy
 		{

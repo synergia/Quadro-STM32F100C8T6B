@@ -10,7 +10,10 @@
 
 #define DT 20 //20 ms do calkowania
 #define MDEG 8.75 //na 1 cyfre 8.75 milistopnia
-#define DELTAZYRO 300 //eksperymentalnie dobrana stala bledu zyroskopu
+#define DELTAZYROX 300 //eksperymentalnie dobrana stala bledu zyroskopu
+
+#define KALIBR 512 //z tylu próbek jest kalibrowany zyroskop
+#define KALIBR_PRZESUN 9
 /*
  * ms * mdeg/s = udeg
  * ale podzielone przez 1000 wiec ms
