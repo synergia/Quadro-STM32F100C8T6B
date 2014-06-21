@@ -197,10 +197,10 @@ void odczyt_sensory()
     }
     else if (dane.opoznienie > 100)
     {
-    	dane.pwm.pwm1 = 1;
-    	dane.pwm.pwm2 = 1;
-    	dane.pwm.pwm3 = 1;
-    	dane.pwm.pwm4 = 1;
+    	dane.pwm.pwm1 = 0;
+    	dane.pwm.pwm2 = 0;
+    	dane.pwm.pwm3 = 0;
+    	dane.pwm.pwm4 = 0;
     	dane.kat.kat_x = 0;
     	dane.opoznienie++;
     }

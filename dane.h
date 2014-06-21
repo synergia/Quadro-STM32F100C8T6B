@@ -101,7 +101,7 @@ typedef struct
 
 	signed int temp;
 	uint8_t czy_polaczony; //zeby awaryjnie wylaczyc (systick)
-	uint8_t opoznienie; //¿eby zainicjalizowaæ silniki oraz dla bezpieczeñstwa
+	uint16_t opoznienie; //¿eby zainicjalizowaæ silniki oraz dla bezpieczeñstwa
 } daneTypeDef;
 
 
