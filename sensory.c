@@ -52,12 +52,13 @@ void odczyt_zyroskop(uint8_t *bufor)
 	uint16_t temp;
 	signed int temp_vdeg;
 
+	//kalibracja zyroskopu
 	if(dane.zyro.zyro_kalibr_ktory < KALIBR + 10)
 	{
 		if (dane.zyro.zyro_kalibr_ktory >= 10)
 		{
 			temp = (dane.zyro.zyro_y_h << 8) + dane.zyro.zyro_y_l;
-			//uwzglêdnienie ujemnych
+			//uwzglï¿½dnienie ujemnych
 			if (temp > 32768)
 				temp_vdeg = temp - 65535;
 			else
@@ -78,7 +79,7 @@ void odczyt_zyroskop(uint8_t *bufor)
 		//obliczenie kata z zyroskopu
 		temp = (dane.zyro.zyro_y_h << 8) + dane.zyro.zyro_y_l;
 		if (temp > 32768)
-			temp_vdeg = temp - 65535;
+			temp_vdeg = temp - 65536;
 		else
 			temp_vdeg = temp;
 		dane.zyro.zyro_y_kat_mdeg = (temp_vdeg - dane.zyro.zyro_y_kalibracja) * DT * MDEG * 0.001; //w milistopniach
@@ -86,7 +87,7 @@ void odczyt_zyroskop(uint8_t *bufor)
 
 		temp = (dane.zyro.zyro_x_h << 8) + dane.zyro.zyro_x_l;
 		if(temp > 32768)
-			temp_vdeg = temp - 65535;
+			temp_vdeg = temp - 65536;
 		else
 			temp_vdeg = temp;
 		dane.zyro.zyro_x_kat_mdeg = (temp_vdeg - DELTAZYROX) * DT * MDEG * 0.001; //w milistopniach
@@ -149,7 +150,7 @@ void odczyt_akcelerometr(uint8_t *bufor)
 	//uint16_t temp = (dane.akcel.akcel_x_srednia << 8);// + dane.akcel.akcel_x_l;
 	signed int temp_deg;
 	if (temp > 32768)
-		temp_deg = temp - 65535;
+		temp_deg = temp - 65536;
 	else
 		temp_deg = temp;
 	if (temp_deg < -1280)
@@ -161,7 +162,7 @@ void odczyt_akcelerometr(uint8_t *bufor)
 
 	temp = (dane.akcel.akcel_y_srednia << 8);
 	if (temp > 32768)
-		temp_deg = temp -65535;
+		temp_deg = temp -65536;
 	else
 		temp_deg = temp;
 	if (temp_deg < -1280)
