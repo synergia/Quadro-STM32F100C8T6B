@@ -3,8 +3,8 @@
 #ifndef _DANE_H_
 #define _DANE_H_
 
-#define SREDNIA 64
-#define PRZESUN 6
+#define SREDNIA 256
+#define PRZESUN 8
 #define BLEDY 64 //ilosc bledow gromadzonych w I
 
 #endif
@@ -99,7 +99,7 @@ typedef struct
 	KatTypeDef kat;
 	BateriaTypeDef bateria;
 
-	signed int temp;
+	int32_t temp;
 	uint8_t czy_polaczony; //zeby awaryjnie wylaczyc (systick)
 	uint16_t opoznienie; //¿eby zainicjalizowaæ silniki oraz dla bezpieczeñstwa
 } daneTypeDef;

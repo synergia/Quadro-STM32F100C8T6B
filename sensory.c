@@ -30,7 +30,7 @@ void inicjalizacja_magnetometr()
 
 void inicjalizacja_akcelerometr()
 {
-	wyslij_I2C(I2C2, AKCEL_ADR, 0x20, 0b00111111);
+	wyslij_I2C(I2C2, AKCEL_ADR, 0x20, 0b00100111);
 	wyslij_I2C(I2C2, AKCEL_ADR, 0x21, 0b00000000);
 	wyslij_I2C(I2C2, AKCEL_ADR, 0x23, 0b00110000);
 }
@@ -120,7 +120,7 @@ void odczyt_akcelerometr(uint8_t *bufor)
 	//--------------------------------------------
 	if (dane.akcel.akcel_ktora_srednia >= SREDNIA)
 		dane.akcel.akcel_ktora_srednia = 0;
-	dane.akcel.akcel_x_srednia_tab[dane.akcel.akcel_ktora_srednia] = dane.akcel.akcel_x_h; //20 odczytow w miedzyczasie (1 kHz)
+	dane.akcel.akcel_x_srednia_tab[dane.akcel.akcel_ktora_srednia] = dane.akcel.akcel_x_h;
 	int i;
 	for(i=0, dane.temp = 0; i < SREDNIA; i++)
 	{
@@ -145,8 +145,8 @@ void odczyt_akcelerometr(uint8_t *bufor)
 	//---------------------------------------------
 
 	//oblicza kat -90 do 90 stopni
-	//uint16_t temp = (dane.akcel.akcel_x_h << 8) + dane.akcel.akcel_x_l;
-	uint16_t temp = (dane.akcel.akcel_x_srednia << 8);// + dane.akcel.akcel_x_l;
+	uint16_t temp = (dane.akcel.akcel_x_h << 8) + dane.akcel.akcel_x_l;
+	//uint16_t temp = (dane.akcel.akcel_x_srednia << 8);// + dane.akcel.akcel_x_l;
 	signed int temp_deg;
 	if (temp > 32768)
 		temp_deg = temp - 65535;
