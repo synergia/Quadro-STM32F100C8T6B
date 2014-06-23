@@ -68,21 +68,30 @@ void odczyt_zyroskop(uint8_t *bufor)
 			dane.zyro.zyro_y_kat_mdeg = 0;
 
 			dane.zyro.zyro_kalibr_ktory++;
-			if (dane.zyro.zyro_kalibr_ktory == KALIBR + 10)
-				dane.zyro.zyro_y_kalibracja = dane.zyro.zyro_y_kalibracja >> KALIBR_PRZESUN;
+			if (dane.zyro.zyro_kalibr_ktory == (KALIBR + 10))
+				dane.zyro.zyro_y_kalibracja = (dane.zyro.zyro_y_kalibracja >> KALIBR_PRZESUN);
 		}
 		else
 			dane.zyro.zyro_kalibr_ktory++;
 	}
 	else
 	{
+		//uwzglednienie kalibracji
+		if (dane.zyro.zyro_y_kalibracja > 32768)
+			dane.zyro.zyro_y_kalibracja -= 65536;
+		temp = dane.zyro.zyro_y_kalibracja;
+		temp = (dane.zyro.zyro_y_h << 8) + dane.zyro.zyro_y_l - dane.zyro.zyro_y_kalibracja;
+		dane.zyro.zyro_y_h = temp >> 8;
+		dane.zyro.zyro_y_l = temp;
+
+
 		//obliczenie kata z zyroskopu
-		temp = (dane.zyro.zyro_y_h << 8) + dane.zyro.zyro_y_l;
+
 		if (temp > 32768)
 			temp_vdeg = temp - 65536;
 		else
 			temp_vdeg = temp;
-		dane.zyro.zyro_y_kat_mdeg = (temp_vdeg - dane.zyro.zyro_y_kalibracja) * DT * MDEG * 0.001; //w milistopniach
+		dane.zyro.zyro_y_kat_mdeg = temp_vdeg * DT * MDEG * 0.001; //w milistopniach
 
 
 		temp = (dane.zyro.zyro_x_h << 8) + dane.zyro.zyro_x_l;
