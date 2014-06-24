@@ -63,4 +63,22 @@ void inicjalizacja_dane()
 
 	dane.czy_polaczony = 0;
 	dane.opoznienie = 0;
+
+	//Kalman
+	dane.kalman_x.K[0] = 0;
+	dane.kalman_x.K[1] = 0;
+
+	dane.kalman_x.P[0][0] = 0;
+	dane.kalman_x.P[0][1] = 0;
+	dane.kalman_x.P[1][0] = 0;
+	dane.kalman_x.P[1][1] = 0;
+
+	dane.kalman_x.Q_angle = 0;
+	dane.kalman_x.Q_bias = 0;
+	dane.kalman_x.R_measure = 0;
+	dane.kalman_x.S = 0;
+	dane.kalman_x.angle = 0;
+	dane.kalman_x.bias = 0;
+	dane.kalman_x.rate = 0;
+	dane.kalman_x.y = 0;
 }

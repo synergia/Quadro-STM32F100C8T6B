@@ -89,6 +89,27 @@ typedef struct
 	uint32_t ktora;
 } BateriaTypeDef;
 
+/*
+ * https://github.com/TKJElectronics/KalmanFilter/blob/master/Kalman.h
+ * Trochê magii z Hogwartu!
+ */
+
+typedef struct
+{
+	double Q_angle; // Process noise variance for the accelerometer
+	double Q_bias; // Process noise variance for the gyro bias
+	double R_measure; // Measurement noise variance - this is actually the variance of the measurement noise
+
+	double angle; // The angle calculated by the Kalman filter - part of the 2x1 state vector
+	double bias; // The gyro bias calculated by the Kalman filter - part of the 2x1 state vector
+	double rate; // Unbiased rate calculated from the rate and the calculated bias - you have to call getAngle to update the rate
+
+	double P[2][2]; // Error covariance matrix - This is a 2x2 matrix
+	double K[2]; // Kalman gain - This is a 2x1 vector
+	double y; // Angle difference
+	double S; // Estimate error
+} KalmanTypeDef;
+
 typedef struct
 {
 	PWMTypeDef pwm; //struktura PWM
@@ -98,6 +119,8 @@ typedef struct
 	PIDTypeDef pid;
 	KatTypeDef kat;
 	BateriaTypeDef bateria;
+
+	KalmanTypeDef kalman_x;
 
 	int32_t temp;
 	uint8_t czy_polaczony; //zeby awaryjnie wylaczyc (systick)

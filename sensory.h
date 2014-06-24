@@ -33,3 +33,4 @@ void obliczenia_akcelerometr();
 
 void odczyt_sensory();
 void oblicz_kat();
+void kalman_x();

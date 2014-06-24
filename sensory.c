@@ -126,37 +126,8 @@ void odczyt_akcelerometr(uint8_t *bufor)
 	dane.akcel.akcel_z_l = bufor[4];
 	dane.akcel.akcel_z_h = bufor[5];
 
-	//obliczanie sredniej
-	//--------------------------------------------
-	if (dane.akcel.akcel_ktora_srednia >= SREDNIA)
-		dane.akcel.akcel_ktora_srednia = 0;
-	dane.akcel.akcel_x_srednia_tab[dane.akcel.akcel_ktora_srednia] = dane.akcel.akcel_x_h;
-	int i;
-	for(i=0, dane.temp = 0; i < SREDNIA; i++)
-	{
-		if(dane.akcel.akcel_x_srednia_tab[i] < 127)
-			dane.temp += dane.akcel.akcel_x_srednia_tab[i];
-		else
-			dane.temp += (dane.akcel.akcel_x_srednia_tab[i] - 255);
-	}
-	dane.akcel.akcel_x_srednia = dane.temp >> PRZESUN;
-
-	dane.akcel.akcel_y_srednia_tab[dane.akcel.akcel_ktora_srednia] = dane.akcel.akcel_y_h;
-	for(i = 0, dane.temp = 0; i < SREDNIA; i++)
-	{
-		if (dane.akcel.akcel_y_srednia_tab[i] < 127)
-			dane.temp += (dane.akcel.akcel_y_srednia_tab[i]);
-		else
-			dane.temp += (dane.akcel.akcel_y_srednia_tab[i] - 255);
-	}
-	dane.akcel.akcel_y_srednia = dane.temp >> PRZESUN;
-
-	dane.akcel.akcel_ktora_srednia++;
-	//---------------------------------------------
-
 	//oblicza kat -90 do 90 stopni
 	uint16_t temp = (dane.akcel.akcel_x_h << 8) + dane.akcel.akcel_x_l;
-	//uint16_t temp = (dane.akcel.akcel_x_srednia << 8);// + dane.akcel.akcel_x_l;
 	signed int temp_deg;
 	if (temp > 32768)
 		temp_deg = temp - 65536;
@@ -185,11 +156,12 @@ void odczyt_akcelerometr(uint8_t *bufor)
 
 void oblicz_kat()
 {
-	dane.kat.kat_x += dane.zyro.zyro_y_kat_mdeg;
-	dane.kat.kat_x = 0.999*dane.kat.kat_x + 0.001*dane.akcel.akcel_x_kat_deg*1000;
 
-	dane.kat.kat_y -= dane.zyro.zyro_x_kat_mdeg;
-	dane.kat.kat_y = 0.99*dane.kat.kat_y + 0.01*dane.akcel.akcel_y_kat_deg*1000;
+}
+
+void kalman_x()
+{
+
 }
 
 void odczyt_sensory()
