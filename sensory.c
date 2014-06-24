@@ -163,9 +163,9 @@ void odczyt_akcelerometr(uint8_t *bufor)
 	else
 		temp_deg = temp;
 	if (temp_deg < -1280)
-		dane.akcel.akcel_x_kat_deg = -180.0 / PI; //skrajny przypadek
+		dane.akcel.akcel_x_kat_deg = -90; //skrajny przypadek
 	else if (temp_deg > 1280)
-		dane.akcel.akcel_x_kat_deg = 180.0 / PI; //skrajny przypadek
+		dane.akcel.akcel_x_kat_deg = 90; //skrajny przypadek
 	else
 		dane.akcel.akcel_x_kat_deg = (int)(asin((double)temp_deg/1280.0) *180.0 / PI);
 
@@ -175,9 +175,9 @@ void odczyt_akcelerometr(uint8_t *bufor)
 	else
 		temp_deg = temp;
 	if (temp_deg < -1280)
-		dane.akcel.akcel_y_kat_deg = -180.0 / PI;
+		dane.akcel.akcel_y_kat_deg = -90;
 	else if (temp_deg > 1280)
-		dane.akcel.akcel_y_kat_deg = 180.0 / PI;
+		dane.akcel.akcel_y_kat_deg = 90;
 	else
 		dane.akcel.akcel_y_kat_deg = (int)(asin((double)temp_deg/1280.0) * 180.0 / PI);
 	//----------------------------
