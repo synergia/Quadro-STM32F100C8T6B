@@ -1,4 +1,5 @@
 #include "naglowki_include.h"
+#include "timery.h"
 
 #ifndef _SENSORY_H_
 #define _SENSORY_H_
@@ -30,7 +31,7 @@ void inicjalizacja_akcelerometr();
 void odczyt_zyroskop(uint8_t *bufor);
 void odczyt_magnetometr(uint8_t *bufor);
 void odczyt_akcelerometr(uint8_t *bufor);
-void obliczenia_akcelerometr();
+void odczyt_akcelerometr_prosty(); //jak najszybszy odczyt, bez obliczen
 
 void odczyt_sensory();
 void oblicz_kat();

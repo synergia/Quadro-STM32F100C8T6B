@@ -6,20 +6,12 @@ void inicjalizacja_SysTick()
 	SysTick_Config(SystemCoreClock/2); //co 0,5 s - nie może być więcej bo 24 bity
 }
 
-void inicjalizacja_TIM1()
-{
-	TIM1->CR1 = TIM_CR1_URS | TIM_CR1_CEN; //tylko overflow
-	TIM1->DIER = TIM_DIER_UIE; //interrupt enable
-	TIM1->PSC = 2400;
-	TIM1->ARR = 9; //42105 * 4 = 168420; 16000000/168420 ok 95 Hz
-}
-
 void inicjalizacja_TIM2() //timer odpowiedzialny za PWM
 {
 	TIM2->CR1 = TIM_CR1_URS | TIM_CR1_CEN; //tylko overflow
 	TIM2->DIER = TIM_DIER_UIE; //interrupt enable
 	TIM2->PSC = T_PSC2;
-	TIM2->ARR = T_ARR2;
+	TIM2->ARR = T_ARR2 * T_ARR2MNOZNIK; //tyle ile mnoznik tyle danych bedzie odczytane
 }
 
 void inicjalizacja_TIM3() //timer odpowiedzialny za PWM

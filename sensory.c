@@ -125,29 +125,34 @@ void odczyt_akcelerometr(uint8_t *bufor)
 	dane.akcel.akcel_z_l = bufor[4];
 	dane.akcel.akcel_z_h = bufor[5];
 
+	if (dane.akcel.akcel_x_h > 127) //ujemna
+		dane.akcel.akcel_x_suma_prosta += (dane.akcel.akcel_x_h - 256);
+	else
+		dane.akcel.akcel_x_suma_prosta += dane.akcel.akcel_x_h;
+
+	if (dane.akcel.akcel_y_h > 127) //ujemna
+		dane.akcel.akcel_y_suma_prosta += (dane.akcel.akcel_y_h - 256);
+	else
+		dane.akcel.akcel_y_suma_prosta += dane.akcel.akcel_y_h;
+
 	//obliczanie sredniej
 	//--------------------------------------------
 	if (dane.akcel.akcel_ktora_srednia >= SREDNIA)
 		dane.akcel.akcel_ktora_srednia = 0;
-	dane.akcel.akcel_x_srednia_tab[dane.akcel.akcel_ktora_srednia] = dane.akcel.akcel_x_h;
+
+	dane.akcel.akcel_x_srednia_tab[dane.akcel.akcel_ktora_srednia] = dane.akcel.akcel_x_suma_prosta >> T_ARR2PRZESUN;
+
 	int i;
 	for(i=0, dane.temp = 0; i < SREDNIA; i++)
-	{
-		if(dane.akcel.akcel_x_srednia_tab[i] < 127)
-			dane.temp += dane.akcel.akcel_x_srednia_tab[i];
-		else
-			dane.temp += (dane.akcel.akcel_x_srednia_tab[i] - 255);
-	}
+		{ dane.temp += dane.akcel.akcel_x_srednia_tab[i]; }
+
 	dane.akcel.akcel_x_srednia = dane.temp >> PRZESUN;
 
-	dane.akcel.akcel_y_srednia_tab[dane.akcel.akcel_ktora_srednia] = dane.akcel.akcel_y_h;
+	dane.akcel.akcel_y_srednia_tab[dane.akcel.akcel_ktora_srednia] = dane.akcel.akcel_y_suma_prosta >> T_ARR2PRZESUN;;
+
 	for(i = 0, dane.temp = 0; i < SREDNIA; i++)
-	{
-		if (dane.akcel.akcel_y_srednia_tab[i] < 127)
-			dane.temp += (dane.akcel.akcel_y_srednia_tab[i]);
-		else
-			dane.temp += (dane.akcel.akcel_y_srednia_tab[i] - 255);
-	}
+		{ dane.temp += (dane.akcel.akcel_y_srednia_tab[i] - 255); }
+
 	dane.akcel.akcel_y_srednia = dane.temp >> PRZESUN;
 
 	dane.akcel.akcel_ktora_srednia++;
@@ -181,6 +186,27 @@ void odczyt_akcelerometr(uint8_t *bufor)
 	else
 		dane.akcel.akcel_y_kat_deg = (int)(asin((double)temp_deg/1280.0) * 180.0 / PI);
 	//----------------------------
+}
+
+void odczyt_akcelerometr_prosty()
+{
+	uint8_t bufor[4];
+
+	odczyt_I2C(I2C2, AKCEL_ADR, 0xA8, 4, bufor);
+	dane.akcel.akcel_x_l = bufor[0];
+	dane.akcel.akcel_x_h = bufor[1];
+	dane.akcel.akcel_y_l = bufor[2];
+	dane.akcel.akcel_y_h = bufor[3];
+
+	if (dane.akcel.akcel_x_h > 127) //ujemna
+		dane.akcel.akcel_x_suma_prosta += (dane.akcel.akcel_x_h - 256);
+	else
+		dane.akcel.akcel_x_suma_prosta += dane.akcel.akcel_x_h;
+
+	if (dane.akcel.akcel_y_h > 127) //ujemna
+		dane.akcel.akcel_y_suma_prosta += (dane.akcel.akcel_y_h - 256);
+	else
+		dane.akcel.akcel_y_suma_prosta += dane.akcel.akcel_y_h;
 }
 
 void oblicz_kat()
@@ -243,7 +269,7 @@ void odczyt_sensory()
 
     if (dane.opoznienie > 250)
     {
-    	PID();
+    	//PID();
     }
     else if (dane.opoznienie > 100)
     {

@@ -17,6 +17,8 @@ typedef struct
 	uint8_t pwm2;
 	uint8_t pwm3;
 	uint8_t pwm4;
+
+	uint8_t licznik; //licznik powielenia timera 2 (do odczytu w miedzyczasie danych)
 } PWMTypeDef;
 
 typedef struct
@@ -33,9 +35,11 @@ typedef struct
 
 	uint8_t akcel_ktora_srednia;
 	uint8_t akcel_x_srednia;
-	uint8_t akcel_x_srednia_tab[SREDNIA];
+	int16_t akcel_x_suma_prosta; //suma z szybkich odczytow
+	int8_t akcel_x_srednia_tab[SREDNIA];
 	uint8_t akcel_y_srednia;
-	uint8_t akcel_y_srednia_tab[SREDNIA];
+	int16_t akcel_y_suma_prosta;
+	int8_t akcel_y_srednia_tab[SREDNIA];
 } AkcelTypeDef;
 
 typedef struct
