@@ -3,8 +3,8 @@
 #ifndef _DANE_H_
 #define _DANE_H_
 
-#define SREDNIA 256
-#define PRZESUN 8
+#define SREDNIA 64
+#define PRZESUN 6
 #define BLEDY 64 //ilosc bledow gromadzonych w I
 
 #endif
@@ -50,6 +50,8 @@ typedef struct
 
 	int32_t zyro_y_kat_mdeg;
 	int32_t zyro_x_kat_mdeg;
+
+	double zyro_y_deg_sec;
 
 	int32_t zyro_y_kalibracja; //sluzy do kalibrowania odczytow, przez pierwsze 256 odczytow quadro MUSI staæ
 } ZyroTypeDef;

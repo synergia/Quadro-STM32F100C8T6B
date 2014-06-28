@@ -8,8 +8,9 @@
 #define AKCEL_ADR 0x32
 #define PI 3.14159265
 
-#define DT 20 //20 ms do calkowania
+#define DT 0.02 //20 ms do calkowania
 #define MDEG 8.75 //na 1 cyfre 8.75 milistopnia
+#define AKC_SKALA 8000.0
 #define DELTAZYROX 300 //eksperymentalnie dobrana stala bledu zyroskopu
 
 #define KALIBR 32 //z tylu próbek jest kalibrowany zyroskop
@@ -33,4 +34,4 @@ void obliczenia_akcelerometr();
 
 void odczyt_sensory();
 void oblicz_kat();
-void kalman_x();
+void kalman_x(double newAngle, double newRate, double dt);

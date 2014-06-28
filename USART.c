@@ -194,6 +194,8 @@ void USART1_IRQHandler(void)
 
 			//wysylanie katow
 
+			//dane.kat.kat_x = (int)dane.kalman_x.angle;
+
 			USART1->DR = dane.kat.kat_x >> 24;
 			while(!(USART1->SR & USART_SR_TC)) {}
 			USART1->DR = dane.kat.kat_x >> 16;

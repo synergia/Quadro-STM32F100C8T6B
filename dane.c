@@ -73,9 +73,9 @@ void inicjalizacja_dane()
 	dane.kalman_x.P[1][0] = 0;
 	dane.kalman_x.P[1][1] = 0;
 
-	dane.kalman_x.Q_angle = 0;
-	dane.kalman_x.Q_bias = 0;
-	dane.kalman_x.R_measure = 0;
+	dane.kalman_x.Q_angle = 0.001;
+	dane.kalman_x.Q_bias = 0.003;
+	dane.kalman_x.R_measure = 10.0;
 	dane.kalman_x.S = 0;
 	dane.kalman_x.angle = 0;
 	dane.kalman_x.bias = 0;
