@@ -54,7 +54,7 @@
 </editor>
 <editor activePart="true" focus="true" id="org.eclipse.cdt.ui.editor.CEditor" name="sensory.c" partName="sensory.c" path="C:/Users/Marcin/Documents/GitHub/Quadro-STM32F100C8T6B/sensory.c" title="sensory.c" tooltip="C:/Users/Marcin/Documents/GitHub/Quadro-STM32F100C8T6B/sensory.c" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Quadro/sensory.c"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="4781" selectionTopPixel="2459"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="2366" selectionTopPixel="1117"/>
 </editor>
 <editor id="org.eclipse.cdt.ui.editor.CEditor" name="sensory.h" partName="sensory.h" path="C:/Users/Marcin/Documents/GitHub/Quadro-STM32F100C8T6B/sensory.h" title="sensory.h" tooltip="C:/Users/Marcin/Documents/GitHub/Quadro-STM32F100C8T6B/sensory.h" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Quadro/sensory.h"/>

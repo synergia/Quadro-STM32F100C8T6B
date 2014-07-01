@@ -16,8 +16,8 @@
 <attrib name="registered" value="true"/>
 <attrib name="path" value="/Quadro/sensory.c"/>
 <attrib name="org.eclipse.cdt.debug.core.sourceHandle" value="C:\Documents and Settings\Marcin Twardak\Moje dokumenty\GitHub\Quadro-STM32F100C8T6B\sensory.c"/>
-<attrib name="org.eclipse.debug.core.enabled" value="true"/>
 <attrib name="org.eclipse.cdt.debug.core.ignoreCount" value="0"/>
+<attrib name="org.eclipse.debug.core.enabled" value="true"/>
 </marker>
 </breakpoint>
 </breakpoints>
