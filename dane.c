@@ -10,7 +10,6 @@ void inicjalizacja_dane()
 	dane.pwm.pwm2 = 1;
 	dane.pwm.pwm3 = 1;
 	dane.pwm.pwm4 = 1;
-	dane.pwm.licznik = 0;
 
 	dane.zyro.zyro_x_h = 0;
 	dane.zyro.zyro_x_l = 0;
@@ -34,8 +33,6 @@ void inicjalizacja_dane()
 	dane.akcel.akcel_ktora_srednia = 0;
 	dane.akcel.akcel_x_srednia = 0;
 	dane.akcel.akcel_y_srednia = 0;
-	dane.akcel.akcel_x_suma_prosta = 0;
-	dane.akcel.akcel_y_suma_prosta = 0;
 
 	dane.kat.kat_x = 0;
 	dane.kat.kat_y = 0;

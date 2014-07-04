@@ -9,8 +9,6 @@
 
 #define T_PSC2 10000
 #define T_ARR2 47
-#define T_ARR2MNOZNIK 4
-#define T_ARR2PRZESUN 2 // 2^2 = 4
 
 #define T_PSC3 80
 #define T_ARR3 2
@@ -29,6 +27,8 @@
 #endif
 
 void inicjalizacja_SysTick(); //odpowiedzialny za mruganie ledem i wylaczanie awaryjne silnikow
+
+void inicjalizacja_TIM1(); //odpowiedzialny za zbieranie danych z akcelerometru 1kHz
 
 void inicjalizacja_TIM2(); //TIM2 odpowiedzialny za sygnal co 20 ms
 

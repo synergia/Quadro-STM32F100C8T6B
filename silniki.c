@@ -27,28 +27,12 @@ void TIM2_IRQHandler(void)
 	if (TIM_GetITStatus(TIM2, TIM_IT_Update) == SET) //sprawdzenie zrodla
 	{
 		TIM_ClearFlag(TIM2, TIM_FLAG_Update); //wyzerowanie flagi przerwania
+		GPIO_WriteBit(GPIOB, SILNIK1 | SILNIK2 | SILNIK3 | SILNIK4, Bit_SET);
 
-		if (dane.pwm.licznik == T_ARR2MNOZNIK - 1)
-		{
-			GPIO_WriteBit(GPIOB, SILNIK1 | SILNIK2 | SILNIK3 | SILNIK4, Bit_SET);
-
-			TIM4->CNT = 0;
-			TIM4->DIER = TIM_DIER_UIE; //wlaczenie przerwania szerokosci impulsu
-			TIM_ClearFlag(TIM4, TIM_FLAG_Update); //wyzerowanie flagi przerwania
-
-			dane.pwm.licznik = 0;
-			odczyt_akcelerometr_prosty(); //tu powninen byc jak najprostszy odczyt (ma tylko 1 ms!!!)
-		}
-		else if (dane.pwm.licznik == T_ARR2MNOZNIK - 2)
-		{
-			dane.pwm.licznik++;
-			odczyt_sensory(); //tu wykonuje wszystkie operacje matematyczne oraz dzialania regulatora (ma na to 20 ms / T_ARR2MNOZNIK )
-		}
-		else
-		{
-			dane.pwm.licznik++;
-			odczyt_akcelerometr_prosty();
-		}
+		TIM4->CNT = 0;
+		TIM4->DIER = TIM_DIER_UIE; //wlaczenie przerwania szerokosci impulsu
+		TIM_ClearFlag(TIM4, TIM_FLAG_Update); //wyzerowanie flagi przerwania
+		//odczyt_sensory();
 	}
 }
 
@@ -82,7 +66,9 @@ void TIM3_IRQHandler(void)
 		{
 			TIM3->DIER = 0; //wylaczenie przerwania
 			GPIO_WriteBit(GPIOB, SILNIK1 | SILNIK2 | SILNIK3 | SILNIK4, Bit_RESET);
+			odczyt_sensory();
 		}
+		//dane.pwm.timer = 0;
 		else
 			dane.pwm.timer++;
 	}
