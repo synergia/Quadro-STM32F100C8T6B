@@ -9,8 +9,8 @@
 #define PI 3.14159265
 
 #define DT 0.02 //20 ms do calkowania
-#define MDEG 8.75 //na 1 cyfre 8.75 milistopnia
-#define AKC_SKALA 8000.0
+#define MDEG 8.75 //na 1 cyfre 8.75 milistopnia (zyro)
+#define AKC_SKALA 16000.0
 #define DELTAZYROX 300 //eksperymentalnie dobrana stala bledu zyroskopu
 
 #define KALIBR 32 //z tylu próbek jest kalibrowany zyroskop

@@ -32,7 +32,7 @@ void inicjalizacja_akcelerometr()
 {
 	wyslij_I2C(I2C2, AKCEL_ADR, 0x20, 0b00100111);
 	wyslij_I2C(I2C2, AKCEL_ADR, 0x21, 0b00000000);
-	wyslij_I2C(I2C2, AKCEL_ADR, 0x23, 0b00110000);
+	wyslij_I2C(I2C2, AKCEL_ADR, 0x23, 0b00000000);
 }
 
 void odczyt_zyroskop(uint8_t *bufor)
@@ -154,32 +154,30 @@ void odczyt_akcelerometr(uint8_t *bufor)
 	//---------------------------------------------
 
 	//oblicza kat -90 do 90 stopni
-	//uint16_t temp = (dane.akcel.akcel_x_h << 8) + dane.akcel.akcel_x_l;
-	uint16_t temp = dane.akcel.akcel_x_srednia << 8;
+	uint16_t temp = (dane.akcel.akcel_x_h << 8) + dane.akcel.akcel_x_l;
+	//uint16_t temp = dane.akcel.akcel_x_srednia << 8;
 	signed int temp_deg;
 	if (temp > 32768)
 		temp_deg = temp - 65536;
 	else
 		temp_deg = temp;
 	if (temp_deg < -AKC_SKALA)
-		dane.akcel.akcel_x_kat_deg = -90; //skrajny przypadek
+		dane.akcel.akcel_x_kat_deg = -1.57; //skrajny przypadek
 	else if (temp_deg > AKC_SKALA)
-		dane.akcel.akcel_x_kat_deg = 90; //skrajny przypadek
+		dane.akcel.akcel_x_kat_deg = 1.57; //skrajny przypadek
 	else
-		dane.akcel.akcel_x_kat_deg = (int)(asin((double)temp_deg/AKC_SKALA) *180.0 / PI);
-	dane.akcel.akcel_x_kat_deg *= 9;
-
-	temp = (dane.akcel.akcel_y_srednia << 8);
+		dane.akcel.akcel_x_kat_deg = (int)temp_deg/AKC_SKALA * 100;
+	temp = (dane.akcel.akcel_y_h << 8) + dane.akcel.akcel_y_l;
 	if (temp > 32768)
 		temp_deg = temp -65536;
 	else
 		temp_deg = temp;
-	if (temp_deg < -1280)
+	if (temp_deg < -AKC_SKALA)
 		dane.akcel.akcel_y_kat_deg = -90;
-	else if (temp_deg > 1280)
+	else if (temp_deg > AKC_SKALA)
 		dane.akcel.akcel_y_kat_deg = 90;
 	else
-		dane.akcel.akcel_y_kat_deg = (int)(asin((double)temp_deg/1280.0) * 180.0 / PI);
+		dane.akcel.akcel_y_kat_deg = (int)temp_deg/AKC_SKALA * 100;
 	//----------------------------
 }
 
