@@ -58,7 +58,7 @@ void odczyt_zyroskop(uint8_t *bufor)
 		if (dane.zyro.zyro_kalibr_ktory >= 10)
 		{
 			temp = (dane.zyro.zyro_y_h << 8) + dane.zyro.zyro_y_l;
-			//uwzgl�dnienie ujemnych
+			//uwzglednienie ujemnych
 			if (temp > 32768)
 				temp_vdeg = temp - 65535;
 			else
@@ -166,7 +166,7 @@ void odczyt_akcelerometr(uint8_t *bufor)
 	else if (temp_deg > AKC_SKALA)
 		dane.akcel.akcel_x_kat_deg = 1.57; //skrajny przypadek
 	else
-		dane.akcel.akcel_x_kat_deg = (int)temp_deg/AKC_SKALA * 100;
+		dane.akcel.akcel_x_kat_deg = (int)temp_deg/AKC_SKALA * 10000;
 	temp = (dane.akcel.akcel_y_h << 8) + dane.akcel.akcel_y_l;
 	if (temp > 32768)
 		temp_deg = temp -65536;
@@ -177,7 +177,7 @@ void odczyt_akcelerometr(uint8_t *bufor)
 	else if (temp_deg > AKC_SKALA)
 		dane.akcel.akcel_y_kat_deg = 90;
 	else
-		dane.akcel.akcel_y_kat_deg = (int)temp_deg/AKC_SKALA * 100;
+		dane.akcel.akcel_y_kat_deg = (int)temp_deg/AKC_SKALA * 10000;
 	//----------------------------
 }
 

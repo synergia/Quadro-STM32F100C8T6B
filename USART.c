@@ -59,9 +59,13 @@ void USART1_IRQHandler(void)
 			 * wysylanie danych z AKCELEROMETRU
 			 */
 
+			USART1->DR = dane.akcel.akcel_x_kat_deg >> 8; //najpierw najstarsze
+			while(!(USART1->SR & USART_SR_TC)) {}
 			USART1->DR = dane.akcel.akcel_x_kat_deg;
 			while(!(USART1->SR & USART_SR_TC)) {}
 
+			USART1->DR = dane.akcel.akcel_y_kat_deg >> 8;
+			while(!(USART1->SR & USART_SR_TC)) {}
 			USART1->DR = dane.akcel.akcel_y_kat_deg;
 			while(!(USART1->SR & USART_SR_TC)) {}
 
