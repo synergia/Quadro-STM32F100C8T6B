@@ -17,7 +17,7 @@ void inicjalizacja_zyroskop()
 	wyslij_I2C(I2C2, ZYRO_ADR, 0x20, 0b00001111);  //wlaczony zyroskop
 	wyslij_I2C(I2C2, ZYRO_ADR, 0x21, 0b00000000); //filtry
 	wyslij_I2C(I2C2, ZYRO_ADR, 0x22, 0b00000000);
-	wyslij_I2C(I2C2, ZYRO_ADR, 0x23, 0b10000000); //250 dps
+	wyslij_I2C(I2C2, ZYRO_ADR, 0x23, 0b00000000); //250 dps
 	wyslij_I2C(I2C2, ZYRO_ADR, 0x24, 0b00000000);
 }
 
@@ -60,22 +60,35 @@ void odczyt_zyroskop(uint8_t *bufor)
 			temp = (dane.zyro.zyro_y_h << 8) + dane.zyro.zyro_y_l;
 			//uwzglednienie ujemnych
 			if (temp > 32768)
-				temp_vdeg = temp - 65535;
+				temp_vdeg = temp - 65536;
 			else
 				temp_vdeg = temp;
 
 			dane.zyro.zyro_y_kalibracja += temp_vdeg;
 			dane.zyro.zyro_y_kat_mdeg = 0;
 
+			temp = (dane.zyro.zyro_z_h << 8) + dane.zyro.zyro_z_l;
+			if (temp > 32768)
+				temp_vdeg = temp - 65536;
+			else
+				temp_vdeg = temp;
+
+			dane.zyro.zyro_z_kalibracja += temp_vdeg;
+			dane.zyro.zyro_z_kat_mdeg = 0;
+
 			dane.zyro.zyro_kalibr_ktory++;
 			if (dane.zyro.zyro_kalibr_ktory == (KALIBR + 10))
+			{
 				dane.zyro.zyro_y_kalibracja = (dane.zyro.zyro_y_kalibracja >> KALIBR_PRZESUN);
+				dane.zyro.zyro_z_kalibracja = (dane.zyro.zyro_z_kalibracja >> KALIBR_PRZESUN);
+			}
 		}
 		else
 			dane.zyro.zyro_kalibr_ktory++;
 	}
 	else
 	{
+		// Y --------------------
 		//uwzglednienie kalibracji
 		if (dane.zyro.zyro_y_kalibracja > 32768)
 			dane.zyro.zyro_y_kalibracja -= 65536;
@@ -92,6 +105,24 @@ void odczyt_zyroskop(uint8_t *bufor)
 		dane.zyro.zyro_y_deg_sec = temp_vdeg * MDEG * 0.001; //w stopniach na sekunde
 		dane.zyro.zyro_y_kat_mdeg = temp_vdeg * DT * MDEG; //w milistopniach
 
+		// ------------------------
+
+		// Z ----------------------
+		/*if (dane.zyro.zyro_z_kalibracja > 32768)
+			dane.zyro.zyro_z_kalibracja -= 65536;*/
+		temp = (dane.zyro.zyro_z_h << 8) + dane.zyro.zyro_z_l - dane.zyro.zyro_z_kalibracja;
+		dane.zyro.zyro_z_h = temp >> 8;
+		dane.zyro.zyro_z_l = temp;
+
+		if (temp > 32768)
+			temp_vdeg = temp - 65536;
+		else temp_vdeg = temp;
+		dane.zyro.zyro_z_deg_sec = temp_vdeg * MDEG * 0.001;
+		dane.zyro.zyro_z_kat_mdeg += temp_vdeg * DT * MDEG;
+
+		// -------------------------
+
+		// X -----------------------
 
 		temp = (dane.zyro.zyro_x_h << 8) + dane.zyro.zyro_x_l;
 		if(temp > 32768)
@@ -99,6 +130,7 @@ void odczyt_zyroskop(uint8_t *bufor)
 		else
 			temp_vdeg = temp;
 		dane.zyro.zyro_x_kat_mdeg = (temp_vdeg - DELTAZYROX) * DT * MDEG * 0.001; //w milistopniach
+		// -------------------------
 	}
 }
 

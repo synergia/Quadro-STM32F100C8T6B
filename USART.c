@@ -69,6 +69,15 @@ void USART1_IRQHandler(void)
 			USART1->DR = dane.akcel.akcel_y_kat_deg;
 			while(!(USART1->SR & USART_SR_TC)) {}
 
+			USART1->DR = dane.zyro.zyro_z_kat_mdeg >> 24;
+			while(!(USART1->SR & USART_SR_TC)) {}
+			USART1->DR = dane.zyro.zyro_z_kat_mdeg >> 16;
+			while(!(USART1->SR & USART_SR_TC)) {}
+			USART1->DR = dane.zyro.zyro_z_kat_mdeg >> 8;
+			while(!(USART1->SR & USART_SR_TC)) {}
+			USART1->DR = dane.zyro.zyro_z_kat_mdeg;
+			while(!(USART1->SR & USART_SR_TC)) {}
+
 			//bateria
 			USART1->DR = dane.bateria.poziom_procent;
 			while(!(USART1->SR & USART_SR_TC)) {}

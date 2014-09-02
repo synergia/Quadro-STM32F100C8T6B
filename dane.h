@@ -28,8 +28,8 @@ typedef struct
 	uint8_t akcel_z_l;
 	uint8_t akcel_z_h;
 
-	signed int akcel_x_kat_deg;
-	signed int akcel_y_kat_deg;
+	int32_t akcel_x_kat_deg;
+	int32_t akcel_y_kat_deg;
 
 	uint8_t akcel_ktora_srednia;
 	uint8_t akcel_x_srednia;
@@ -50,10 +50,13 @@ typedef struct
 
 	int32_t zyro_y_kat_mdeg;
 	int32_t zyro_x_kat_mdeg;
+	int32_t zyro_z_kat_mdeg;
 
 	double zyro_y_deg_sec;
+	double zyro_z_deg_sec;
 
-	int32_t zyro_y_kalibracja; //sluzy do kalibrowania odczytow, przez pierwsze 256 odczytow quadro MUSI staæ
+	int32_t zyro_y_kalibracja; //sluzy do kalibrowania odczytow, przez pierwsze 256 odczytow quadro MUSI stac
+	int32_t zyro_z_kalibracja;
 } ZyroTypeDef;
 
 typedef struct

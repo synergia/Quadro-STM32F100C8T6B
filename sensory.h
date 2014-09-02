@@ -13,8 +13,8 @@
 #define AKC_SKALA 16000.0
 #define DELTAZYROX 300 //eksperymentalnie dobrana stala bledu zyroskopu
 
-#define KALIBR 32 //z tylu próbek jest kalibrowany zyroskop
-#define KALIBR_PRZESUN 5
+#define KALIBR 128 //z tylu próbek jest kalibrowany zyroskop
+#define KALIBR_PRZESUN 7
 /*
  * ms * mdeg/s = udeg
  * ale podzielone przez 1000 wiec ms
