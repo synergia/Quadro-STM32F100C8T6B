@@ -34,6 +34,14 @@ void inicjalizacja_dane()
 	dane.akcel.akcel_x_srednia = 0;
 	dane.akcel.akcel_y_srednia = 0;
 
+	dane.baro.press_out_h = 0;
+	dane.baro.press_out_l = 0;
+	dane.baro.temp_celsius = 0;
+	dane.baro.temp_out_h = 0;
+	dane.baro.temp_out_l = 0;
+	dane.baro.ktory = 0;
+	dane.baro.press_mbar = 0;
+
 	dane.kat.kat_x = 0;
 	dane.kat.kat_y = 0;
 

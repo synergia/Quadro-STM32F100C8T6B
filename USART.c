@@ -81,6 +81,16 @@ void USART1_IRQHandler(void)
 			//bateria
 			USART1->DR = dane.bateria.poziom_procent;
 			while(!(USART1->SR & USART_SR_TC)) {}
+
+			//temperatura
+			USART1->DR = dane.baro.temp_celsius;
+			while(!(USART1->SR & USART_SR_TC)) {}
+
+			//cisnienie
+			USART1->DR = dane.baro.press_mbar >> 8;
+			while(!(USART1->SR & USART_SR_TC)) {}
+			USART1->DR = dane.baro.press_mbar;
+			while(!(USART1->SR & USART_SR_TC)) {}
 		}
 		else
 			USART_blad();

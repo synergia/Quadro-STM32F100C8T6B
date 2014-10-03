@@ -10,6 +10,7 @@ void inicjalizacja_sensory()
 	inicjalizacja_zyroskop();
 	inicjalizacja_magnetometr();
 	inicjalizacja_akcelerometr();
+	inicjalizacja_barometr();
 }
 
 void inicjalizacja_zyroskop()
@@ -33,6 +34,12 @@ void inicjalizacja_akcelerometr()
 	wyslij_I2C(I2C2, AKCEL_ADR, 0x20, 0b00100111);
 	wyslij_I2C(I2C2, AKCEL_ADR, 0x21, 0b00000000);
 	wyslij_I2C(I2C2, AKCEL_ADR, 0x23, 0b00000000);
+}
+
+void inicjalizacja_barometr()
+{
+	wyslij_I2C(I2C2, BARO_ADR, 0x20, 0b11000100);
+	wyslij_I2C(I2C2, BARO_ADR, 0x10, 0x7A);
 }
 
 void odczyt_zyroskop(uint8_t *bufor)
@@ -199,6 +206,7 @@ void odczyt_akcelerometr(uint8_t *bufor)
 		dane.akcel.akcel_x_kat_deg = 1.57; //skrajny przypadek
 	else
 		dane.akcel.akcel_x_kat_deg = (int)temp_deg/AKC_SKALA * 10000;
+
 	temp = (dane.akcel.akcel_y_h << 8) + dane.akcel.akcel_y_l;
 	if (temp > 32768)
 		temp_deg = temp -65536;
@@ -211,6 +219,32 @@ void odczyt_akcelerometr(uint8_t *bufor)
 	else
 		dane.akcel.akcel_y_kat_deg = (int)temp_deg/AKC_SKALA * 10000;
 	//----------------------------
+}
+
+void odczyt_barometr(uint8_t *bufor)
+{
+	odczyt_I2C(I2C2, BARO_ADR, 0xA8, 5, bufor);
+	dane.baro.press_out_xl = bufor[0];
+	dane.baro.press_out_l = bufor[1];
+	dane.baro.press_out_h = bufor[2];
+	dane.baro.temp_out_l = bufor[3];
+	dane.baro.temp_out_h = bufor[4];
+
+	int16_t temp = (dane.baro.temp_out_h << 8) + dane.baro.temp_out_l;
+
+	dane.baro.temp_celsius = (uint8_t)(42.5 + temp * 0.002083); // strona 29
+
+	//kalibracja barometru
+	if (dane.baro.ktory < KALIBR)
+			dane.baro.ktory++;
+	else if (dane.baro.ktory == KALIBR)
+	{
+		wyslij_I2C(I2C2, BARO_ADR, 0x21, 0b00000010);
+		dane.baro.ktory++;
+	}
+	else
+		dane.baro.press_mbar = ((dane.baro.press_out_h << 24) + (dane.baro.press_out_l << 16) + dane.baro.press_out_xl)>>12;
+
 }
 
 void oblicz_kat()
@@ -268,12 +302,17 @@ void odczyt_sensory()
 	odczyt_zyroskop(bufor);
 	odczyt_akcelerometr(bufor);
 	odczyt_magnetometr(bufor);
+	odczyt_barometr(bufor);
 
 	oblicz_kat();
 
     if (dane.opoznienie > 250)
     {
-    	PID();
+    	//PID();
+    	dane.pwm.pwm1 = 50;
+    	dane.pwm.pwm2 = 50;
+    	dane.pwm.pwm3 = 50;
+    	dane.pwm.pwm4 = 50;
     }
     else if (dane.opoznienie > 100)
     {
@@ -286,10 +325,10 @@ void odczyt_sensory()
     }
     else
     {
-    	dane.pwm.pwm1 = 10;
-		dane.pwm.pwm2 = 10;
-		dane.pwm.pwm3 = 10;
-		dane.pwm.pwm4 = 10;
+    	dane.pwm.pwm1 = 0;
+		dane.pwm.pwm2 = 0;
+		dane.pwm.pwm3 = 0;
+		dane.pwm.pwm4 = 0;
 		dane.kat.kat_x = 0;
     	dane.opoznienie++;
     }

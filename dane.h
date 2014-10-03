@@ -61,6 +61,20 @@ typedef struct
 
 typedef struct
 {
+	uint8_t press_out_xl;
+	uint8_t press_out_l;
+	uint8_t press_out_h;
+	uint8_t temp_out_l;
+	uint8_t temp_out_h;
+
+	uint8_t temp_celsius;
+	int16_t press_mbar;
+
+	uint8_t ktory; // do kalibracji
+} BaroTypeDef;
+
+typedef struct
+{
 	int32_t kat_x;
 	int32_t kat_y;
 } KatTypeDef;
@@ -121,6 +135,7 @@ typedef struct
 	ZyroTypeDef zyro;
 	MagnetTypeDef magnet;
 	AkcelTypeDef akcel;
+	BaroTypeDef baro;
 	PIDTypeDef pid;
 	KatTypeDef kat;
 	BateriaTypeDef bateria;

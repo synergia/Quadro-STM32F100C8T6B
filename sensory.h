@@ -6,6 +6,7 @@
 #define ZYRO_ADR 0xD6
 #define MAGNET_ADR 0x3C
 #define AKCEL_ADR 0x32
+#define BARO_ADR 0xBA
 #define PI 3.14159265
 
 #define DT 0.02 //20 ms do calkowania
@@ -26,10 +27,12 @@ void inicjalizacja_sensory();
 void inicjalizacja_zyroskop();
 void inicjalizacja_magnetometr();
 void inicjalizacja_akcelerometr();
+void inicjalizacja_barometr(); //takze termometr
 
 void odczyt_zyroskop(uint8_t *bufor);
 void odczyt_magnetometr(uint8_t *bufor);
 void odczyt_akcelerometr(uint8_t *bufor);
+void odczyt_barometr(uint8_t *bufor);
 void obliczenia_akcelerometr();
 
 void odczyt_sensory();

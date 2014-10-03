@@ -40,21 +40,32 @@ void ADC1_IRQHandler(void)
 
 		if (dane.bateria.ktora >= SREDNIA)
 		{
+			/*
+			 * V_in / V_ref * 2^12
+			 *
+			 * 8,41 V (100%) - 1882
+			 * 6,8 V (0%) - 1521
+			 *
+			 * 1882 - 1521 = 361
+			 * 361/100 = 3,61
+			 * 1/3,61 = 0,277
+			 */
+
 			dane.bateria.poziom = dane.bateria.poziom >> PRZESUN;
 			dane.bateria.ktora = 0;
-			dane.bateria.poziom_procent = (dane.bateria.poziom - 2900)*0.2;
+			dane.bateria.poziom_procent = (uint8_t)((dane.bateria.poziom - 1521)*0.277);
 
-			if (dane.bateria.poziom >= 3370)
+			if (dane.bateria.poziom >= 1786) //8,0 V
 			{
 				GPIO_WriteBit(LED_PORT, LED_NIEB_2, Bit_SET);
 				GPIO_WriteBit(LED_PORT, LED_ZOL_1 | LED_ZOL_2 | LED_CZER_1, Bit_RESET);
 			}
-			else if (dane.bateria.poziom >= 3130)
+			else if (dane.bateria.poziom >= 1723) //7,7 V
 			{
 				GPIO_WriteBit(LED_PORT, LED_ZOL_1, Bit_SET);
 				GPIO_WriteBit(LED_PORT, LED_NIEB_2 | LED_ZOL_2 | LED_CZER_1, Bit_RESET);
 			}
-			else if (dane.bateria.poziom >= 2930)
+			else if (dane.bateria.poziom >= 1655) //7,4 V
 			{
 				GPIO_WriteBit(LED_PORT, LED_ZOL_2, Bit_SET);
 				GPIO_WriteBit(LED_PORT, LED_NIEB_2 | LED_ZOL_1 | LED_CZER_1, Bit_RESET);
