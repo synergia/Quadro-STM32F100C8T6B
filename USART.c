@@ -51,22 +51,24 @@ void USART1_IRQHandler(void)
 		USART_ITConfig(USART1, USART_IT_RXNE, DISABLE);
 		dane.czy_polaczony = 1;
 
+		while (USART_GetFlagStatus(USART1, USART_FLAG_RXNE)== RESET);
 		dane_usart = USART_ReceiveData(USART1);
-		if (dane_usart == '0') //zadnych zmian tylko dane
+		USART_ClearFlag(USART1,USART_FLAG_RXNE);
+		if (dane_usart == '0') // bez wyslania czegos komunikacja czasem sie zawala
 		{
 			USART_potwierdz();
 			/*
 			 * wysylanie danych z AKCELEROMETRU
 			 */
 
-			USART1->DR = dane.akcel.akcel_x_kat_deg >> 8; //najpierw najstarsze
+			USART1->DR = dane.akcel.akcel_x_kat_rad >> 8; //najpierw najstarsze
 			while(!(USART1->SR & USART_SR_TC)) {}
-			USART1->DR = dane.akcel.akcel_x_kat_deg;
+			USART1->DR = dane.akcel.akcel_x_kat_rad;
 			while(!(USART1->SR & USART_SR_TC)) {}
 
-			USART1->DR = dane.akcel.akcel_y_kat_deg >> 8;
+			USART1->DR = dane.akcel.akcel_y_kat_rad >> 8;
 			while(!(USART1->SR & USART_SR_TC)) {}
-			USART1->DR = dane.akcel.akcel_y_kat_deg;
+			USART1->DR = dane.akcel.akcel_y_kat_rad;
 			while(!(USART1->SR & USART_SR_TC)) {}
 
 			USART1->DR = dane.zyro.zyro_z_kat_mdeg >> 24;
@@ -91,6 +93,19 @@ void USART1_IRQHandler(void)
 			while(!(USART1->SR & USART_SR_TC)) {}
 			USART1->DR = dane.baro.press_mbar;
 			while(!(USART1->SR & USART_SR_TC)) {}
+
+			//ustawianie silnikow
+			while (!(USART1->SR & USART_SR_RXNE));
+			dane.pwm.pwm1 = USART1->DR;
+
+			while (!(USART1->SR & USART_SR_RXNE));
+			dane.pwm.pwm2 = USART1->DR;
+
+			while (!(USART1->SR & USART_SR_RXNE));
+			dane.pwm.pwm3 = USART1->DR;
+
+			while (!(USART1->SR & USART_SR_RXNE));
+			dane.pwm.pwm4 = USART1->DR;
 		}
 		else
 			USART_blad();

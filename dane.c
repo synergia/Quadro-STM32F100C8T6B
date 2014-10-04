@@ -28,8 +28,8 @@ void inicjalizacja_dane()
 	dane.akcel.akcel_y_l = 0;
 	dane.akcel.akcel_z_h = 0;
 	dane.akcel.akcel_z_l = 0;
-	dane.akcel.akcel_x_kat_deg = 0;
-	dane.akcel.akcel_y_kat_deg = 0;
+	dane.akcel.akcel_x_kat_rad = 0;
+	dane.akcel.akcel_y_kat_rad = 0;
 	dane.akcel.akcel_ktora_srednia = 0;
 	dane.akcel.akcel_x_srednia = 0;
 	dane.akcel.akcel_y_srednia = 0;

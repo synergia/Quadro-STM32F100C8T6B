@@ -53,7 +53,13 @@ void ADC1_IRQHandler(void)
 
 			dane.bateria.poziom = dane.bateria.poziom >> PRZESUN;
 			dane.bateria.ktora = 0;
-			dane.bateria.poziom_procent = (uint8_t)((dane.bateria.poziom - 1521)*0.277);
+
+			if (dane.bateria.poziom <= 1521) //6,8 V
+				dane.bateria.poziom_procent = 0;
+			else if (dane.bateria.poziom >= 1882) //8,41 V
+				dane.bateria.poziom_procent = 100;
+			else
+				dane.bateria.poziom_procent = (uint8_t)((dane.bateria.poziom - 1521)*0.277);
 
 			if (dane.bateria.poziom >= 1786) //8,0 V
 			{

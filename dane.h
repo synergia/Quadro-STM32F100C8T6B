@@ -28,8 +28,8 @@ typedef struct
 	uint8_t akcel_z_l;
 	uint8_t akcel_z_h;
 
-	int32_t akcel_x_kat_deg;
-	int32_t akcel_y_kat_deg;
+	int32_t akcel_x_kat_rad;
+	int32_t akcel_y_kat_rad;
 
 	uint8_t akcel_ktora_srednia;
 	uint8_t akcel_x_srednia;

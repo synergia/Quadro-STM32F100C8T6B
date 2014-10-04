@@ -33,7 +33,7 @@ void inicjalizacja_akcelerometr()
 {
 	wyslij_I2C(I2C2, AKCEL_ADR, 0x20, 0b00100111);
 	wyslij_I2C(I2C2, AKCEL_ADR, 0x21, 0b00000000);
-	wyslij_I2C(I2C2, AKCEL_ADR, 0x23, 0b00000000);
+	wyslij_I2C(I2C2, AKCEL_ADR, 0x23, 0b10000000);
 }
 
 void inicjalizacja_barometr()
@@ -193,31 +193,22 @@ void odczyt_akcelerometr(uint8_t *bufor)
 	//---------------------------------------------
 
 	//oblicza kat -90 do 90 stopni
-	uint16_t temp = (dane.akcel.akcel_x_h << 8) + dane.akcel.akcel_x_l;
-	//uint16_t temp = dane.akcel.akcel_x_srednia << 8;
-	signed int temp_deg;
-	if (temp > 32768)
-		temp_deg = temp - 65536;
-	else
-		temp_deg = temp;
+	//int16_t temp_deg = dane.akcel.akcel_x_srednia << 8;
+	int16_t temp_deg = (dane.akcel.akcel_x_h << 8) + dane.akcel.akcel_x_l;
 	if (temp_deg < -AKC_SKALA)
-		dane.akcel.akcel_x_kat_deg = -1.57; //skrajny przypadek
+		dane.akcel.akcel_x_kat_rad = -1.57*10000; //skrajny przypadek
 	else if (temp_deg > AKC_SKALA)
-		dane.akcel.akcel_x_kat_deg = 1.57; //skrajny przypadek
+		dane.akcel.akcel_x_kat_rad = 1.57*10000; //skrajny przypadek
 	else
-		dane.akcel.akcel_x_kat_deg = (int)temp_deg/AKC_SKALA * 10000;
+		dane.akcel.akcel_x_kat_rad = (int)(temp_deg/AKC_SKALA * 10000);
 
-	temp = (dane.akcel.akcel_y_h << 8) + dane.akcel.akcel_y_l;
-	if (temp > 32768)
-		temp_deg = temp -65536;
-	else
-		temp_deg = temp;
+	temp_deg = (dane.akcel.akcel_y_h << 8) + dane.akcel.akcel_y_l;
 	if (temp_deg < -AKC_SKALA)
-		dane.akcel.akcel_y_kat_deg = -90;
+		dane.akcel.akcel_y_kat_rad = -1.57*10000;
 	else if (temp_deg > AKC_SKALA)
-		dane.akcel.akcel_y_kat_deg = 90;
+		dane.akcel.akcel_y_kat_rad = 1.57*10000;
 	else
-		dane.akcel.akcel_y_kat_deg = (int)temp_deg/AKC_SKALA * 10000;
+		dane.akcel.akcel_y_kat_rad = (int)(temp_deg/AKC_SKALA * 10000);
 	//----------------------------
 }
 
@@ -251,7 +242,7 @@ void oblicz_kat()
 {
 	//kalman_x(dane.akcel.akcel_x_kat_deg, dane.zyro.zyro_y_deg_sec, DT);
 	dane.kat.kat_x += dane.zyro.zyro_y_kat_mdeg;
-	dane.kat.kat_x = 0.98*dane.kat.kat_x + 0.02*dane.akcel.akcel_x_kat_deg*1000;
+	dane.kat.kat_x = 0.98*dane.kat.kat_x + 0.02*dane.akcel.akcel_x_kat_rad*1000;
 }
 
 void kalman_x(double newAngle, double newRate, double dt)
