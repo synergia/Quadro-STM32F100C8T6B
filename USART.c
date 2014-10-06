@@ -50,12 +50,12 @@ void USART1_IRQHandler(void)
 
 	if (USART_GetITStatus(USART1, USART_IT_RXNE) != RESET) //sprawdzenie czy aby na pewno odpowiednie przerwanie
 	{
-		USART_ITConfig(USART1, USART_IT_RXNE, DISABLE); // wylaczenie przerwania na czas jego wykonania
+		//USART_ITConfig(USART1, USART_IT_RXNE, DISABLE); // wylaczenie przerwania na czas jego wykonania
 		dane.czy_polaczony = 1;
 
 		dane_usart = USART1->DR;
 
-		if (dane_usart == 50)
+		if (dane_usart == 's')
 		{
 			GPIOA->ODR |= LED_NIEB_1;
 			/*while( USART_GetFlagStatus(USART1, USART_FLAG_RXNE) == RESET );
@@ -109,10 +109,14 @@ void USART1_IRQHandler(void)
 			USART1->DR = dane.baro.press_mbar;
 			while(!(USART1->SR & USART_SR_TXE)) {}*/
 		}
+		else if(dane_usart == 'z')
+			GPIOA->ODR |= LED_NIEB_2;
+		else if(dane_usart == 50)
+			GPIOA->ODR |= LED_ZOL_2;
 		else
-			GPIOA->ODR &= ~LED_NIEB_1;
+			GPIOA->ODR &= ~LED_ZOL_2;
 
-		USART_ITConfig(USART1, USART_IT_RXNE, ENABLE); //wlaczenie na koncu przerwania
+		//USART_ITConfig(USART1, USART_IT_RXNE, ENABLE); //wlaczenie na koncu przerwania
 	}
 }
 
