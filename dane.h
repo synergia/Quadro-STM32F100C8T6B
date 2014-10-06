@@ -131,6 +131,12 @@ typedef struct
 
 typedef struct
 {
+	uint8_t overrun_error; // jak jest overrun error czekaj az do 's'
+	uint8_t bufor; //
+} USARTTypeDef;
+
+typedef struct
+{
 	PWMTypeDef pwm; //struktura PWM
 	ZyroTypeDef zyro;
 	MagnetTypeDef magnet;
@@ -139,6 +145,7 @@ typedef struct
 	PIDTypeDef pid;
 	KatTypeDef kat;
 	BateriaTypeDef bateria;
+	USARTTypeDef usart;
 
 	KalmanTypeDef kalman_x;
 

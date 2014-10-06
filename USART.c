@@ -50,16 +50,14 @@ void USART1_IRQHandler(void)
 
 	if (USART_GetITStatus(USART1, USART_IT_RXNE) != RESET) //sprawdzenie czy aby na pewno odpowiednie przerwanie
 	{
-		//USART_ITConfig(USART1, USART_IT_RXNE, DISABLE); // wylaczenie przerwania na czas jego wykonania
 		dane.czy_polaczony = 1;
 
 		dane_usart = USART1->DR;
 
 		if (dane_usart == 's')
 		{
+			dane.usart.overrun_error = 0;
 			GPIOA->ODR |= LED_NIEB_1;
-			/*while( USART_GetFlagStatus(USART1, USART_FLAG_RXNE) == RESET );
-			dane_usart = USART1->DR;*/
 
 			//ustawianie silnikow
 			/*dane.pwm.pwm1 = USART1->DR;
@@ -109,14 +107,41 @@ void USART1_IRQHandler(void)
 			USART1->DR = dane.baro.press_mbar;
 			while(!(USART1->SR & USART_SR_TXE)) {}*/
 		}
-		else if(dane_usart == 'z')
+		else if(dane_usart == 'z' && dane.usart.overrun_error == 0) //zakonczono odbieranie danych wyslij jakas dana
+		{
+			dane.usart.bufor = 0;
 			GPIOA->ODR |= LED_NIEB_2;
-		else if(dane_usart == 50)
-			GPIOA->ODR |= LED_ZOL_2;
-		else
-			GPIOA->ODR &= ~LED_ZOL_2;
+		}
 
-		//USART_ITConfig(USART1, USART_IT_RXNE, ENABLE); //wlaczenie na koncu przerwania
+		else if(dane.usart.bufor == 0 && dane.usart.overrun_error == 0) // pwm1
+		{
+			if (dane_usart == 50)
+				GPIOA->ODR |= LED_ZOL_2;
+			else
+				GPIOA->ODR &= ~LED_ZOL_2;
+			dane.usart.bufor++;
+		}
+		else if(dane.usart.bufor == 1 && dane.usart.overrun_error == 0) // pwm2
+		{
+			dane.usart.bufor++;
+		}
+		else if(dane.usart.bufor == 2 && dane.usart.overrun_error == 0) // pwm3
+		{
+			dane.usart.bufor++;
+		}
+		else if(dane.usart.bufor == 3 && dane.usart.overrun_error == 0) // pwm4
+		{
+			dane.usart.bufor++;
+			if (dane_usart == 30)
+				GPIOA->ODR |= LED_CZER_1;
+			else
+				GPIOA->ODR &= ~LED_CZER_1;
+		}
+	}
+	else if (USART_GetFlagStatus(USART1, USART_IT_ORE)) // overrun error
+	{
+		dane.usart.overrun_error = 1;
+		dane_usart = USART1->DR;
 	}
 }
 
