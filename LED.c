@@ -13,7 +13,7 @@ void inicjalizacja_LED()
 
 void SysTick_Handler(void)
 {
-	GPIOA->ODR ^= LED_NIEB_1;
+	//GPIOA->ODR ^= LED_NIEB_1;
 	/*if (!dane.czy_polaczony)
 	{
 		dane.pwm.pwm1 = 0;

@@ -292,10 +292,10 @@ void odczyt_sensory()
 	uint8_t bufor[6];
 	odczyt_zyroskop(bufor);
 	odczyt_akcelerometr(bufor);
-	odczyt_magnetometr(bufor);
-	odczyt_barometr(bufor);
+	//odczyt_magnetometr(bufor);
+	//odczyt_barometr(bufor);
 
-	oblicz_kat();
+	//oblicz_kat();
 
     if (dane.opoznienie > 250)
     {

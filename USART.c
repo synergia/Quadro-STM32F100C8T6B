@@ -1,6 +1,7 @@
 #include "USART.h"
 #include "dane.h"
 #include "silniki.h"
+#include "LED.h"
 
 extern volatile daneTypeDef dane;
 
@@ -31,6 +32,7 @@ void inicjalizacja_USART()
 	usart->USART_WordLength = USART_WordLength_8b;
 
 	USART_Init(USART1, usart);
+	USART_ITConfig(USART1, USART_IT_TXE, DISABLE);
 	USART_ITConfig(USART1, USART_IT_RXNE, ENABLE);
 
 	free(usart);
@@ -48,80 +50,80 @@ void USART1_IRQHandler(void)
 
 	if (USART_GetITStatus(USART1, USART_IT_RXNE) != RESET) //sprawdzenie czy aby na pewno odpowiednie przerwanie
 	{
-		USART_ITConfig(USART1, USART_IT_RXNE, DISABLE);
+		USART_ITConfig(USART1, USART_IT_RXNE, DISABLE); // wylaczenie przerwania na czas jego wykonania
 		dane.czy_polaczony = 1;
 
-		while (USART_GetFlagStatus(USART1, USART_FLAG_RXNE)== RESET);
-		dane_usart = USART_ReceiveData(USART1);
-		USART_ClearFlag(USART1,USART_FLAG_RXNE);
-		if (dane_usart == '0') // bez wyslania czegos komunikacja czasem sie zawala
+		dane_usart = USART1->DR;
+
+		if (dane_usart == 50)
 		{
-			USART_potwierdz();
+			GPIOA->ODR |= LED_NIEB_1;
+			/*while( USART_GetFlagStatus(USART1, USART_FLAG_RXNE) == RESET );
+			dane_usart = USART1->DR;*/
+
+			//ustawianie silnikow
+			/*dane.pwm.pwm1 = USART1->DR;
+			while( USART_GetFlagStatus(USART1, USART_FLAG_RXNE) == RESET );
+
+			dane.pwm.pwm2 = USART1->DR;
+			while( USART_GetFlagStatus(USART1, USART_FLAG_RXNE) == RESET );
+
+			dane.pwm.pwm3 = USART1->DR;
+			while( USART_GetFlagStatus(USART1, USART_FLAG_RXNE) == RESET );
+
+			dane.pwm.pwm4 = USART1->DR;
+			while( USART_GetFlagStatus(USART1, USART_FLAG_RXNE) == RESET );*/
 			/*
 			 * wysylanie danych z AKCELEROMETRU
 			 */
-
-			USART1->DR = dane.akcel.akcel_x_kat_rad >> 8; //najpierw najstarsze
-			while(!(USART1->SR & USART_SR_TC)) {}
+			/*USART1->DR = dane.akcel.akcel_x_kat_rad >> 8; //najpierw najstarsze
+			while(!(USART1->SR & USART_SR_TXE)) {}
 			USART1->DR = dane.akcel.akcel_x_kat_rad;
-			while(!(USART1->SR & USART_SR_TC)) {}
+			while(!(USART1->SR & USART_SR_TXE)) {}
 
 			USART1->DR = dane.akcel.akcel_y_kat_rad >> 8;
-			while(!(USART1->SR & USART_SR_TC)) {}
+			while(!(USART1->SR & USART_SR_TXE)) {}
 			USART1->DR = dane.akcel.akcel_y_kat_rad;
-			while(!(USART1->SR & USART_SR_TC)) {}
+			while(!(USART1->SR & USART_SR_TXE)) {}
 
 			USART1->DR = dane.zyro.zyro_z_kat_mdeg >> 24;
-			while(!(USART1->SR & USART_SR_TC)) {}
+			while(!(USART1->SR & USART_SR_TXE)) {}
 			USART1->DR = dane.zyro.zyro_z_kat_mdeg >> 16;
-			while(!(USART1->SR & USART_SR_TC)) {}
+			while(!(USART1->SR & USART_SR_TXE)) {}
 			USART1->DR = dane.zyro.zyro_z_kat_mdeg >> 8;
-			while(!(USART1->SR & USART_SR_TC)) {}
+			while(!(USART1->SR & USART_SR_TXE)) {}
 			USART1->DR = dane.zyro.zyro_z_kat_mdeg;
-			while(!(USART1->SR & USART_SR_TC)) {}
+			while(!(USART1->SR & USART_SR_TXE)) {}
 
 			//bateria
 			USART1->DR = dane.bateria.poziom_procent;
-			while(!(USART1->SR & USART_SR_TC)) {}
+			while(!(USART1->SR & USART_SR_TXE)) {}
 
 			//temperatura
 			USART1->DR = dane.baro.temp_celsius;
-			while(!(USART1->SR & USART_SR_TC)) {}
+			while(!(USART1->SR & USART_SR_TXE)) {}
 
 			//cisnienie
 			USART1->DR = dane.baro.press_mbar >> 8;
-			while(!(USART1->SR & USART_SR_TC)) {}
+			while(!(USART1->SR & USART_SR_TXE)) {}
 			USART1->DR = dane.baro.press_mbar;
-			while(!(USART1->SR & USART_SR_TC)) {}
-
-			//ustawianie silnikow
-			while (!(USART1->SR & USART_SR_RXNE));
-			dane.pwm.pwm1 = USART1->DR;
-
-			while (!(USART1->SR & USART_SR_RXNE));
-			dane.pwm.pwm2 = USART1->DR;
-
-			while (!(USART1->SR & USART_SR_RXNE));
-			dane.pwm.pwm3 = USART1->DR;
-
-			while (!(USART1->SR & USART_SR_RXNE));
-			dane.pwm.pwm4 = USART1->DR;
+			while(!(USART1->SR & USART_SR_TXE)) {}*/
 		}
 		else
-			USART_blad();
+			GPIOA->ODR &= ~LED_NIEB_1;
 
-		USART_ITConfig(USART1, USART_IT_RXNE, ENABLE);
+		USART_ITConfig(USART1, USART_IT_RXNE, ENABLE); //wlaczenie na koncu przerwania
 	}
 }
 
 inline void USART_potwierdz()
 {
 	USART1->DR = '0';
-	while(!(USART1->SR & USART_SR_TC)) {}
+	while(!(USART1->SR & USART_SR_TXE)) {}
 }
 
 inline void USART_blad()
 {
 	USART1->DR = '1';
-	while(!(USART1->SR & USART_SR_TC)) {}
+	while(!(USART1->SR & USART_SR_TXE)) {}
 }
