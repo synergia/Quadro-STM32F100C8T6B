@@ -136,12 +136,24 @@ void USART1_IRQHandler(void)
 				GPIOA->ODR |= LED_CZER_1;
 			else
 				GPIOA->ODR &= ~LED_CZER_1;
+
+			/*USART1->DR = 69;
+			while(!USART_GetFlagStatus(USART1, USART_SR_TXE));
+			USART_ITConfig(USART1, USART_IT_RXNE, ENABLE);*/
+
 		}
 	}
-	else if (USART_GetFlagStatus(USART1, USART_IT_ORE)) // overrun error
+	else if (USART_GetITStatus(USART1, USART_IT_ORE)) // overrun error
 	{
 		dane.usart.overrun_error = 1;
 		dane_usart = USART1->DR;
+
+
+		if (dane.usart.bufor == 3)
+		{
+			while(!USART_GetFlagStatus(USART1, USART_SR_TXE));
+			USART_ITConfig(USART1, USART_IT_RXNE, ENABLE);
+		}
 	}
 }
 
