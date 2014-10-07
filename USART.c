@@ -24,7 +24,7 @@ void inicjalizacja_USART()
 	USART_Cmd(USART1, ENABLE);
 
 	USART_InitTypeDef *usart = malloc(sizeof(USART_InitTypeDef));
-	usart->USART_BaudRate = 115200;
+	usart->USART_BaudRate = 9600;
 	usart->USART_HardwareFlowControl = USART_HardwareFlowControl_None;
 	usart->USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
 	usart->USART_Parity = USART_Parity_No;
@@ -48,7 +48,12 @@ void USART1_IRQHandler(void)
 {
 	uint8_t dane_usart=0;
 
-	if (USART_GetITStatus(USART1, USART_IT_RXNE) != RESET) //sprawdzenie czy aby na pewno odpowiednie przerwanie
+	if (USART_GetFlagStatus(USART1, USART_IT_ORE) != RESET) // overrun error
+	{
+		dane.usart.overrun_error = 0;
+		dane_usart = (int8_t)(USART1->SR & (uint8_t)0xFF);
+	}
+    if (USART_GetITStatus(USART1, USART_IT_RXNE) != RESET) //sprawdzenie czy aby na pewno odpowiednie przerwanie
 	{
 		dane.czy_polaczony = 1;
 
@@ -57,6 +62,7 @@ void USART1_IRQHandler(void)
 		if (dane_usart == 's')
 		{
 			dane.usart.overrun_error = 0;
+			dane.usart.bufor = 0;
 			GPIOA->ODR |= LED_NIEB_1;
 
 			//ustawianie silnikow
@@ -109,7 +115,6 @@ void USART1_IRQHandler(void)
 		}
 		else if(dane_usart == 'z' && dane.usart.overrun_error == 0) //zakonczono odbieranie danych wyslij jakas dana
 		{
-			dane.usart.bufor = 0;
 			GPIOA->ODR |= LED_NIEB_2;
 		}
 
@@ -137,22 +142,10 @@ void USART1_IRQHandler(void)
 			else
 				GPIOA->ODR &= ~LED_CZER_1;
 
-			/*USART1->DR = 69;
-			while(!USART_GetFlagStatus(USART1, USART_SR_TXE));
-			USART_ITConfig(USART1, USART_IT_RXNE, ENABLE);*/
+			USART_SendData(USART1, 69);
+			while(!(USART1->SR & USART_SR_TC));
+			//USART_ITConfig(USART1, USART_IT_RXNE, ENABLE);
 
-		}
-	}
-	else if (USART_GetITStatus(USART1, USART_IT_ORE)) // overrun error
-	{
-		dane.usart.overrun_error = 1;
-		dane_usart = USART1->DR;
-
-
-		if (dane.usart.bufor == 3)
-		{
-			while(!USART_GetFlagStatus(USART1, USART_SR_TXE));
-			USART_ITConfig(USART1, USART_IT_RXNE, ENABLE);
 		}
 	}
 }
