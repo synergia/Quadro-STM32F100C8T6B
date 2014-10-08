@@ -23,7 +23,7 @@
  */
 
 #define T_PSC4 1000
-#define T_ARR4 18//23 niby powinno przy 1 ms ale dwa regulatory na to nie reaguj¹ musi byæ krótszy :(
+#define T_ARR4 18//23 niby powinno przy 1 ms ale dwa regulatory na to nie reaguj¹ musi byæ krótszy
 #endif
 
 void inicjalizacja_SysTick(); //odpowiedzialny za mruganie ledem i wylaczanie awaryjne silnikow

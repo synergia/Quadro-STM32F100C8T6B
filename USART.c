@@ -142,12 +142,15 @@ void USART1_IRQHandler(void)
 			else
 				GPIOA->ODR &= ~LED_CZER_1;
 
-			USART_SendData(USART1, 69);
-			while(!(USART1->SR & USART_SR_TC));
-			//USART_ITConfig(USART1, USART_IT_RXNE, ENABLE);
-
+			USART1->DR = 69;
+			USART_ITConfig(USART1, USART_IT_TXE, ENABLE);
 		}
 	}
+    else if(USART_GetITStatus(USART1, USART_IT_TXE) != RESET)
+    {
+    	dane.usart.bufor++;
+    	USART_ITConfig(USART1, USART_IT_TXE, DISABLE);
+    }
 }
 
 inline void USART_potwierdz()
