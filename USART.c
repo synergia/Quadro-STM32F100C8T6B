@@ -57,81 +57,36 @@ void USART1_IRQHandler(void)
 
 		dane_usart = USART1->DR;
 
-		if (dane_usart == 's')
+		if (dane_usart == 's') // rozpocznij odbieranie danych
 		{
 			dane.usart.bufor = 0;
 			GPIOA->ODR |= LED_NIEB_1;
-
-			/*
-			 * wysylanie danych z AKCELEROMETRU
-			 */
-			/*USART1->DR = dane.akcel.akcel_x_kat_rad >> 8; //najpierw najstarsze
-			while(!(USART1->SR & USART_SR_TXE)) {}
-			USART1->DR = dane.akcel.akcel_x_kat_rad;
-			while(!(USART1->SR & USART_SR_TXE)) {}
-
-			USART1->DR = dane.akcel.akcel_y_kat_rad >> 8;
-			while(!(USART1->SR & USART_SR_TXE)) {}
-			USART1->DR = dane.akcel.akcel_y_kat_rad;
-			while(!(USART1->SR & USART_SR_TXE)) {}
-
-			USART1->DR = dane.zyro.zyro_z_kat_mdeg >> 24;
-			while(!(USART1->SR & USART_SR_TXE)) {}
-			USART1->DR = dane.zyro.zyro_z_kat_mdeg >> 16;
-			while(!(USART1->SR & USART_SR_TXE)) {}
-			USART1->DR = dane.zyro.zyro_z_kat_mdeg >> 8;
-			while(!(USART1->SR & USART_SR_TXE)) {}
-			USART1->DR = dane.zyro.zyro_z_kat_mdeg;
-			while(!(USART1->SR & USART_SR_TXE)) {}
-
-			//bateria
-			USART1->DR = dane.bateria.poziom_procent;
-			while(!(USART1->SR & USART_SR_TXE)) {}
-
-			//temperatura
-			USART1->DR = dane.baro.temp_celsius;
-			while(!(USART1->SR & USART_SR_TXE)) {}
-
-			//cisnienie
-			USART1->DR = dane.baro.press_mbar >> 8;
-			while(!(USART1->SR & USART_SR_TXE)) {}
-			USART1->DR = dane.baro.press_mbar;
-			while(!(USART1->SR & USART_SR_TXE)) {}*/
 		}
-		else if(dane_usart == 'z') //zakonczono odbieranie danych wyslij jakas dana
-		{
-			GPIOA->ODR |= LED_NIEB_2;
-		}
-
 		else if(dane.usart.bufor == 0) // pwm1
 		{
-			if (dane_usart == 50)
-				GPIOA->ODR |= LED_ZOL_2;
-			else
-				GPIOA->ODR &= ~LED_ZOL_2;
+			dane.pwm.pwm1 = dane_usart;
 			dane.usart.bufor++;
 		}
 		else if(dane.usart.bufor == 1) // pwm2
 		{
+			dane.pwm.pwm2 = dane_usart;
 			dane.usart.bufor++;
 		}
 		else if(dane.usart.bufor == 2) // pwm3
 		{
+			dane.pwm.pwm3 = dane_usart;
 			dane.usart.bufor++;
 		}
-		else if(dane.usart.bufor == 3) // pwm4
+		else if(dane.usart.bufor == 3) // pwm4, wlacz przerwanie Transmit
 		{
+			dane.pwm.pwm4 = dane_usart;
 			dane.usart.bufor++;
-			if (dane_usart == 30)
-				GPIOA->ODR |= LED_CZER_1;
-			else
-				GPIOA->ODR &= ~LED_CZER_1;
 
 			USART1->DR = dane.akcel.akcel_x_kat_rad >> 8;
 			USART_ITConfig(USART1, USART_IT_TXE, ENABLE);
 		}
 	}
-    else if(USART_GetITStatus(USART1, USART_IT_TXE) != RESET)
+    else if(USART_GetITStatus(USART1, USART_IT_TXE) != RESET) // wysylanie danych
     {
     	switch(dane.usart.bufor)
     	{
