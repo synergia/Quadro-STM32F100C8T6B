@@ -72,7 +72,6 @@ void inicjalizacja_dane()
 	dane.czy_polaczony = 0;
 	dane.opoznienie = 0;
 
-	dane.usart.overrun_error = 0;
 	dane.usart.bufor = 0;
 
 	//Kalman

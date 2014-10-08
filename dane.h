@@ -131,7 +131,6 @@ typedef struct
 
 typedef struct
 {
-	uint8_t overrun_error; // jak jest overrun error czekaj az do 's'
 	uint8_t bufor; //
 } USARTTypeDef;
 

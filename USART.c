@@ -49,10 +49,8 @@ void USART1_IRQHandler(void)
 	uint8_t dane_usart=0;
 
 	if (USART_GetFlagStatus(USART1, USART_IT_ORE) != RESET) // overrun error
-	{
-		dane.usart.overrun_error = 0;
 		dane_usart = (int8_t)(USART1->SR & (uint8_t)0xFF);
-	}
+
     if (USART_GetITStatus(USART1, USART_IT_RXNE) != RESET) //sprawdzenie czy aby na pewno odpowiednie przerwanie
 	{
 		dane.czy_polaczony = 1;
@@ -61,22 +59,9 @@ void USART1_IRQHandler(void)
 
 		if (dane_usart == 's')
 		{
-			dane.usart.overrun_error = 0;
 			dane.usart.bufor = 0;
 			GPIOA->ODR |= LED_NIEB_1;
 
-			//ustawianie silnikow
-			/*dane.pwm.pwm1 = USART1->DR;
-			while( USART_GetFlagStatus(USART1, USART_FLAG_RXNE) == RESET );
-
-			dane.pwm.pwm2 = USART1->DR;
-			while( USART_GetFlagStatus(USART1, USART_FLAG_RXNE) == RESET );
-
-			dane.pwm.pwm3 = USART1->DR;
-			while( USART_GetFlagStatus(USART1, USART_FLAG_RXNE) == RESET );
-
-			dane.pwm.pwm4 = USART1->DR;
-			while( USART_GetFlagStatus(USART1, USART_FLAG_RXNE) == RESET );*/
 			/*
 			 * wysylanie danych z AKCELEROMETRU
 			 */
@@ -113,12 +98,12 @@ void USART1_IRQHandler(void)
 			USART1->DR = dane.baro.press_mbar;
 			while(!(USART1->SR & USART_SR_TXE)) {}*/
 		}
-		else if(dane_usart == 'z' && dane.usart.overrun_error == 0) //zakonczono odbieranie danych wyslij jakas dana
+		else if(dane_usart == 'z') //zakonczono odbieranie danych wyslij jakas dana
 		{
 			GPIOA->ODR |= LED_NIEB_2;
 		}
 
-		else if(dane.usart.bufor == 0 && dane.usart.overrun_error == 0) // pwm1
+		else if(dane.usart.bufor == 0) // pwm1
 		{
 			if (dane_usart == 50)
 				GPIOA->ODR |= LED_ZOL_2;
@@ -126,15 +111,15 @@ void USART1_IRQHandler(void)
 				GPIOA->ODR &= ~LED_ZOL_2;
 			dane.usart.bufor++;
 		}
-		else if(dane.usart.bufor == 1 && dane.usart.overrun_error == 0) // pwm2
+		else if(dane.usart.bufor == 1) // pwm2
 		{
 			dane.usart.bufor++;
 		}
-		else if(dane.usart.bufor == 2 && dane.usart.overrun_error == 0) // pwm3
+		else if(dane.usart.bufor == 2) // pwm3
 		{
 			dane.usart.bufor++;
 		}
-		else if(dane.usart.bufor == 3 && dane.usart.overrun_error == 0) // pwm4
+		else if(dane.usart.bufor == 3) // pwm4
 		{
 			dane.usart.bufor++;
 			if (dane_usart == 30)
@@ -142,14 +127,56 @@ void USART1_IRQHandler(void)
 			else
 				GPIOA->ODR &= ~LED_CZER_1;
 
-			USART1->DR = 69;
+			USART1->DR = dane.akcel.akcel_x_kat_rad >> 8;
 			USART_ITConfig(USART1, USART_IT_TXE, ENABLE);
 		}
 	}
     else if(USART_GetITStatus(USART1, USART_IT_TXE) != RESET)
     {
+    	switch(dane.usart.bufor)
+    	{
+		// AKCELEROMETR
+    	case (4):
+			USART1->DR = dane.akcel.akcel_x_kat_rad;
+    		break;
+    	case (5):
+			USART1->DR = dane.akcel.akcel_y_kat_rad >> 8;
+    		break;
+    	case (6):
+			USART1->DR = dane.akcel.akcel_y_kat_rad;
+    		break;
+    	// ZYROSKOP
+    	case (7):
+			USART1->DR = dane.zyro.zyro_z_kat_mdeg >> 24;
+    		break;
+    	case (8):
+			USART1->DR = dane.zyro.zyro_z_kat_mdeg >> 16;
+			break;
+    	case (9):
+			USART1->DR = dane.zyro.zyro_z_kat_mdeg >> 8;
+			break;
+    	case (10):
+			USART1->DR = dane.zyro.zyro_z_kat_mdeg;
+			break;
+		// BATERIA
+    	case (11):
+			USART1->DR = dane.bateria.poziom_procent;
+			break;
+		// TEMPERATURA
+    	case (12):
+			USART1->DR = dane.baro.temp_celsius;
+    		break;
+    	// CISNIENIE
+    	case (13):
+			USART1->DR = dane.baro.press_mbar >> 8;
+    		break;
+    	case (14):
+			USART1->DR = dane.baro.press_mbar;
+    		USART_ITConfig(USART1, USART_IT_TXE, DISABLE);
+    		break;
+    	}
+
     	dane.usart.bufor++;
-    	USART_ITConfig(USART1, USART_IT_TXE, DISABLE);
     }
 }
 
