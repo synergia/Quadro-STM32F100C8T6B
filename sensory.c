@@ -64,6 +64,7 @@ void odczyt_zyroskop(uint8_t *bufor)
 	{
 		if (dane.zyro.zyro_kalibr_ktory >= 10)
 		{
+			// Y
 			temp = (dane.zyro.zyro_y_h << 8) + dane.zyro.zyro_y_l;
 			//uwzglednienie ujemnych
 			if (temp > 32768)
@@ -74,6 +75,7 @@ void odczyt_zyroskop(uint8_t *bufor)
 			dane.zyro.zyro_y_kalibracja += temp_vdeg;
 			dane.zyro.zyro_y_kat_mdeg = 0;
 
+			// Z
 			temp = (dane.zyro.zyro_z_h << 8) + dane.zyro.zyro_z_l;
 			if (temp > 32768)
 				temp_vdeg = temp - 65536;
@@ -83,11 +85,22 @@ void odczyt_zyroskop(uint8_t *bufor)
 			dane.zyro.zyro_z_kalibracja += temp_vdeg;
 			dane.zyro.zyro_z_kat_mdeg = 0;
 
+			// X
+			temp = (dane.zyro.zyro_x_h << 8) + dane.zyro.zyro_z_l;
+			if (temp > 32768)
+				temp_vdeg = temp - 65536;
+			else
+				temp_vdeg = temp;
+
+			dane.zyro.zyro_x_kalibracja += temp_vdeg;
+			dane.zyro.zyro_x_kat_mdeg = 0;
+
 			dane.zyro.zyro_kalibr_ktory++;
 			if (dane.zyro.zyro_kalibr_ktory == (KALIBR + 10))
 			{
 				dane.zyro.zyro_y_kalibracja = (dane.zyro.zyro_y_kalibracja >> KALIBR_PRZESUN);
 				dane.zyro.zyro_z_kalibracja = (dane.zyro.zyro_z_kalibracja >> KALIBR_PRZESUN);
+				dane.zyro.zyro_x_kalibracja = (dane.zyro.zyro_x_kalibracja >> KALIBR_PRZESUN);
 			}
 		}
 		else
@@ -115,8 +128,8 @@ void odczyt_zyroskop(uint8_t *bufor)
 		// ------------------------
 
 		// Z ----------------------
-		/*if (dane.zyro.zyro_z_kalibracja > 32768)
-			dane.zyro.zyro_z_kalibracja -= 65536;*/
+		if (dane.zyro.zyro_z_kalibracja > 32768)
+			dane.zyro.zyro_z_kalibracja -= 65536;
 		temp = (dane.zyro.zyro_z_h << 8) + dane.zyro.zyro_z_l - dane.zyro.zyro_z_kalibracja;
 		dane.zyro.zyro_z_h = temp >> 8;
 		dane.zyro.zyro_z_l = temp;
@@ -130,13 +143,18 @@ void odczyt_zyroskop(uint8_t *bufor)
 		// -------------------------
 
 		// X -----------------------
+		if (dane.zyro.zyro_x_kalibracja > 32768)
+			dane.zyro.zyro_x_kalibracja -= 65536;
+		temp = (dane.zyro.zyro_x_h << 8) + dane.zyro.zyro_x_l - dane.zyro.zyro_x_kalibracja;
+		dane.zyro.zyro_x_h = temp >> 8;
+		dane.zyro.zyro_x_l = temp;
 
-		temp = (dane.zyro.zyro_x_h << 8) + dane.zyro.zyro_x_l;
 		if(temp > 32768)
 			temp_vdeg = temp - 65536;
 		else
 			temp_vdeg = temp;
-		dane.zyro.zyro_x_kat_mdeg = (temp_vdeg - DELTAZYROX) * DT * MDEG * 0.001; //w milistopniach
+		dane.zyro.zyro_x_deg_sec = temp_vdeg * MDEG * 0.001; //w stopniach na sekunde
+		dane.zyro.zyro_x_kat_mdeg = temp_vdeg * DT * MDEG; //w milistopniach
 		// -------------------------
 	}
 }
@@ -193,8 +211,8 @@ void odczyt_akcelerometr(uint8_t *bufor)
 	//---------------------------------------------
 
 	//oblicza kat -90 do 90 stopni
-	//int16_t temp_deg = dane.akcel.akcel_x_srednia << 8;
-	int16_t temp_deg = (dane.akcel.akcel_x_h << 8) + dane.akcel.akcel_x_l;
+	int16_t temp_deg = dane.akcel.akcel_x_srednia << 8;
+	//int16_t temp_deg = (dane.akcel.akcel_x_h << 8) + dane.akcel.akcel_x_l;
 	if (temp_deg < -AKC_SKALA)
 		dane.akcel.akcel_x_kat_rad = -1.57*10000; //skrajny przypadek
 	else if (temp_deg > AKC_SKALA)
@@ -202,7 +220,8 @@ void odczyt_akcelerometr(uint8_t *bufor)
 	else
 		dane.akcel.akcel_x_kat_rad = (int)(temp_deg/AKC_SKALA * 10000);
 
-	temp_deg = (dane.akcel.akcel_y_h << 8) + dane.akcel.akcel_y_l;
+	temp_deg = dane.akcel.akcel_y_srednia << 8;
+	//temp_deg = (dane.akcel.akcel_y_h << 8) + dane.akcel.akcel_y_l;
 	if (temp_deg < -AKC_SKALA)
 		dane.akcel.akcel_y_kat_rad = -1.57*10000;
 	else if (temp_deg > AKC_SKALA)
@@ -241,8 +260,14 @@ void odczyt_barometr(uint8_t *bufor)
 void oblicz_kat()
 {
 	//kalman_x(dane.akcel.akcel_x_kat_deg, dane.zyro.zyro_y_deg_sec, DT);
-	dane.kat.kat_x += dane.zyro.zyro_y_kat_mdeg;
-	dane.kat.kat_x = 0.98*dane.kat.kat_x + 0.02*dane.akcel.akcel_x_kat_rad*1000;
+	int32_t temp_rad;
+	temp_rad = (double)(dane.zyro.zyro_y_kat_mdeg) * 0.1745; // milistopnie do radianow i jeszcze razy 10000
+	dane.kat.kat_x += temp_rad;
+	dane.kat.kat_x = 0.98*dane.kat.kat_x + 0.02*dane.akcel.akcel_x_kat_rad;
+
+	temp_rad = (double)(dane.zyro.zyro_x_kat_mdeg) * 0.1745;
+	dane.kat.kat_y -= temp_rad;
+	dane.kat.kat_y = 0.98*dane.kat.kat_y + 0.02*dane.akcel.akcel_y_kat_rad;
 }
 
 void kalman_x(double newAngle, double newRate, double dt)
@@ -295,15 +320,15 @@ void odczyt_sensory()
 	//odczyt_magnetometr(bufor);
 	//odczyt_barometr(bufor);
 
-	//oblicz_kat();
+	oblicz_kat();
 
     if (dane.opoznienie > 250)
     {
     	//PID();
-    	dane.pwm.pwm1 = 50;
+    	/*dane.pwm.pwm1 = 50;
     	dane.pwm.pwm2 = 50;
     	dane.pwm.pwm3 = 50;
-    	dane.pwm.pwm4 = 50;
+    	dane.pwm.pwm4 = 50;*/
     }
     else if (dane.opoznienie > 100)
     {

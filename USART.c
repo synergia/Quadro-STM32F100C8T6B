@@ -82,7 +82,7 @@ void USART1_IRQHandler(void)
 			dane.pwm.pwm4 = dane_usart;
 			dane.usart.bufor++;
 
-			USART1->DR = dane.akcel.akcel_x_kat_rad >> 8;
+			USART1->DR = dane.kat.kat_x >> 8;
 			USART_ITConfig(USART1, USART_IT_TXE, ENABLE);
 		}
 	}
@@ -92,13 +92,13 @@ void USART1_IRQHandler(void)
     	{
 		// AKCELEROMETR
     	case (4):
-			USART1->DR = dane.akcel.akcel_x_kat_rad;
+			USART1->DR = dane.kat.kat_x;
     		break;
     	case (5):
-			USART1->DR = dane.akcel.akcel_y_kat_rad >> 8;
+			USART1->DR = dane.kat.kat_y >> 8;
     		break;
     	case (6):
-			USART1->DR = dane.akcel.akcel_y_kat_rad;
+			USART1->DR = dane.kat.kat_y;
     		break;
     	// ZYROSKOP
     	case (7):

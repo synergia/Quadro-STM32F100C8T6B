@@ -20,6 +20,8 @@ void inicjalizacja_dane()
 	dane.zyro.zyro_y_kat_mdeg = 0;
 	dane.zyro.zyro_x_kat_mdeg = 0;
 	dane.zyro.zyro_y_kalibracja = 0;
+	dane.zyro.zyro_z_kalibracja = 0;
+	dane.zyro.zyro_x_kalibracja = 0;
 	dane.zyro.zyro_kalibr_ktory = 0;
 	
 	dane.akcel.akcel_x_h = 0;

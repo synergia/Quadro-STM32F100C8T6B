@@ -54,9 +54,11 @@ typedef struct
 
 	double zyro_y_deg_sec;
 	double zyro_z_deg_sec;
+	double zyro_x_deg_sec;
 
 	int32_t zyro_y_kalibracja; //sluzy do kalibrowania odczytow, przez pierwsze 256 odczytow quadro MUSI stac
 	int32_t zyro_z_kalibracja;
+	int32_t zyro_x_kalibracja;
 } ZyroTypeDef;
 
 typedef struct
