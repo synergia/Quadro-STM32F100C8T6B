@@ -349,4 +349,3 @@ void odczyt_sensory()
     	dane.opoznienie++;
     }
 }
-
